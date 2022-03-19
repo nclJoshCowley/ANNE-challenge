@@ -73,20 +73,26 @@ economic cost, skill shortage) to achieve some ideal environmental level.
 - A dashboard showing sewage leaks exists on their website.
 - Looking into "catchment pollution" leads to multiple news outlets mentioning
   sewage overflow (CSOs) and public outcry against the frequency of such.
-- Phosphorous is a major pollutant that comes from sewage and agriculture
-  with adverse health effects.
+- Phosphorous is expected in rivers but high levels from sewage and agriculture
+  can disrupt the ecosystem of a river.
 
 ### Research
 
 Channel 4 news summarises the sewage issue really well in the video:
 "900,000 hours of human sewage and rainwater flow into UK rivers in just one
-year - revealed", [(Channel 4, 2020))](channel4news)
+year - revealed", [(Channel 4, 2020)][channel4news]
+
+Reactive phosphorus is already subject to some standards, see [Reccomendations on phosphorus standards for rivers][somerset2013].
+
+### Idea
+
+TBC.
 
 [channel4news]:
   https://www.youtube.com/watch?v=x1AmHDByodI
   "900,000 hours of human sewage and rainwater flow into UK rivers in just one
   year - revealed"
 
-### Idea
-
-TBC.
+[somerset2013]:
+  http://www.somersetlevelsphosphate.org.uk/Documents/UKTAG%20Phosphorus%20Standards%20for%20Rivers_Final%20130906_0.pdf
+  "RECOMMENDATIONS ON PHOSPHORUS STANDARDS FOR RIVERS"
