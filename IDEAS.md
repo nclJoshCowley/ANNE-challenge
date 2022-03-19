@@ -60,3 +60,33 @@ economic cost, skill shortage) to achieve some ideal environmental level.
 [greenalliance2021]:
   https://green-alliance.org.uk/wp-content/uploads/2021/11/reinventing_retrofit.pdf
   "Reinventing retrofit"
+
+-------------------------------------------------------------------------------
+
+## Water - Phosphorous
+
+### Motivation
+
+- Rivers Trust has information on what it has done, would like an indicator
+  that reflects the impacts of their actions
+- They claim the biggest culprit of water pollution is agriculture.
+- A dashboard showing sewage leaks exists on their website.
+- Looking into "catchment pollution" leads to multiple news outlets mentioning
+  sewage overflow (CSOs) and public outcry against the frequency of such.
+- Phosphorous is a major pollutant that comes from sewage and agriculture
+  with adverse health effects.
+
+### Research
+
+Channel 4 news summarises the sewage issue really well in the video:
+"900,000 hours of human sewage and rainwater flow into UK rivers in just one
+year - revealed", [(Channel 4, 2020))](channel4news)
+
+[channel4news]:
+  https://www.youtube.com/watch?v=x1AmHDByodI
+  "900,000 hours of human sewage and rainwater flow into UK rivers in just one
+  year - revealed"
+
+### Idea
+
+TBC.
