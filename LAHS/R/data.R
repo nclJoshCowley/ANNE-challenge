@@ -11,4 +11,6 @@
 #'   \item{LA_REGION}{English Region name}
 #'   \item{YEAR}{The starting year of the financial reporting year}
 #' }
+#'
+#' @source <https://www.gov.uk/government/statistical-data-sets/local-authority-housing-statistics-open-data>
 "LAHS"

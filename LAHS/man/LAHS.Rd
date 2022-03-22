@@ -14,6 +14,9 @@ A data frame with 3239 rows and ? variables:
 \item{YEAR}{The starting year of the financial reporting year}
 }
 }
+\source{
+\url{https://www.gov.uk/government/statistical-data-sets/local-authority-housing-statistics-open-data}
+}
 \usage{
 LAHS
 }
