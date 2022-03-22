@@ -2,11 +2,13 @@
 
 ## Overall Approach
 
-To narrow down such a wide array of possibilities I aim to draft one or two
+To narrow down such a wide array of possibilities I aimed to draft one or two
 ideas for each expert field: land, water and housing before looking into any
-data.
-One I set of possible projects I will then narrow down to a single project
-based upon my opinion and the quality of the data available.
+data. Then, I will narrow down the options to a single project based upon my 
+opinion and the quality of the data available.
+
+Unfortunately, this made my task much harder and after several hours of
+researching, I decided to pivot to a data-first approach.
 
 The analysis visualisation is likely to be a Shiny application due to my
 strengths and the overall professional feel of well-made Shiny applications,
