@@ -29,10 +29,11 @@ knitr::knit_hooks$set(source = LAHS::get_knit_hook_source_hide())
 The purpose of this report is to convey all processes used and any decisions
 made when the data was cleaned.
 The source of this data (CSV) can be found at
-<https://www.gov.uk/government/statistical-data-sets/local-authority-housing-statistics-open-data>
+<https://www.gov.uk/government/statistical-data-sets/local-authority-housing-statistics-open-data>.
 
-Currently, we are interested in a subset of these data and such will populate a 
-new data frame as we clean the data.
+Currently, we are interested in a subset of these data and as such will 
+populate a new data frame as we clean the data.
+
 ```{r load-csv}
 lahs_path <-
   file.path("data-raw", "LAHS_201112_to_202021_open_data_02_2022.csv")
@@ -56,6 +57,8 @@ LAHS_latest$LA_NAME <- lahs$LA_NAME
 
 There are `r length(unique(LAHS_latest$LA_NAME))` unique local authorities.
 Most have 10 data points, one for each year, but this is not always the case.
+The following visualisation summarises the LA(s) that have fewer than 10 
+observations.
 
 ```{r plot-la-code-name-issues, hide = "Reveal ggplot2 code."}
 LAHS_latest %>%
@@ -70,6 +73,47 @@ LAHS_latest %>%
   ggplot2::labs(y = NULL, x = "Number of Datum")
 ```
 
-For now, we remove these problematic data points but may revisit these issues
-to increase the data available.
+For now, we mark these problematic LA(s) for removal but may revisit these 
+issues to increase the data available.
 
+```{r mark-rm-la-name, echo = FALSE}
+REMOVALS_LA_NAME <-
+  local({
+    tbl <- table(LAHS_latest$LA_NAME)
+    names(tbl)[tbl != 10]
+  })
+```
+
+## Classification
+
+We are also interested in the categorical information that is held in the first 
+three characters of the local authority code and in its own column.
+
+For example, Darlington is coded "E06000005"; the "E06" implies that this LA
+is a unitary authority. We convert each code to a corresponding label.
+
+```{r add-la-type}
+LAHS_latest$LA_TYPE <- LAHS::LAD20TYPE_to_label(lahs$LAD20TYPE)
+```
+
+We can see the respective sample sizes of such divisions here.
+
+```{r show-la-type, hide = "Reveal table generating code."}
+dplyr::count(LAHS_latest, .data$LA_TYPE) %>%
+  kableExtra::kbl(col.names = c("Local Authority Type", "N"), align = "lc") %>%
+  kableExtra::kable_styling()
+```
+
+A further classification can be made on the region each LA exists in.
+
+```{r add-la-region}
+LAHS_latest$LA_REGION <- lahs$RGN20NM
+```
+
+With a similar table also made.
+
+```{r show-la-region, hide = "Reveal table generating code."}
+dplyr::count(LAHS_latest, .data$LA_REGION) %>%
+  kableExtra::kbl(col.names = c("English Region", "N"), align = "lc") %>%
+  kableExtra::kable_styling()
+```
