@@ -1,0 +1,23 @@
+Package: LAHS
+Type: Package
+Title: Local Authority Housing Statistics and Analysis
+Version: 0.1.0
+Authors@R: 
+    person(given = "Josh",
+           family = "Cowley",
+           role = c("aut", "cre"),
+           email = "j.cowley1@ncl.ac.uk")
+Maintainer: Josh Cowley <j.cowley1@ncl.ac.uk>
+Description: Concerned with the data analysis of local authority housing
+    statistics supplied by the UK's Department for Levelling Up, Housing and
+    Communities and Ministry of Housing, Communities & Local Government.
+Depends: R (>= 3.5.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports:
+    magrittr,
+Suggests:
+    knitr,
