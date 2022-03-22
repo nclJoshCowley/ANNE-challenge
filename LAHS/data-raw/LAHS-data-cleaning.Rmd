@@ -9,13 +9,15 @@ output:
     toc_depth: 2
     toc_float:
       collapsed: false
+params:
+  use_data: TRUE
 ---
 
 ```{r setup, include = FALSE}
 # CRAN
 library(tidyverse)
+library(usethis)
 library(kableExtra)
-library(magrittr) # %>%
 
 # Github
 library(LAHS)
@@ -23,8 +25,6 @@ LAHS::common_report_setup(echo = TRUE)
 
 # Hooks
 knitr::knit_hooks$set(source = LAHS::get_knit_hook_source_hide())
-
-
 ```
 
 The purpose of this report is to convey all processes used and any decisions
@@ -39,9 +39,9 @@ populate a new data frame as we clean the data.
 lahs_path <-
   file.path("data-raw", "LAHS_201112_to_202021_open_data_02_2022.csv")
 
-lahs <- utils::read.csv(lahs_path)
+lahs_csv <- utils::read.csv(lahs_path)
 
-LAHS_latest <- tibble::tibble(.rows = nrow(lahs))
+LAHS <- tibble::tibble(.rows = nrow(lahs_csv))
 ```
 
 # Local Authority Information
@@ -52,17 +52,17 @@ We use the local authority code and name at the time of data collection,
 ignoring the codes and names using the 2020 geography
 
 ```{r add-la-code-name}
-LAHS_latest$LA_CODE <- lahs$LA_CODE
-LAHS_latest$LA_NAME <- lahs$LA_NAME
+LAHS$LA_CODE <- lahs_csv$LA_CODE
+LAHS$LA_NAME <- lahs_csv$LA_NAME
 ```
 
-There are `r length(unique(LAHS_latest$LA_NAME))` unique local authorities.
+There are `r length(unique(LAHS$LA_NAME))` unique local authorities.
 Most have 10 data points, one for each year, but this is not always the case.
 The following visualisation summarises the LA(s) that have fewer than 10 
 observations.
 
 ```{r plot-la-code-name-issues, hide = "Reveal ggplot2 code."}
-LAHS_latest %>%
+LAHS %>%
   dplyr::count(.data$LA_NAME) %>%
   dplyr::filter(.data$n != 10) %>%
   ggplot2::ggplot(ggplot2::aes(
@@ -80,7 +80,7 @@ issues to increase the data available.
 ```{r mark-rm-la-name, echo = FALSE}
 REMOVALS_LA_NAME <-
   local({
-    tbl <- table(LAHS_latest$LA_NAME)
+    tbl <- table(LAHS$LA_NAME)
     names(tbl)[tbl != 10]
   })
 ```
@@ -94,13 +94,13 @@ For example, Darlington is coded "E06000005"; the "E06" implies that this LA
 is a unitary authority. We convert each code to a corresponding label.
 
 ```{r add-la-type}
-LAHS_latest$LA_TYPE <- LAHS::LAD20TYPE_to_label(lahs$LAD20TYPE)
+LAHS$LA_TYPE <- LAHS::LAD20TYPE_to_label(lahs_csv$LAD20TYPE)
 ```
 
 We can see the respective sample sizes of such divisions here.
 
 ```{r show-la-type, hide = "Reveal table generating code."}
-dplyr::count(LAHS_latest, .data$LA_TYPE) %>%
+dplyr::count(LAHS, .data$LA_TYPE) %>%
   kableExtra::kbl(col.names = c("Local Authority Type", "N"), align = "lc") %>%
   kableExtra::kable_styling()
 ```
@@ -108,13 +108,49 @@ dplyr::count(LAHS_latest, .data$LA_TYPE) %>%
 A further classification can be made on the region each LA exists in.
 
 ```{r add-la-region}
-LAHS_latest$LA_REGION <- lahs$RGN20NM
+LAHS$LA_REGION <- lahs_csv$RGN20NM
 ```
 
 With a similar table also made.
 
 ```{r show-la-region, hide = "Reveal table generating code."}
-dplyr::count(LAHS_latest, .data$LA_REGION) %>%
+dplyr::count(LAHS, .data$LA_REGION) %>%
   kableExtra::kbl(col.names = c("English Region", "N"), align = "lc") %>%
   kableExtra::kable_styling()
+```
+
+# Temporal Information
+
+The raw data spans a decade and lists the years in plain text, that is, 
+"2011-12", "2012-13" to "2020-21".
+To convert this to numerical information we obtain the data as year start 
+information so a value of $20$ denotes the duration from tax year start, 2020,
+to tax year end, 2021.
+
+```{r add-year}
+LAHS$YEAR <- 
+  lahs_csv$Year %>%
+  regmatches(regexpr("^20[0-9]{2}", .)) %>%
+  as.integer()
+```
+
+
+
+
+
+
+
+
+
+# Access to these Data
+
+```{r use-data, echo = FALSE, eval = params$use_data}
+usethis::use_data(LAHS, overwrite = TRUE)
+```
+
+One can access this data by installing this package and importing the `LAHS` 
+dataset in the following way.
+
+```{r eg-import, echo = TRUE, eval = FALSE}
+data("LAHS", package = "LAHS")
 ```
