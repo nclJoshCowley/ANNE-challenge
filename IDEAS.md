@@ -75,20 +75,42 @@ economic cost, skill shortage) to achieve some ideal environmental level.
 - A dashboard showing sewage leaks exists on their website.
 - Looking into "catchment pollution" leads to multiple news outlets mentioning
   sewage overflow (CSOs) and public outcry against the frequency of such.
-- Phosphorous is a major pollutant that comes from sewage and agriculture
-  with adverse health effects.
+- Phosphorous is expected in rivers but high levels from sewage and agriculture
+  can disrupt the ecosystem of a river.
 
 ### Research
 
 Channel 4 news summarises the sewage issue really well in the video:
 "900,000 hours of human sewage and rainwater flow into UK rivers in just one
-year - revealed", [(Channel 4, 2020))](channel4news)
+year - revealed", [(Channel 4, 2020)][channel4news]
+
+Reactive phosphorus is already subject to some standards, see [Recommendations
+on phosphorus standards for rivers][somerset2013].
+
+### Idea
+
+Form a descriptive analysis of the health of a catchment based on the levels of
+reactive phosphorus. More research into types of phosphorus and its effects on
+the environment would be required.
+
+### Reasons for Not Pursuing
+
+Most datasets found such as [WFD SW Classification Status][enviragency2020] and 
+the catchment data resource (from organisers) only gives ordinal categorical 
+data (Low, Mid, High and Fail) with no information on the reliability or 
+variance of the measurements. There is no auxiliary data available to pivot
+such an idea to predictive modelling.
 
 [channel4news]:
   https://www.youtube.com/watch?v=x1AmHDByodI
   "900,000 hours of human sewage and rainwater flow into UK rivers in just one
   year - revealed"
 
-### Idea
+[somerset2013]:
+  http://www.somersetlevelsphosphate.org.uk/Documents/UKTAG%20Phosphorus%20Standards%20for%20Rivers_Final%20130906_0.pdf
+  "RECOMMENDATIONS ON PHOSPHORUS STANDARDS FOR RIVERS"
 
-TBC.
+[enviragency2020]:
+  https://environment.data.gov.uk/portalstg/home/item.html?id=bcec2775501841d7a4dacef57e291b61
+
+-------------------------------------------------------------------------------
