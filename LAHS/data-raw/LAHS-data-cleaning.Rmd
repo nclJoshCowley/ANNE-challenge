@@ -13,8 +13,9 @@ output:
 
 ```{r setup, include = FALSE}
 # CRAN
-library(tibble)
-library(magrittr)
+library(tidyverse)
+library(kableExtra)
+library(magrittr) # %>%
 
 # Github
 library(LAHS)
