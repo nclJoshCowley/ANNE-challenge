@@ -1,0 +1,75 @@
+---
+title: "LAHS Data Cleaning Script"
+author: "Josh Cowley"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    number_sections: true
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+---
+
+```{r setup, include = FALSE}
+# CRAN
+library(tibble)
+library(magrittr)
+
+# Github
+library(LAHS)
+LAHS::common_report_setup(echo = TRUE)
+
+# Hooks
+knitr::knit_hooks$set(source = LAHS::get_knit_hook_source_hide())
+
+
+```
+
+The purpose of this report is to convey all processes used and any decisions
+made when the data was cleaned.
+The source of this data (CSV) can be found at
+<https://www.gov.uk/government/statistical-data-sets/local-authority-housing-statistics-open-data>
+
+Currently, we are interested in a subset of these data and such will populate a 
+new data frame as we clean the data.
+```{r load-csv}
+lahs_path <-
+  file.path("data-raw", "LAHS_201112_to_202021_open_data_02_2022.csv")
+
+lahs <- utils::read.csv(lahs_path)
+
+LAHS_latest <- tibble::tibble(.rows = nrow(lahs))
+```
+
+# Local Authority Information
+
+## Unique Identifiers
+
+We use the local authority code and name at the time of data collection,
+ignoring the codes and names using the 2020 geography
+
+```{r add-la-code-name}
+LAHS_latest$LA_CODE <- lahs$LA_CODE
+LAHS_latest$LA_NAME <- lahs$LA_NAME
+```
+
+There are `r length(unique(LAHS_latest$LA_NAME))` unique local authorities.
+Most have 10 data points, one for each year, but this is not always the case.
+
+```{r plot-la-code-name-issues, hide = "Reveal ggplot2 code."}
+LAHS_latest %>%
+  dplyr::count(.data$LA_NAME) %>%
+  dplyr::filter(.data$n != 10) %>%
+  ggplot2::ggplot(ggplot2::aes(
+    y = forcats::fct_rev(factor(.data$LA_NAME)),
+    xmax = .data$n,
+  )) +
+  ggplot2::geom_linerange(xmin = 0) +
+  ggplot2::scale_x_continuous(breaks = 1:10, limits = c(1, 10)) +
+  ggplot2::labs(y = NULL, x = "Number of Datum")
+```
+
+For now, we remove these problematic data points but may revisit these issues
+to increase the data available.
+
