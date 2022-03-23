@@ -145,7 +145,7 @@ Questions a.1.a) and a.1.b) relate to any publicly owned property within a LA,
 whereas a.2.i.a) relates to all stock owned by the corresponding LA with option
 to dig deeper into how many are "Social Rent" against "Affordable Rent".
 
-```{r add-stock}
+```{r add-stock-counts}
 LAHS$STOCK_PUBLIC_LA <- lahs_csv$a1a
 LAHS$STOCK_PUBLIC_OTHER <- lahs_csv$a1b
 LAHS$STOCK <- lahs_csv$a2ia
@@ -154,7 +154,7 @@ LAHS$STOCK <- lahs_csv$a2ia
 Now, we see many of the data points concern local auhthorities that own no
 dwelling stock and thus will be unusable.
 
-```{r view-stock, hide = "Reveal table generating code."}
+```{r view-stock-counts, hide = "Reveal table generating code."}
 local({
   raw_stock_table <- 
     LAHS %>%
@@ -180,7 +180,7 @@ local({
 The value of all dwellings in a LA is reported in the millions of pounds and
 accurate to 3 decimal places.
 
-```{r add-stock}
+```{r add-stock-value}
 LAHS$STOCK_VALUE <- lahs_csv$a3a
 ```
 
