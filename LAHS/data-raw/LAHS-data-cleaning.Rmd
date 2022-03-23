@@ -74,16 +74,16 @@ LAHS %>%
   ggplot2::labs(y = NULL, x = "Number of Datum")
 ```
 
-For now, we mark these problematic LA(s) for removal but may revisit these 
-issues to increase the data available.
+<!-- For now, we mark these problematic LA(s) for removal but may revisit these  -->
+<!-- issues to increase the data available. -->
 
-```{r mark-rm-la-name, echo = FALSE}
-REMOVALS_LA_NAME <-
-  local({
-    tbl <- table(LAHS$LA_NAME)
-    names(tbl)[tbl != 10]
-  })
-```
+<!-- ```{r mark-rm-la-name, echo = FALSE} -->
+<!-- REMOVALS_LA_NAME <- -->
+<!--   local({ -->
+<!--     tbl <- table(LAHS$LA_NAME) -->
+<!--     names(tbl)[tbl != 10] -->
+<!--   }) -->
+<!-- ``` -->
 
 ## Classification
 
