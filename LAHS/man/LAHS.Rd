@@ -12,6 +12,12 @@ A data frame with 3239 rows and ? variables:
 \item{LA_TYPE}{Current local authority type (April 2020)}
 \item{LA_REGION}{English Region name}
 \item{YEAR}{The starting year of the financial reporting year}
+\item{STOCK_PUBLIC_LA}{Number of dwellings owned by \strong{any} LA}
+\item{STOCK_PUBLIC_OTHER}{Other public sector owned dwellings}
+\item{STOCK}{Number of dwellings owned by encircling LA}
+\item{STOCK_VALUE}{Value of dwellings owned by encircling LA in millions
+of pounds to 3.d.p}
+\item{EPC}{EPC Band of the average SAP rating}
 }
 }
 \source{
