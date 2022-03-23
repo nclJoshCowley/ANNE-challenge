@@ -221,6 +221,29 @@ dplyr::count(LAHS, .data$EPC) %>%
   kableExtra::kable_styling()
 ```
 
+## Boiler Replacement
+
+Raw quantity of boilers replaced, regardless of energy efficiency rating of the 
+boiler.
+
+```{r add-boilers}
+LAHS$NEW_BOILERS <- lahs_csv$f2ba
+```
+
+## Insulation
+
+We are given a total of insulation installed by question f.2.c.a) with more 
+granular details given by sub-questions.
+
+```{r add-insulation}
+LAHS$INSULATION <- lahs_csv$f2ca
+
+LAHS$INSULATION_SOLID <- lahs_csv$f2caa
+LAHS$INSULATION_CAVITY <- lahs_csv$f2cba
+LAHS$INSULATION_LOFT <- lahs_csv$f2cca
+LAHS$INSULATION_FLOOR <- lahs_csv$f2cda
+```
+
 
 
 
