@@ -244,6 +244,42 @@ LAHS$INSULATION_LOFT <- lahs_csv$f2cca
 LAHS$INSULATION_FLOOR <- lahs_csv$f2cda
 ```
 
+## Renewables
+
+Question f.2.d.a) allows local authorities to report the number of dwellings 
+that have had renewable technologies installed.
+
+```{r add-rt-total}
+LAHS$RT_TOTAL <- lahs_csv$f2da
+```
+
+The sub-part of this question codes the renewable types in the following way,
+for each of the following that have been installed, add the corresponding value
+to a total.
+
+- 1 = photovoltaic panels
+- 2 = solar thermal
+- 4 = heat pumps (air, ground or water)
+- 8 = biomass boilers
+- 16 = wind turbines
+- 32 = other
+
+Thus the value of f.2.d.a.a) uniquely determines 6 binary variables that can be
+recovered by converting to binary.
+For example, 42 (10 10 01 in  binary) implies the installation of other, 
+biomass boilers and photovoltaic panels.
+
+Note the presence of missing values are assumed to be 0.
+
+```{r add-rt-types, error = TRUE}
+LAHS <- 
+  dplyr::bind_cols(
+    LAHS,
+    parse_rt_types(
+      tidyr::replace_na(lahs_csv$f2daa, replace = 0)
+    )
+  )
+```
 
 
 
