@@ -1,16 +1,9 @@
-#' To Label
+#' Parse LA Type
 #'
-#' Convert coded data to a human-readable label
+#' Convert local authority types to label to a human-readable label.
 #'
-#' @param x character. Coded data
-#'
-#' @name to_label
-NULL
-
-
-#' @describeIn to_label Local Authority types to label.
-#' @export
-LAD20TYPE_to_label <- function(x) {
+#' @param x character. Coded data such as `E06` to `E09`.
+parse_la_type <- function(x) {
   out <-
     factor(
       x,
@@ -27,3 +20,4 @@ LAD20TYPE_to_label <- function(x) {
 
   return(out)
 }
+

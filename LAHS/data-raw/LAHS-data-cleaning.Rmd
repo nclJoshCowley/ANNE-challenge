@@ -14,6 +14,9 @@ params:
 ---
 
 ```{r setup, include = FALSE}
+# Using Project directory for filepaths
+knitr::opts_knit$set(root.dir = rprojroot::find_root("DESCRIPTION"))
+
 # CRAN
 library(tidyverse)
 library(usethis)
@@ -25,6 +28,10 @@ LAHS::common_report_setup(echo = TRUE)
 
 # Hooks
 knitr::knit_hooks$set(source = LAHS::get_knit_hook_source_hide())
+```
+
+```{r setup-helper}
+source(file.path("data-raw", "LAHS-data-cleaning-helper.R"))
 ```
 
 The purpose of this report is to convey all processes used and any decisions
@@ -94,7 +101,7 @@ For example, Darlington is coded "E06000005"; the "E06" implies that this LA
 is a unitary authority. We convert each code to a corresponding label.
 
 ```{r add-la-type}
-LAHS$LA_TYPE <- LAHS::LAD20TYPE_to_label(lahs_csv$LAD20TYPE)
+LAHS$LA_TYPE <- parse_la_type(lahs_csv$LAD20TYPE)
 ```
 
 We can see the respective sample sizes of such divisions here.
