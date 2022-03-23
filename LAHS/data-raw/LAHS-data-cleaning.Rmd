@@ -101,7 +101,7 @@ We can see the respective sample sizes of such divisions here.
 
 ```{r show-la-type, hide = "Reveal table generating code."}
 dplyr::count(LAHS, .data$LA_TYPE) %>%
-  kableExtra::kbl(col.names = c("Local Authority Type", "N"), align = "lc") %>%
+  kableExtra::kbl(col.names = c("Local Authority Type", "N"), align = "lr") %>%
   kableExtra::kable_styling()
 ```
 
@@ -115,7 +115,7 @@ With a similar table also made.
 
 ```{r show-la-region, hide = "Reveal table generating code."}
 dplyr::count(LAHS, .data$LA_REGION) %>%
-  kableExtra::kbl(col.names = c("English Region", "N"), align = "lc") %>%
+  kableExtra::kbl(col.names = c("English Region", "N"), align = "lr") %>%
   kableExtra::kable_styling()
 ```
 
@@ -133,6 +133,58 @@ LAHS$YEAR <-
   regmatches(regexpr("^20[0-9]{2}", .)) %>%
   as.integer()
 ```
+
+# Section A: Dwelling Stock
+
+Section A, as described in the LAHS guidance document informs about the number
+and value of dwellings within the LA.
+
+## Ownership
+
+Questions a.1.a) and a.1.b) relate to any publicly owned property within a LA,
+whereas a.2.i.a) relates to all stock owned by the corresponding LA with option
+to dig deeper into how many are "Social Rent" against "Affordable Rent".
+
+```{r add-stock}
+LAHS$STOCK_PUBLIC_LA <- lahs_csv$a1a
+LAHS$STOCK_PUBLIC_OTHER <- lahs_csv$a1b
+LAHS$STOCK <- lahs_csv$a2ia
+```
+
+Now, we see many of the data points concern local auhthorities that own no
+dwelling stock and thus will be unusable.
+
+```{r view-stock, hide = "Reveal table generating code."}
+local({
+  raw_stock_table <- 
+    LAHS %>%
+    dplyr::count(g = ceiling(.data$STOCK / 1e4)) %>%
+    dplyr::mutate(
+      lower = prettyNum(1e4 * (g - 1) + 1, big.mark = ","),
+      upper = prettyNum(1e4 * g, big.mark = ","),
+      stock_tb = paste(.data$lower, .data$upper, sep = " - "),
+      .before = 1, .keep = "unused"
+    )
+  
+  raw_stock_table$stock_tb[1] <- "No dwellings owned"
+  
+  raw_stock_table %>%
+    dplyr::select(.data$stock_tb, .data$n) %>%
+    kableExtra::kbl(col.names = c("Owned Stock", "N"), align = "lr") %>%
+    kableExtra::kable_styling()
+})
+```
+
+## Value
+
+The value of all dwellings in a LA is reported in the millions of pounds and
+accurate to 3 decimal places.
+
+```{r add-stock}
+LAHS$STOCK_VALUE <- lahs_csv$a3a
+```
+
+
 
 
 
