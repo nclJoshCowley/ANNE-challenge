@@ -184,12 +184,35 @@ accurate to 3 decimal places.
 LAHS$STOCK_VALUE <- lahs_csv$a3a
 ```
 
+# Section F: Condition of Dwelling Stock
 
+Section F, as described in the LAHS guidance document, is where we focus for the
+environmental impact.
+Each question is label is also shown in the headings to help matching with any
+official documentation
 
+## EPC
 
+Question F.1.a) is concerned with the *average* rating of all properties.
+The LA is instructed to calculate the mean of the SAP (Standard Assessment 
+Procedure) for each dwelling and report the EPC band of this result.
 
+We note that in the CSV, some values are missing (coded as "") and need to be 
+converted to explicit missing data and some (1) values are miscoded in
+lowercase.
 
+```{r add-epc}
+LAHS$EPC <- 
+  lahs_csv$f1a %>%
+  dplyr::na_if("") %>%
+  stringr::str_to_upper()
+```
 
+```{r show-epc, hide = "Reveal table generating code."}
+dplyr::count(LAHS, .data$EPC) %>%
+  kableExtra::kbl(col.names = c("EPC Average", "N"), align = "lr") %>%
+  kableExtra::kable_styling()
+```
 
 
 
