@@ -11,7 +11,7 @@
 
 <meta name="author" content="Josh Cowley" />
 
-<meta name="date" content="2022-03-23" />
+<meta name="date" content="2022-03-24" />
 
 <title>LAHS Data Cleaning Script</title>
 
@@ -1738,7 +1738,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">LAHS Data Cleaning Script</h1>
 <h4 class="author">Josh Cowley</h4>
-<h4 class="date">March 23, 2022</h4>
+<h4 class="date">March 24, 2022</h4>
 
 </div>
 
@@ -2198,8 +2198,22 @@ LAHS$INSULATION_FLOOR &lt;- lahs_csv$f2cda</code></pre>
   )</code></pre>
 </div>
 </div>
-<div id="access-to-these-data" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> Access to these Data</h1>
+<div id="data-subsetting" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Data Subsetting</h1>
+<p>Peeking the data shows that many observations equate to a null value, that is, they own no stock at the corresponding year.</p>
+<p>Hence, we remove all LA(s) that have not reported owning stock over the last decade.</p>
+<pre class="r"><code>no_stock_la &lt;- 
+  LAHS %&gt;%
+  dplyr::group_by(.data$LA_NAME) %&gt;%
+  dplyr::summarise(STOCK_MAX = max(.data$STOCK)) %&gt;%
+  dplyr::filter(.data$STOCK_MAX == 0) %&gt;%
+  dplyr::pull(.data$LA_NAME)
+
+LAHS_FULL &lt;- LAHS
+LAHS &lt;- dplyr::filter(LAHS, !(.data$LA_NAME %in% no_stock_la))</code></pre>
+</div>
+<div id="access-to-these-data" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Access to these Data</h1>
 <p>One can access this data by installing this package and importing the <code>LAHS</code> dataset in the following way.</p>
 <pre class="r"><code>data(&quot;LAHS&quot;, package = &quot;LAHS&quot;)</code></pre>
 </div>

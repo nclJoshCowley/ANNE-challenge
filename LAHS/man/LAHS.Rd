@@ -3,9 +3,10 @@
 \docType{data}
 \name{LAHS}
 \alias{LAHS}
+\alias{LAHS_FULL}
 \title{Subset of Local Authority Housing Statistics}
 \format{
-A data frame with 3239 rows and 23 variables:
+A data frame with 1961 rows and 23 variables:
 \describe{
 \item{LA_CODE}{Local authority code at the time the data was collected.}
 \item{LA_NAME}{Local Authority name at the time the data was collected.}
@@ -33,15 +34,21 @@ efficiency rating of the boiler.}
 \item{RT_TURBINE}{True if any wind turbines have been installed.}
 \item{RT_OTHER}{True if any other technologies have been installed.}
 }
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 3239 rows and 23 columns.
 }
 \source{
 \url{https://www.gov.uk/government/statistical-data-sets/local-authority-housing-statistics-open-data}
 }
 \usage{
 LAHS
+
+LAHS_FULL
 }
 \description{
 We focus on the subset of the data that could be relevant from an
 environmental perspective.
+
+\code{LAHS_FULL} is greater dataset with LA(s) that hold no dwelling stock.
 }
 \keyword{datasets}

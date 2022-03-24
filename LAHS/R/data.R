@@ -3,7 +3,7 @@
 #' We focus on the subset of the data that could be relevant from an
 #'   environmental perspective.
 #'
-#' @format A data frame with 3239 rows and 23 variables:
+#' @format A data frame with 1961 rows and 23 variables:
 #' \describe{
 #'   \item{LA_CODE}{Local authority code at the time the data was collected.}
 #'   \item{LA_NAME}{Local Authority name at the time the data was collected.}
@@ -34,3 +34,10 @@
 #'
 #' @source <https://www.gov.uk/government/statistical-data-sets/local-authority-housing-statistics-open-data>
 "LAHS"
+
+#' LAHS_FULL
+#'
+#' `LAHS_FULL` is greater dataset with LA(s) that hold no dwelling stock.
+#'
+#' @rdname LAHS
+"LAHS_FULL"

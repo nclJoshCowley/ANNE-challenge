@@ -281,11 +281,30 @@ LAHS <-
   )
 ```
 
+# Data Subsetting
 
+Peeking the data shows that many observations equate to a null value, that is,
+they own no stock at the corresponding year.
+
+Hence, we remove all LA(s) that have not reported owning stock over the last
+decade.
+
+```{r subset-data}
+no_stock_la <- 
+  LAHS %>%
+  dplyr::group_by(.data$LA_NAME) %>%
+  dplyr::summarise(STOCK_MAX = max(.data$STOCK)) %>%
+  dplyr::filter(.data$STOCK_MAX == 0) %>%
+  dplyr::pull(.data$LA_NAME)
+
+LAHS_FULL <- LAHS
+LAHS <- dplyr::filter(LAHS, !(.data$LA_NAME %in% no_stock_la))
+```
 
 # Access to these Data
 
 ```{r use-data, echo = FALSE, eval = params$use_data}
+usethis::use_data(LAHS_FULL, overwrite = TRUE)
 usethis::use_data(LAHS, overwrite = TRUE)
 ```
 
