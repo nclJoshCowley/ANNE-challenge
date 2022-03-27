@@ -1,0 +1,49 @@
+---
+title: "Local Authority CO2 Emissions - Data Cleaning Script"
+author: "Josh Cowley"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    number_sections: true
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+params:
+  use_data: TRUE
+---
+
+```{r setup, include = FALSE}
+# CRAN
+library(tidyverse)
+library(usethis)
+library(kableExtra)
+
+# Github
+library(LAHS)
+LAHS::common_report_setup(echo = TRUE)
+```
+
+The purpose of this report is to convey all processes used and any decisions
+made when the data was cleaned.
+The source of this data (CSV) can be found at
+<https://data.gov.uk/dataset/723c243d-2f1a-4d27-8b61-cdb93e5b10ff/uk-local-authority-and-regional-carbon-dioxide-emissions-national-statistics-2005-to-2019>.
+
+```{r load-csv}
+laco2_path <-
+  file.path("data-raw", "source", "2005-19_Local_Authority_CO2_emissions.csv")
+```
+
+**TODO**.
+
+# Access to these Data
+
+```{r use-data, echo = FALSE, eval = params$use_data}
+usethis::use_data(., overwrite = TRUE)
+```
+
+One can access this data by installing this package and importing the dataset.
+
+```{r eg-import, echo = TRUE, eval = FALSE}
+data("LAHS", package = "LAHS")
+```
