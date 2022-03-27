@@ -41,3 +41,27 @@
 #'
 #' @rdname LAHS
 "LAHS_FULL"
+
+
+#' Local Authority Carbon Dioxide Emissions
+#'
+#' CO2 emissions for local authorities within the UK.
+#'
+#' @format A data frame with 129388 rows and 10 variables:
+#' \describe{
+#'   \item{LA_CODE}{Local authority code at the time the data was collected.}
+#'   \item{LA_NAME}{Local Authority name at the time the data was collected.}
+#'   \item{LA_REGION}{English Region name.}
+#'   \item{YEAR}{Reporting calendar year.}
+#'   \item{CO2_SECTOR}{Sector responsible for CO2 emissions.}
+#'   \item{CO2_SUBSECTOR}{Sub-sector (electricity, gas, etc.) responsible for
+#'       CO2 emissions.}
+#'   \item{CO2_EMISSIONS}{Terrotorial emission in kilotonnes.}
+#'   \item{CO2_LA_EMISSIONS}{Emissions defined as 'within the scope of
+#'       influence' of the LA.}
+#'   \item{LA_POPULATION}{Mid-year population in the thousands.}
+#'   \item{LA_AREA}{Area in square kilometres.}
+#' }
+#'
+#' @source <https://data.gov.uk/dataset/723c243d-2f1a-4d27-8b61-cdb93e5b10ff/uk-local-authority-and-regional-carbon-dioxide-emissions-national-statistics-2005-to-2019>
+"LACO2"

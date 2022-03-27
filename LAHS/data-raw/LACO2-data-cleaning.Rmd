@@ -34,12 +34,56 @@ laco2_path <-
   file.path("data-raw", "source", "2005-19_Local_Authority_CO2_emissions.csv")
 ```
 
-**TODO**.
+# Selection
+
+For these data, we initially remove superfluous columns by defining the 
+following specification.
+
+```{r create-laco2-raw, message = TRUE}
+laco2_raw <- 
+  laco2_path %>%
+  readr::read_csv(
+    col_select = -tidyselect::all_of(
+      c("Country", "Country Code", "Region Code", "Second Tier Authority")
+    ),
+    show_col_types = FALSE
+  )
+```
+
+```{r show-colspec, echo = FALSE, results = "asis"}
+spec(laco2_raw) %>%
+  capture.output() %>%
+  head(-1) %>%
+  tail(-1) %>% 
+  sprintf(fmt = "-%s") %>%
+  cat(sep = "\n")
+```
+
+# Renaming
+
+Then, we rename the columns to make joining with `LAHS` easier and to improve conciseness
+
+```{r create-LACO2}
+LACO2 <- 
+  laco2_raw %>%
+  dplyr::rename(
+    LA_CODE = `Local Authority Code`,
+    LA_NAME = `Local Authority`,
+    LA_REGION = Region,
+    YEAR = `Calendar Year`,
+    CO2_SECTOR = `LA CO2 Sector`,
+    CO2_SUBSECTOR = `LA CO2 Sub-sector`,
+    CO2_EMISSIONS = `Territorial emissions (kt CO2)`,
+    CO2_LA_EMISSIONS = `Emissions within the scope of influence of LAs (kt CO2)`,
+    LA_POPULATION = `Mid-year Population (thousands)`,
+    LA_AREA = `Area (km2)`
+  )
+```
 
 # Access to these Data
 
 ```{r use-data, echo = FALSE, eval = params$use_data}
-usethis::use_data(., overwrite = TRUE)
+usethis::use_data(LACO2, overwrite = TRUE)
 ```
 
 One can access this data by installing this package and importing the dataset.
