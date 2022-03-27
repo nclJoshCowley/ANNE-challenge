@@ -11,9 +11,9 @@
 
 <meta name="author" content="Josh Cowley" />
 
-<meta name="date" content="2022-03-24" />
+<meta name="date" content="2022-03-27" />
 
-<title>LAHS Data Cleaning Script</title>
+<title>Local Authority Housing Statistics - Data Cleaning Script</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1736,9 +1736,9 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">LAHS Data Cleaning Script</h1>
+<h1 class="title toc-ignore">Local Authority Housing Statistics - Data Cleaning Script</h1>
 <h4 class="author">Josh Cowley</h4>
-<h4 class="date">March 24, 2022</h4>
+<h4 class="date">March 27, 2022</h4>
 
 </div>
 
@@ -1747,7 +1747,7 @@ div.tocify {
 <p>The purpose of this report is to convey all processes used and any decisions made when the data was cleaned. The source of this data (CSV) can be found at <a href="https://www.gov.uk/government/statistical-data-sets/local-authority-housing-statistics-open-data" class="uri">https://www.gov.uk/government/statistical-data-sets/local-authority-housing-statistics-open-data</a>.</p>
 <p>Currently, we are interested in a subset of these data and as such will populate a new data frame as we clean the data.</p>
 <pre class="r"><code>lahs_path &lt;-
-  file.path(&quot;data-raw&quot;, &quot;LAHS_201112_to_202021_open_data_02_2022.csv&quot;)
+  file.path(&quot;data-raw&quot;, &quot;source&quot;, &quot;LAHS_201112_to_202021_open_data_02_2022.csv&quot;)
 
 lahs_csv &lt;- utils::read.csv(lahs_path)
 

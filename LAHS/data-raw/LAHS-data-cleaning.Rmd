@@ -1,5 +1,5 @@
 ---
-title: "LAHS Data Cleaning Script"
+title: "Local Authority Housing Statistics - Data Cleaning Script"
 author: "Josh Cowley"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
@@ -14,9 +14,6 @@ params:
 ---
 
 ```{r setup, include = FALSE}
-# Using Project directory for filepaths
-knitr::opts_knit$set(root.dir = rprojroot::find_root("DESCRIPTION"))
-
 # CRAN
 library(tidyverse)
 library(usethis)
@@ -25,9 +22,6 @@ library(kableExtra)
 # Github
 library(LAHS)
 LAHS::common_report_setup(echo = TRUE)
-
-# Hooks
-knitr::knit_hooks$set(source = LAHS::get_knit_hook_source_hide())
 ```
 
 ```{r setup-helper}
@@ -44,7 +38,7 @@ populate a new data frame as we clean the data.
 
 ```{r load-csv}
 lahs_path <-
-  file.path("data-raw", "LAHS_201112_to_202021_open_data_02_2022.csv")
+  file.path("data-raw", "source", "LAHS_201112_to_202021_open_data_02_2022.csv")
 
 lahs_csv <- utils::read.csv(lahs_path)
 
@@ -308,8 +302,7 @@ usethis::use_data(LAHS_FULL, overwrite = TRUE)
 usethis::use_data(LAHS, overwrite = TRUE)
 ```
 
-One can access this data by installing this package and importing the `LAHS` 
-dataset in the following way.
+One can access this data by installing this package and importing the dataset.
 
 ```{r eg-import, echo = TRUE, eval = FALSE}
 data("LAHS", package = "LAHS")

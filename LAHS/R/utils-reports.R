@@ -8,8 +8,6 @@
 #'
 #' @export
 common_report_setup <- function(..., base_size = 16) {
-  ggplot2::theme_set(ggplot2::theme_minimal(base_size = base_size))
-
   default_args <-
     list(
       # Figure(s)
@@ -23,8 +21,18 @@ common_report_setup <- function(..., base_size = 16) {
       cache = FALSE
     )
 
+  # ggplot2 theme
+  ggplot2::theme_set(ggplot2::theme_minimal(base_size = base_size))
+
+  # Knitr options
   updated_args <- utils::modifyList(default_args, rlang::list2(...))
   do.call(knitr::opts_chunk$set, updated_args)
+
+  # Hooks
+  knitr::knit_hooks$set(source = get_knit_hook_source_hide())
+
+  # Using Project directory for filepaths
+  knitr::opts_knit$set(root.dir = rprojroot::find_root("DESCRIPTION"))
 
   return(invisible(NULL))
 }
