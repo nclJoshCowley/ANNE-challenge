@@ -1,23 +1,25 @@
 # Plan
 
+## Initial Plan
+
 Decided to loosely implement the 6 main stages of CRISP-DM following the
 initial research stage (inspired by the [NICD workshop][NICD-workflow]).
 
 Dates are attached to each step to determine the **main** time to be working on
 each step but these are loose as each step may cause backtracking.
 
-## Business Understanding
+### Business Understanding
 
-See [IDEAS.md](IDEAS.md)
+- See [IDEAS.md](IDEAS.md)
 
-## Data Understanding (21st April - 27th April)
+### Data Understanding (21st April - 27th April)
 
 - Initial data determined to be open data: local authority housing
   statistics [(LAHS)][lahs2022].
 
 - Supplementing data would be a good objective to aim for but not required.
 
-## Data Preparation (21st April - 27th April)
+### Data Preparation (21st April - 27th April)
 
 - LAHS data takes the form of many features such as "a1a" that correspond to
   answers for each local authority (LA) in a supplied form.
@@ -29,13 +31,13 @@ See [IDEAS.md](IDEAS.md)
 - Feature names will be made less ambiguous but still need to be concise,
   as such,a dataset description is an objective.
 
-## Modelling (28th April - 3rd May)
+### Modelling (28th April - 3rd May)
 
 - This will be updated following the data steps but at the time of the initial
   plan, the data seems to be annual time series where features should affect
   the response variable in the future: EPC average (ordinal categorical).
 
-## Evaluation (4th May - 6th May)
+### Evaluation (4th May - 6th May)
 
 In summary, the objectives are:
 
@@ -50,10 +52,17 @@ In summary, the objectives are:
 - Unambiguously define some indicator that builds upon EPC but also
   incorporates trend (or the original idea of difficulty).
 
-## Deployment (4th May - 6th May)
+### Deployment (4th May - 6th May)
 
 This step is simply producing the final report and dashboard and submitting to
 the SharePoint folder before the deadline of 6th April 2022.
+
+## Revisions
+
+- **2022-03-25**.
+  - *Issue*. Learned that EPC data for a single LA does not change very often
+    due to a combination of ratings lasting for 10 years and volume of stock.
+  - *Revision*. Find supplementary data to assist LA housing statistic data.
 
 [NICD-workflow]:
   https://nicd-uk.github.io/workflow-workshop/#15
