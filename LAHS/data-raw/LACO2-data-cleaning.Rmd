@@ -81,6 +81,16 @@ LACO2 <-
   )
 ```
 
+# Removal
+
+We see some of the data has no region and is logged under the local authority 
+name "Unallocated electricity NI", "Unallocated consumption" and "Large elec 
+users (high voltage lines) unknown location" which we remove from the data.
+
+```{r rm-ni}
+LACO2 <- dplyr::filter(LACO2, !is.na(.data$LA_REGION))
+```
+
 # Access to these Data
 
 ```{r use-data, echo = FALSE, eval = params$use_data}
