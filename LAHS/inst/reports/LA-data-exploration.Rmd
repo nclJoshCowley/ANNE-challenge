@@ -217,3 +217,22 @@ LAHS %>%
   vis_trend(y = .data$NEW_BOILERS, colour = .data$LA_REGION)
 ```
 
+## Insulation, less cavity and more solid wall?
+
+**TODO**.
+
+## Renewable Technologies (RT) increasing?
+
+**TODO**.
+
+## Insight into RT types?
+
+**TODO**.
+
+## Any correlation between EPC and work done?
+
+**TODO**.
+
+## Any correlation between average value and work done?
+
+**TODO**.
