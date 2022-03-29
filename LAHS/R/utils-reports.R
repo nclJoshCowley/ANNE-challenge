@@ -23,6 +23,7 @@ common_report_setup <- function(..., base_size = 16) {
 
   # ggplot2 theme
   ggplot2::theme_set(ggplot2::theme_minimal(base_size = base_size))
+  ggplot2::theme_update(legend.position = "bottom")
 
   # Knitr options
   updated_args <- utils::modifyList(default_args, rlang::list2(...))
