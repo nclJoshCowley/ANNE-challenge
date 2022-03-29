@@ -66,8 +66,8 @@ LACO2_domestic %>%
 
 ### By Region
 
-Aggregating over regions, we still see the same trend but the plot is still too 
-busy (12 regions).
+Aggregating (total DCE) over regions, we still see the same trend but the plot 
+is still too busy (12 regions).
 
 Also, it seems as though temporal trends in domestic emissions are common 
 across regions.
@@ -80,4 +80,33 @@ LACO2_domestic %>%
     .groups = "keep"
   ) %>%
   vis_trend_per_subsector(y = .data$CO2_LA_EMISSIONS, colour = .data$LA_REGION)
+```
+
+## Population trends?
+
+We should expect population to be increasing, and that is what we see.
+
+```{r}
+LACO2_domestic %>%
+  dplyr::group_by(.data$LA_REGION, .data$YEAR) %>%
+  dplyr::summarise(LA_POPULATION = sum(.data$LA_POPULATION), .groups = "keep") %>%
+  ggplot(aes(x = .data$YEAR, y = .data$LA_POPULATION, colour = .data$LA_REGION)) +
+  ggplot2::geom_line()
+```
+
+## Area trends?
+
+Hard to see why LA areas would be changing but the following shows they are not
+necessarily constant for one reason or another.
+
+```{r}
+LACO2_domestic %>%
+  dplyr::group_by(.data$LA_REGION, .data$YEAR) %>%
+  dplyr::summarise(LA_AREA = sum(.data$LA_AREA), .groups = "keep") %>%
+  ggplot2::ggplot(ggplot2::aes(
+    x = .data$YEAR,
+    y = .data$LA_AREA,
+    colour = .data$LA_REGION
+  )) +
+  ggplot2::geom_line()
 ```
