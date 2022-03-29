@@ -40,6 +40,12 @@ Each section asks a questions of the data.
 
 # Domestic CO2 Emissions (DCE)
 
+## Degree under LA Influence?
+
+No visualisation here but note the data is split into CO2 emissions and CO2 
+emissions under the influence of the LA. For domestic emissions, these values
+are always the same.
+
 ## DCE trend over time?
 
 ### By LA
