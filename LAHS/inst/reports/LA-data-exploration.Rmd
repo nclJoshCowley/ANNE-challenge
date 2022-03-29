@@ -110,3 +110,83 @@ LACO2_domestic %>%
   dplyr::summarise(LA_AREA = sum(.data$LA_AREA), .groups = "keep") %>%
   vis_trend(y = .data$LA_AREA, colour = .data$LA_REGION)
 ```
+
+
+
+# LA Housing Statistics
+
+## Dwellings owned trends?
+
+We see that the number of dwellings can change over time but the totals 
+year-to-year remain fairly constant.
+
+```{r}
+LAHS %>%
+  dplyr::group_by(.data$LA_REGION, .data$YEAR) %>%
+  dplyr::summarise(STOCK = sum(.data$STOCK), .groups = "drop") %>%
+  vis_trend(y = .data$STOCK, colour = .data$LA_REGION)
+```
+
+## Average house prices per region?
+
+Note that there are two possible way to find average house value
+
+1. Calculate the average house value per region using reported totals.
+1. Calculate the average house value per LA and take the average of that.
+
+We opt for the former so any LAs with a small sample size of expensive houses 
+don't skew the data.
+
+Furthermore, we must remove any observations from both the total stock counts
+and total stock value that have not reported their stock value
+($n_{\mathrm{missing}} = `r sum(is.na(LAHS$STOCK_VALUE))`$).
+
+```{r}
+LAHS %>%
+  dplyr::filter(!is.na(.data$STOCK_VALUE)) %>%
+  dplyr::group_by(.data$LA_REGION, .data$YEAR) %>%
+  dplyr::summarise(
+    avg_price = sum(.data$STOCK_VALUE) / sum(.data$STOCK), 
+    .groups = "drop"
+  ) %>%
+  vis_trend(y = .data$avg_price, colour = .data$LA_REGION)
+```
+
+## Variability of EPC over time?
+
+Here, we plot a discrete time series for each LA split by their respective 
+region. 
+The main information we take from this are
+- EPC averages rarely change by >1 band over a decade;
+- vast majority of LA(s) report C-D;
+- Missing data is a real issue in these data.
+
+```{r}
+LAHS %>%
+  vis_trend(
+    # A = 7, B = 6, ..., G = 1.
+    y = as.numeric(factor(.data$EPC, levels = rev(LETTERS[1:7]))),
+    colour = .data$LA_NAME
+  ) +
+  ggplot2::facet_wrap(ggplot2::vars(.data$LA_REGION)) +
+  ggplot2::scale_y_continuous(breaks = 1:7, labels = ~ LETTERS[8 - .x]) +
+  ggplot2::guides(colour = "none")
+```
+
+And for the curious, the LA in the East of England with an EPC of F-G is called
+"Castle Point".
+
+<details><summary>Show Castle Point data.</summary>
+```{r}
+LAHS %>%
+  dplyr::filter(.data$LA_NAME == "Castle Point") %>%
+  dplyr::select(
+    tidyselect::starts_with("LA"),
+    tidyselect::all_of(c(
+      "STOCK", "STOCK_VALUE", "YEAR", "NEW_BOILERS", "INSULATION", "RT_TOTAL"
+    ))
+  ) %>%
+  kableExtra::kbl() %>%
+  kableExtra::kable_styling()
+```
+</details>
