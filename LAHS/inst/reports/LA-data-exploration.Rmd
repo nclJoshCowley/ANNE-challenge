@@ -24,9 +24,12 @@ library(LAHS)
 LAHS::common_report_setup()
 ```
 
-```{r}
+```{r setup-data}
 data("LAHS", package = "LAHS")
 data("LACO2", package = "LAHS")
+
+LACO2_domestic <- dplyr::filter(LACO2, .data$CO2_SECTOR == "Domestic")
+rm(LACO2)
 ```
 
 # Introduction
@@ -35,34 +38,33 @@ This report aims to explore the data by collating visualisations that will be
 precursors to more polished visualisations to be delivered.
 Each section asks a questions of the data.
 
-# Domestic Emissions trend?
+# Domestic CO2 Emissions (DCE)
 
-## By LA
+## DCE trend over time?
+
+### By LA
 
 We see that the **domestic** emissions under LA influence appear to be 
 decreasing over time for electricity and to some extent gas.
 
-```{r vis_emissions_over_time_by_subsector}
-vis_emissions_over_time_by_subsector <- function(x, colour, legend = FALSE) {
-  x %>%
-    ggplot2::ggplot(ggplot2::aes(
-      x = .data$YEAR,
-      y = .data$CO2_LA_EMISSIONS,
-      colour = .data[[{{colour}}]]
-    )) +
+```{r vis_trend_per_subsector}
+vis_trend_per_subsector <- function(tb, ...) {
+  default_mapping <- rlang::exprs(x = .data$YEAR)
+  new_mapping <- utils::modifyList(default_mapping, rlang::enexprs(...))
+  
+  ggplot2::ggplot(tb, do.call(ggplot2::aes, new_mapping)) +
     ggplot2::geom_line() +
     ggplot2::facet_wrap(ggplot2::vars(.data$CO2_SUBSECTOR))
 }
 ```
 
 ```{r}
-LACO2 %>%
-  dplyr::filter(.data$CO2_SECTOR == "Domestic") %>%
-  vis_emissions_over_time_by_subsector(colour = "LA_NAME") +
+LACO2_domestic %>%
+  vis_trend_per_subsector(y = .data$CO2_LA_EMISSIONS, colour = .data$LA_NAME) +
   ggplot2::guides(colour = "none")
 ```
 
-## By Region
+### By Region
 
 Aggregating over regions, we still see the same trend but the plot is still too 
 busy (12 regions).
@@ -71,15 +73,11 @@ Also, it seems as though temporal trends in domestic emissions are common
 across regions.
 
 ```{r}
-LACO2 %>%
-  dplyr::filter(.data$CO2_SECTOR == "Domestic") %>%
+LACO2_domestic %>%
   dplyr::group_by(.data$LA_REGION, .data$CO2_SUBSECTOR, .data$YEAR) %>%
   dplyr::summarise(
     CO2_LA_EMISSIONS = sum(.data$CO2_LA_EMISSIONS),
     .groups = "keep"
   ) %>%
-  vis_emissions_over_time_by_subsector(colour = "LA_REGION")  
+  vis_trend_per_subsector(y = .data$CO2_LA_EMISSIONS, colour = .data$LA_REGION)
 ```
-
-
-
