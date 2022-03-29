@@ -6,7 +6,7 @@
 \alias{LAHS_FULL}
 \title{Subset of Local Authority Housing Statistics}
 \format{
-A data frame with 1961 rows and 23 variables:
+A data frame with 1943 rows and 23 variables:
 \describe{
 \item{LA_CODE}{Local authority code at the time the data was collected.}
 \item{LA_NAME}{Local Authority name at the time the data was collected.}

@@ -76,16 +76,8 @@ LAHS %>%
 
 </details><img src="LAHS-data-cleaning_files/figure-html/plot-la-code-name-issues-1.png" width="100%" style="display: block; margin: auto;" />
 
-<!-- For now, we mark these problematic LA(s) for removal but may revisit these  -->
-<!-- issues to increase the data available. -->
-
-<!-- ```{r mark-rm-la-name, echo = FALSE} -->
-<!-- REMOVALS_LA_NAME <- -->
-<!--   local({ -->
-<!--     tbl <- table(LAHS$LA_NAME) -->
-<!--     names(tbl)[tbl != 10] -->
-<!--   }) -->
-<!-- ``` -->
+In a later Section (Data Subsetting) we mark for removal any LA with less than 
+5 data points shown above.
 
 ## Classification
 
@@ -465,11 +457,26 @@ LAHS <-
 # Data Subsetting
 
 Peeking the data shows that many observations equate to a null value, that is,
-they own no stock at the corresponding year.
+they own no stock at the corresponding year. Other data quality issues persist
+but are not mentioned here.
 
-Hence, we remove all LA(s) that have not reported owning stock over the last
-decade.
+Hence, we mark the following for removal
 
+<details><summary>LA(s) with <5 data points</summary>
+
+```r
+incomplete_la <-
+  local({
+    tbl <- table(LAHS$LA_NAME)
+    names(tbl)[tbl < 5]
+  })
+```
+
+
+
+</details>
+
+<details><summary>LA(s) reporting no stock over the last decade.</summary>
 
 ```r
 no_stock_la <- 
@@ -478,9 +485,39 @@ no_stock_la <-
   dplyr::summarise(STOCK_MAX = max(.data$STOCK)) %>%
   dplyr::filter(.data$STOCK_MAX == 0) %>%
   dplyr::pull(.data$LA_NAME)
+```
+
+
+
+</details>
+
+<details><summary>LA(s) with no reported EPC ratings over the last decade.</summary>
+
+```r
+no_epc_la <-
+  LAHS %>%
+  dplyr::group_by(.data$LA_NAME) %>%
+  dplyr::summarise(N_EPC = sum(!is.na(.data$EPC))) %>%
+  dplyr::filter(.data$N_EPC == 0) %>%
+  dplyr::pull(.data$LA_NAME)
+```
+
+
+
+</details>
+
+&nbsp;
+
+And then split our data into a full version and a shorter version where the 
+above LA(s) have been removed.
+
+
+```r
+la_removals <- unique(c(incomplete_la, no_stock_la, no_epc_la))
 
 LAHS_FULL <- LAHS
-LAHS <- dplyr::filter(LAHS, !(.data$LA_NAME %in% no_stock_la))
+
+LAHS <- dplyr::filter(LAHS, !(.data$LA_NAME %in% la_removals))
 ```
 
 # Access to these Data
