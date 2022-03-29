@@ -190,3 +190,30 @@ LAHS %>%
   kableExtra::kable_styling()
 ```
 </details>
+
+## Are new boilers decreasing?
+
+### By LA
+
+Here we start to see a difference in behaviour between LA(s) with the most 
+boilers installed by any single LA peaking in 2019.
+
+```{r}
+LAHS %>%
+  vis_trend(y = .data$NEW_BOILERS, colour = .data$LA_NAME) +
+  ggplot2::guides(colour = "none")
+```
+
+### By Region
+
+If we take the sum of all new boilers at a regional level, we start to see the
+decline expected.
+
+```{r}
+LAHS %>%
+  dplyr::filter(!is.na(.data$NEW_BOILERS)) %>%
+  dplyr::group_by(.data$LA_REGION, .data$YEAR) %>%
+  dplyr::summarise(NEW_BOILERS = sum(.data$NEW_BOILERS), .groups = "keep") %>%
+  vis_trend(y = .data$NEW_BOILERS, colour = .data$LA_REGION)
+```
+
