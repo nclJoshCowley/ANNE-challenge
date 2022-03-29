@@ -1,7 +1,7 @@
 ---
 title: "Local Authority Housing Statistics - Data Cleaning Script"
 author: "Josh Cowley"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+date: "March 29, 2022"
 output:
   html_document:
     number_sections: true
@@ -14,18 +14,10 @@ params:
   use_data: TRUE
 ---
 
-```{r setup, include = FALSE}
-# CRAN
-library(tidyverse)
-library(usethis)
-library(kableExtra)
 
-# Github
-library(LAHS)
-LAHS::common_report_setup(echo = TRUE)
-```
 
-```{r setup-helper}
+
+```r
 source(file.path("data-raw", "LAHS-data-cleaning-helper.R"))
 ```
 
@@ -37,7 +29,8 @@ The source of this data (CSV) can be found at
 Currently, we are interested in a subset of these data and as such will 
 populate a new data frame as we clean the data.
 
-```{r load-csv}
+
+```r
 lahs_path <-
   file.path("data-raw", "source", "LAHS_201112_to_202021_open_data_02_2022.csv")
 
@@ -53,17 +46,20 @@ LAHS <- tibble::tibble(.rows = nrow(lahs_csv))
 We use the local authority code and name at the time of data collection,
 ignoring the codes and names using the 2020 geography
 
-```{r add-la-code-name}
+
+```r
 LAHS$LA_CODE <- lahs_csv$LA_CODE
 LAHS$LA_NAME <- lahs_csv$LA_NAME
 ```
 
-There are `r length(unique(LAHS$LA_NAME))` unique local authorities.
+There are 332 unique local authorities.
 Most have 10 data points, one for each year, but this is not always the case.
 The following visualisation summarises the LA(s) that have fewer than 10 
 observations.
 
-```{r plot-la-code-name-issues, hide = "Reveal ggplot2 code."}
+<details><summary>Reveal ggplot2 code.</summary>
+
+```r
 LAHS %>%
   dplyr::count(.data$LA_NAME) %>%
   dplyr::filter(.data$n != 10) %>%
@@ -75,6 +71,10 @@ LAHS %>%
   ggplot2::scale_x_continuous(breaks = 1:10, limits = c(1, 10)) +
   ggplot2::labs(y = NULL, x = "Number of Datum")
 ```
+
+
+
+</details><img src="LAHS-data-cleaning_files/figure-html/plot-la-code-name-issues-1.png" width="100%" style="display: block; margin: auto;" />
 
 <!-- For now, we mark these problematic LA(s) for removal but may revisit these  -->
 <!-- issues to increase the data available. -->
@@ -95,31 +95,115 @@ three characters of the local authority code and in its own column.
 For example, Darlington is coded "E06000005"; the "E06" implies that this LA
 is a unitary authority. We convert each code to a corresponding label.
 
-```{r add-la-type}
+
+```r
 LAHS$LA_TYPE <- parse_la_type(lahs_csv$LAD20TYPE)
 ```
 
 We can see the respective sample sizes of such divisions here.
 
-```{r show-la-type, hide = "Reveal table generating code."}
+<details><summary>Reveal table generating code.</summary>
+
+```r
 dplyr::count(LAHS, .data$LA_TYPE) %>%
   kableExtra::kbl(col.names = c("Local Authority Type", "N"), align = "lr") %>%
   kableExtra::kable_styling()
 ```
 
+
+
+</details><table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Local Authority Type </th>
+   <th style="text-align:right;"> N </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Unitary authority </td>
+   <td style="text-align:right;"> 609 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Lower tier district authority </td>
+   <td style="text-align:right;"> 1940 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Metropolitan local authority </td>
+   <td style="text-align:right;"> 360 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> London borough </td>
+   <td style="text-align:right;"> 330 </td>
+  </tr>
+</tbody>
+</table>
+
 A further classification can be made on the region each LA exists in.
 
-```{r add-la-region}
+
+```r
 LAHS$LA_REGION <- lahs_csv$RGN20NM
 ```
 
 With a similar table also made.
 
-```{r show-la-region, hide = "Reveal table generating code."}
+<details><summary>Reveal table generating code.</summary>
+
+```r
 dplyr::count(LAHS, .data$LA_REGION) %>%
   kableExtra::kbl(col.names = c("English Region", "N"), align = "lr") %>%
   kableExtra::kable_styling()
 ```
+
+
+
+</details><table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> English Region </th>
+   <th style="text-align:right;"> N </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> East Midlands </td>
+   <td style="text-align:right;"> 400 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> East of England </td>
+   <td style="text-align:right;"> 466 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> London </td>
+   <td style="text-align:right;"> 330 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> North East </td>
+   <td style="text-align:right;"> 120 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> North West </td>
+   <td style="text-align:right;"> 390 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> South East </td>
+   <td style="text-align:right;"> 667 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> South West </td>
+   <td style="text-align:right;"> 356 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> West Midlands </td>
+   <td style="text-align:right;"> 300 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Yorkshire and The Humber </td>
+   <td style="text-align:right;"> 210 </td>
+  </tr>
+</tbody>
+</table>
 
 # Temporal Information
 
@@ -129,7 +213,8 @@ To convert this to numerical information we obtain the data as year start
 information so a value of $20$ denotes the duration from tax year start, 2020,
 to tax year end, 2021.
 
-```{r add-year}
+
+```r
 LAHS$YEAR <- 
   lahs_csv$Year %>%
   regmatches(regexpr("^20[0-9]{2}", .)) %>%
@@ -147,7 +232,8 @@ Questions a.1.a) and a.1.b) relate to any publicly owned property within a LA,
 whereas a.2.i.a) relates to all stock owned by the corresponding LA with option
 to dig deeper into how many are "Social Rent" against "Affordable Rent".
 
-```{r add-stock-counts}
+
+```r
 LAHS$STOCK_PUBLIC_LA <- lahs_csv$a1a
 LAHS$STOCK_PUBLIC_OTHER <- lahs_csv$a1b
 LAHS$STOCK <- lahs_csv$a2ia
@@ -156,7 +242,9 @@ LAHS$STOCK <- lahs_csv$a2ia
 Now, we see many of the data points concern local auhthorities that own no
 dwelling stock and thus will be unusable.
 
-```{r view-stock-counts, hide = "Reveal table generating code."}
+<details><summary>Reveal table generating code.</summary>
+
+```r
 local({
   raw_stock_table <- 
     LAHS %>%
@@ -177,12 +265,58 @@ local({
 })
 ```
 
+
+
+</details><table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Owned Stock </th>
+   <th style="text-align:right;"> N </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> No dwellings owned </td>
+   <td style="text-align:right;"> 1520 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1 - 10,000 </td>
+   <td style="text-align:right;"> 1162 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 10,001 - 20,000 </td>
+   <td style="text-align:right;"> 346 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 20,001 - 30,000 </td>
+   <td style="text-align:right;"> 170 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 30,001 - 40,000 </td>
+   <td style="text-align:right;"> 16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 40,001 - 50,000 </td>
+   <td style="text-align:right;"> 5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 50,001 - 60,000 </td>
+   <td style="text-align:right;"> 11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 60,001 - 70,000 </td>
+   <td style="text-align:right;"> 9 </td>
+  </tr>
+</tbody>
+</table>
+
 ## Value
 
 The value of all dwellings in a LA is reported in the millions of pounds and
 accurate to 3 decimal places.
 
-```{r add-stock-value}
+
+```r
 LAHS$STOCK_VALUE <- lahs_csv$a3a
 ```
 
@@ -203,25 +337,74 @@ We note that in the CSV, some values are missing (coded as "") and need to be
 converted to explicit missing data and some (1) values are miscoded in
 lowercase.
 
-```{r add-epc}
+
+```r
 LAHS$EPC <- 
   lahs_csv$f1a %>%
   dplyr::na_if("") %>%
   stringr::str_to_upper()
 ```
 
-```{r show-epc, hide = "Reveal table generating code."}
+<details><summary>Reveal table generating code.</summary>
+
+```r
 dplyr::count(LAHS, .data$EPC) %>%
   kableExtra::kbl(col.names = c("EPC Average", "N"), align = "lr") %>%
   kableExtra::kable_styling()
 ```
+
+
+
+</details><table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> EPC Average </th>
+   <th style="text-align:right;"> N </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 117 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 958 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> D </td>
+   <td style="text-align:right;"> 691 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> E </td>
+   <td style="text-align:right;"> 21 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> F </td>
+   <td style="text-align:right;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 1418 </td>
+  </tr>
+</tbody>
+</table>
 
 ## Boiler Replacement
 
 Raw quantity of boilers replaced, regardless of energy efficiency rating of the 
 boiler.
 
-```{r add-boilers}
+
+```r
 LAHS$NEW_BOILERS <- lahs_csv$f2ba
 ```
 
@@ -230,7 +413,8 @@ LAHS$NEW_BOILERS <- lahs_csv$f2ba
 We are given a total of insulation installed by question f.2.c.a) with more 
 granular details given by sub-questions.
 
-```{r add-insulation}
+
+```r
 LAHS$INSULATION <- lahs_csv$f2ca
 
 LAHS$INSULATION_SOLID <- lahs_csv$f2caa
@@ -244,7 +428,8 @@ LAHS$INSULATION_FLOOR <- lahs_csv$f2cda
 Question f.2.d.a) allows local authorities to report the number of dwellings 
 that have had renewable technologies installed.
 
-```{r add-rt-total}
+
+```r
 LAHS$RT_TOTAL <- lahs_csv$f2da
 ```
 
@@ -266,7 +451,8 @@ biomass boilers and photovoltaic panels.
 
 Note the presence of missing values are assumed to be 0.
 
-```{r add-rt-types, error = TRUE}
+
+```r
 LAHS <- 
   dplyr::bind_cols(
     LAHS,
@@ -284,7 +470,8 @@ they own no stock at the corresponding year.
 Hence, we remove all LA(s) that have not reported owning stock over the last
 decade.
 
-```{r subset-data}
+
+```r
 no_stock_la <- 
   LAHS %>%
   dplyr::group_by(.data$LA_NAME) %>%
@@ -298,13 +485,11 @@ LAHS <- dplyr::filter(LAHS, !(.data$LA_NAME %in% no_stock_la))
 
 # Access to these Data
 
-```{r use-data, echo = FALSE, eval = params$use_data}
-usethis::use_data(LAHS_FULL, overwrite = TRUE)
-usethis::use_data(LAHS, overwrite = TRUE)
-```
+
 
 One can access this data by installing this package and importing the dataset.
 
-```{r eg-import, echo = TRUE, eval = FALSE}
+
+```r
 data("LAHS", package = "LAHS")
 ```
