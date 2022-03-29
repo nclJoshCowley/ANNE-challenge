@@ -22,9 +22,8 @@ library(kableExtra)
 # Github
 library(LAHS)
 LAHS::common_report_setup()
-```
 
-```{r setup-data}
+# Data
 data("LAHS", package = "LAHS")
 data("LACO2", package = "LAHS")
 
@@ -53,20 +52,20 @@ are always the same.
 We see that the **domestic** emissions under LA influence appear to be 
 decreasing over time for electricity and to some extent gas.
 
-```{r vis_trend_per_subsector}
-vis_trend_per_subsector <- function(tb, ...) {
+```{r vis_trend}
+vis_trend <- function(tb, ...) {
   default_mapping <- rlang::exprs(x = .data$YEAR)
   new_mapping <- utils::modifyList(default_mapping, rlang::enexprs(...))
   
   ggplot2::ggplot(tb, do.call(ggplot2::aes, new_mapping)) +
-    ggplot2::geom_line() +
-    ggplot2::facet_wrap(ggplot2::vars(.data$CO2_SUBSECTOR))
+    ggplot2::geom_line()
 }
 ```
 
 ```{r}
 LACO2_domestic %>%
-  vis_trend_per_subsector(y = .data$CO2_LA_EMISSIONS, colour = .data$LA_NAME) +
+  vis_trend(y = .data$CO2_LA_EMISSIONS, colour = .data$LA_NAME) +
+  ggplot2::facet_wrap(ggplot2::vars(.data$CO2_SUBSECTOR)) +
   ggplot2::guides(colour = "none")
 ```
 
@@ -85,7 +84,8 @@ LACO2_domestic %>%
     CO2_LA_EMISSIONS = sum(.data$CO2_LA_EMISSIONS),
     .groups = "keep"
   ) %>%
-  vis_trend_per_subsector(y = .data$CO2_LA_EMISSIONS, colour = .data$LA_REGION)
+  vis_trend(y = .data$CO2_LA_EMISSIONS, colour = .data$LA_REGION) + 
+  ggplot2::facet_wrap(ggplot2::vars(.data$CO2_SUBSECTOR))
 ```
 
 ## Population trends?
@@ -96,8 +96,7 @@ We should expect population to be increasing, and that is what we see.
 LACO2_domestic %>%
   dplyr::group_by(.data$LA_REGION, .data$YEAR) %>%
   dplyr::summarise(LA_POPULATION = sum(.data$LA_POPULATION), .groups = "keep") %>%
-  ggplot(aes(x = .data$YEAR, y = .data$LA_POPULATION, colour = .data$LA_REGION)) +
-  ggplot2::geom_line()
+  vis_trend(y = .data$LA_POPULATION, colour = .data$LA_REGION)
 ```
 
 ## Area trends?
@@ -109,10 +108,5 @@ necessarily constant for one reason or another.
 LACO2_domestic %>%
   dplyr::group_by(.data$LA_REGION, .data$YEAR) %>%
   dplyr::summarise(LA_AREA = sum(.data$LA_AREA), .groups = "keep") %>%
-  ggplot2::ggplot(ggplot2::aes(
-    x = .data$YEAR,
-    y = .data$LA_AREA,
-    colour = .data$LA_REGION
-  )) +
-  ggplot2::geom_line()
+  vis_trend(y = .data$LA_AREA, colour = .data$LA_REGION)
 ```
