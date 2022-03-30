@@ -69,3 +69,15 @@ In each data or dictionary directory we see the following clusters.
 - Physical.
 
 More information about each of these can be found in the user guide.
+
+## Access (Special License)
+
+For studies from 2008 - 2013 there exists the derived folders that hold data
+relating to energy efficiency pertinent to this project. 
+From 2014 onwards, the following (see 11 in the 2014 user guide) is mentioned:
+
+> Two versions of the EHS Housing Stock data are available via the UK
+> Data Archive; an End User Licence and a Special Licence which
+> provides more detailed information.
+
+A Special Licence is granted to a researcher at the data owner's discretion.
