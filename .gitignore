@@ -51,3 +51,6 @@ rsconnect/
 
 ### Project specific
 .vscode/spellright.dict
+
+LAHS/data-raw/source/EHS/
+!LAHS/data-raw/source/EHS/README_*
