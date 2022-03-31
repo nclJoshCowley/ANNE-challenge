@@ -54,3 +54,4 @@ rsconnect/
 
 LAHS/data-raw/source/EHS/
 !LAHS/data-raw/source/EHS/README_*
+LAHS/data/EHS.rda
