@@ -38,11 +38,11 @@ labelled `physical`.
     - 0: not present.
     - 1: problem present.
 
-1. `dblglaz2`. Extent of double glazing (80%).
+1. ~~`dblglaz2`. Extent of double glazing (80%).~~
 
-    - -8.0: unknown.
-    - 1.0: less than 80% double glazed.
-    - 2.0: 80% or more double glazed.
+    - ~~-8.0: unknown.~~
+    - ~~1.0: less than 80% double glazed.~~
+    - ~~2.0: 80% or more double glazed.~~
 
 1. `dblglaz4`. Extent of double glazing (50%).
 
