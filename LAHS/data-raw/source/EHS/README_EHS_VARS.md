@@ -129,6 +129,7 @@ In `general`, we find the following of interest.
 
 1. `gorEHS`. Government office region EHS version.
 
+    - Renamed to `gorehs` in 2014-15.
     - 1.0: North East.
     - 2.0: North West.
     - 4.0: Yorkshire and the Humber.
@@ -139,13 +140,13 @@ In `general`, we find the following of interest.
     - 9.0: South East.
     - 10.0: South West.
 
-1. `imd1510`. IMD 2015 decile ranking of areas (lower layer SOA).
+1. ~~`imd1510`. IMD 2015 decile ranking of areas (lower layer SOA).~~
 
-    - Available from 2015/16 (SN: 8350).
-    - Takes value 1 through 10 meaning:
-        - 1.0: most deprived 10% of areas.
-        - ...
-        - 10.0: "least deprived 10% of areas.
+    - ~~Available from 2015/16 (SN: 8350).~~
+    - ~~Takes value 1 through 10 meaning:~~
+        - ~~1.0: most deprived 10% of areas.~~
+        - ~~...~~
+        - ~~10.0: "least deprived 10% of areas.~~
 
 1. `tenure4x`. Type of tenure.
 
