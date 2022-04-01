@@ -1,0 +1,25 @@
+---
+book: true
+top-level-division: chapter
+classoption: oneside
+
+toc: true
+toc_depth: 2
+toc-own-page: true
+number_sections: true
+
+mainfont: Algerian
+linestretch: 1.6
+
+header-right: "ANNE Analysis Challenge Event"
+
+titlepage: true
+titlepage-text-color: FFFFFF
+titlepage-rule-color: FFFFFF
+titlepage-background: templates/front-page-background
+
+page-background: templates/all-page-background
+page-background-opacity: 0.8
+
+linkcolor: blue
+---
