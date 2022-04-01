@@ -23,4 +23,5 @@ Imports:
     rlang,
 Suggests:
     knitr,
+    RColorBrewer,
     rprojroot,
