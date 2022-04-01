@@ -65,3 +65,30 @@
 #'
 #' @source <https://data.gov.uk/dataset/723c243d-2f1a-4d27-8b61-cdb93e5b10ff/uk-local-authority-and-regional-carbon-dioxide-emissions-national-statistics-2005-to-2019>
 "LACO2"
+
+#' English Housing Survey
+#'
+#' Subset of EHS dataset relating to emissions and energy efficiency.
+#'   Missing from package when installed via git due to UKDA End-user Licence.
+#'
+#' @format A data frame with 36,971 rows and 17 variables:
+#' \describe{
+#'  \item{YEAR}{Reporting financial year, (i.e. April-`YEAR` to Mar-`YEAR` + 1.}
+#'  \item{serialanon}{EHS case number.}
+#'  \item{gorEHS}{Government office region EHS version.}
+#'  \item{tenure4x}{Type of tenure.}
+#'  \item{vacantx}{Indicator of property being occupied or vacant.}
+#'  \item{alltypex}{Dwelling age and type.}
+#'  \item{boiler}{Type of boiler.}
+#'  \item{dampalf}{`TRUE` when dampness problems found in one or more rooms.}
+#'  \item{dblglaz4}{Extent of double glazing (50%).}
+#'  \item{EPceeb12e}{Energy efficiency rating band (EHS SAP 2012).}
+#'  \item{EPceir12e}{Environmental impact rating (EHS SAP 2012).}
+#'  \item{EPceib12e}{Environmental impact rating band (EHS SAP 2012).}
+#'  \item{fuelx}{Main fuel type used for primary space heating system.}
+#'  \item{loftinsx}{Loft insulation (continuous).}
+#'  \item{sap12}{Energy efficiency (SAP12) rating.}
+#'  \item{wallinsz}{Type of wall and insulation.}
+#'  \item{watersys}{Water heating system.}
+#' }
+"EHS"
