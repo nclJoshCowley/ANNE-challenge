@@ -1,0 +1,113 @@
+---
+title: "Environmental Impact of Housing in England"
+author: "Josh Cowley (Newcastle University)"
+output:
+  pdf_document:
+    # https://github.com/Wandmalfarbe/pandoc-latex-template
+    template: templates/eisvogel.latex
+    number_sections: true
+    includes:
+      in_header: templates/preamble.tex
+---
+
+```{r, echo = FALSE, results = "asis"}
+# Load all YAML options stored in separate file
+cat(readLines("templates/options.yaml"), sep = "\n")
+```
+
+```{r setup, include = FALSE}
+LAHS::common_report_setup()
+```
+
+\chapter{England Housing Survey (EHS)}
+
+\section{Disclaimer}
+
+Data in this report referred to as the England Housing Survey (EHS) was obtained
+from the UK Data Archive (UKDA) under their [End User Licence][ukds-eul] 
+agreement.
+
+[ukds-eul]:
+  https://ukdataservice.ac.uk/app/uploads/cd137-enduserlicence.pdf
+
+As such, any data collection has been enacted for the purpose of non-profit 
+research and further use of the data for commercial use without first obtaining
+permission from the data service provider is prohibited.
+
+Furthermore, since these analyses can be interpreted as 'material derived from
+the data collections,' any user of this report must also be in agreement to 
+these terms.
+
+
+\clearpage <!------------------------------------------------------------------>
+
+
+\section{Aims}
+
+- Set out to find population trends and regional differences in said trends.
+
+
+\clearpage <!------------------------------------------------------------------>
+
+
+\section{Sampling Methodology}
+
+- Mention the possibility of collection bias and methodology of EHS.
+- Need for further analysis of households (not dwellings) for fuel poverty 
+  insight.
+- Show visualisation of data per year for each region.
+
+
+\clearpage <!------------------------------------------------------------------>
+
+
+\section{Dwelling Stock}
+
+\subsection{General}
+
+- EDA into tenure, vacant, alltypex, dampalf.
+
+\subsection{Energy Specific}
+
+- EDA into boiler, dblglaz4, loftinsx, wallinsz, watersys
+
+\subsection{Energy Ratings}
+
+- EDA into sap12, EP_*.
+- Correlation with sap12, EPceir12 *and* boiler, dblglaz4, etc.
+
+
+\clearpage <!------------------------------------------------------------------>
+
+
+\section{Trends}
+
+- Might get absorbed into previous EDAs or need its own section.
+
+
+\clearpage <!------------------------------------------------------------------>
+
+
+\section{Data gaps}
+
+- Renewable technologies in EHS, but available in LAHS.
+- Exact CO2 not given in EHS, EPC impact given instead.
+- Environmental impact of retrofit.
+
+
+\clearpage <!------------------------------------------------------------------>
+
+
+\section{Modelling EPC}
+
+- Aiming to explain EPC using predictors,
+- Modelling EPC is only as good as EPC rating quality which is being upgraded 
+  soon.
+
+
+\clearpage <!------------------------------------------------------------------>
+
+
+\section{Modelling Regional Impact}
+- Explain multilevel modelling as way to distinguish population effect and 
+  group (region) effect.
