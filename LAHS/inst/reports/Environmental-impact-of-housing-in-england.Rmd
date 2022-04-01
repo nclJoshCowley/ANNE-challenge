@@ -16,19 +16,17 @@ cat(readLines("templates/options.yaml"), sep = "\n")
 ```
 
 ```{r setup, include = FALSE}
-LAHS::common_report_setup()
+library(magrittr) # %>%
+LAHS::common_report_setup(fig.asp = 0.55)
 ```
 
-\chapter{England Housing Survey (EHS)}
+\chapter{English Housing Survey (EHS)}
 
 \section{Disclaimer}
 
-Data in this report referred to as the England Housing Survey (EHS) was obtained
+Data in this report referred to as the English Housing Survey (EHS) was obtained
 from the UK Data Archive (UKDA) under their [End User Licence][ukds-eul] 
 agreement.
-
-[ukds-eul]:
-  https://ukdataservice.ac.uk/app/uploads/cd137-enduserlicence.pdf
 
 As such, any data collection has been enacted for the purpose of non-profit 
 research and further use of the data for commercial use without first obtaining
@@ -74,10 +72,44 @@ the North East, are groupings.
 
 \section{Sampling Methodology}
 
-- Mention the possibility of collection bias and methodology of EHS.
-- Need for further analysis of households (not dwellings) for fuel poverty 
-  insight.
-- Show visualisation of data per year for each region.
+The data collected for use in this report are available, with full 
+documentation, at the [UK Data Archive (Series 200010)][ukda-series200010].
+Documentation compiled by the EHS relay, in detail, how the data was 
+collected.
+
+In summary, an initial sample of addresses is pulled from the Postcode Address
+File (PAF) using a two-stage random sample that is not covered in any detail
+here, for more information see [EHS Technical Reports][ehs-technical].
+
+Participants from this initial sample are invited to take part in an 
+\textit{interview} stage survey that is based on \textbf{households}. 
+A subset of these participants where permission is granted or the property is
+vacant are then subject to a \textit{physical} stage survey.
+As such, this 'opt-in' approach may lead to a sample bias that is yet to be
+considered.
+
+Note the distinction of terms:
+
+\begin{itemize}
+  \item \textbf{household(s)} refer to the group of people (or person) who have
+        the accommodation as their only or main residence,
+        
+  \item \textbf{dwelling(s)} refer to the unit of accommodation which households
+        may inhabit.
+\end{itemize}
+
+This report concerns itself with dwellings only and does not utilise data from
+the initial interview survey. Further work should consider this extension to the
+dataset as a means of understanding fuel poverty and the household-dwelling
+relationships.
+
+Figure 1.1 shows unequal, yet consistent, sample sizes across regions. This is
+expected as the number of houses in each region are not necessarily equal.
+
+```{r sample_size_by_region, fig.cap = "Unequal sample size across regions"}
+LAHS::vis_sample_sizes_by_region()
+```
+
 
 
 \clearpage <!------------------------------------------------------------------>
@@ -131,5 +163,17 @@ the North East, are groupings.
 
 
 \section{Modelling Regional Impact}
+
 - Explain multilevel modelling as way to distinguish population effect and 
   group (region) effect.
+
+<!-- Links -->
+
+[ukds-eul]:
+  https://ukdataservice.ac.uk/app/uploads/cd137-enduserlicence.pdf
+
+[ukda-series200010]:
+  https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=200010
+  
+[ehs-technical]:
+  https://www.gov.uk/government/collections/english-housing-survey-technical-advice
