@@ -44,7 +44,29 @@ these terms.
 
 \section{Aims}
 
-- Set out to find population trends and regional differences in said trends.
+The aim of this document is threefold:
+
+1. reveal environmental-specific insights into the EHS dataset,
+
+1. model the current EPC rating system based on the factors that can exist in a 
+   dwelling,
+   
+1. understand regional trends in dwelling efficiency while accounting for 
+   national trends.
+
+By combining these main aims, we will be able to create an environmental
+indicator that serves as a summary to the impact of housing on the climate.
+
+To achieve this, we explore features of the EHS dataset that are pertinent to
+the energy efficiency and CO2 emissions of the sampled dwellings. 
+Then, we employ regression to better understand the relationships between
+the ever-adapting EPC ratings and physical attributes of dwellings such as
+insulation and age of boiler installed.
+
+The final aim is realised using a multi-level modelling framework that allows
+practitioners to separate population-level effects with group-level effects where
+the population in this context is at a national level and the regions, such as
+the North East, are groupings.
 
 
 \clearpage <!------------------------------------------------------------------>
