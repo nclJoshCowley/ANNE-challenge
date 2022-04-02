@@ -5,6 +5,7 @@
 #' @name figures
 NULL
 
+
 #' @rdname figures
 #' @export
 fig1_1_sample_sizes_by_region <- function() {
@@ -22,14 +23,9 @@ fig1_1_sample_sizes_by_region <- function() {
 #' @rdname figures
 #' @export
 fig1_2_percentage_of_ownership <- function() {
+  # Gets data for all plots, define fn to work on filtered data, split by level
   tenure4x_summary <-
-    LAHS::EHS %>%
-    dplyr::count(.data$gorEHS, .data$YEAR, .data$tenure4x) %>%
-    dplyr::group_by(.data$gorEHS, .data$YEAR) %>%
-    dplyr::mutate(prop = .data$n / sum(.data$n)) %>%
-    dplyr::ungroup()
-
-
+    LAHS::count_by_group(LAHS::EHS, .data$tenure4x, .data$gorEHS, .data$YEAR)
 
   create_plot <- function(d) {
     d %>%
@@ -40,7 +36,6 @@ fig1_2_percentage_of_ownership <- function() {
       ggplot2::scale_y_continuous(labels = ~ sprintf("%0.f%%", 100 * .x)) +
       ggplot2::labs(y = NULL, x = NULL)
   }
-
 
   tenure4x_summary %>%
     dplyr::group_by(.data$tenure4x) %>%
