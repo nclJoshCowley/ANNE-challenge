@@ -4,10 +4,10 @@ author: "Josh Cowley (Newcastle University)"
 output:
   pdf_document:
     # https://github.com/Wandmalfarbe/pandoc-latex-template
-    template: templates/eisvogel.latex
+    template: config/eisvogel.latex
     number_sections: true
     includes:
-      in_header: templates/preamble.tex
+      in_header: config/preamble.tex
 ---
 
 ```{r setup, include = FALSE}

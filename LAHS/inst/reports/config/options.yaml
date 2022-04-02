@@ -14,10 +14,13 @@ header-right: "ANNE Analysis Challenge Event"
 titlepage: true
 titlepage-text-color: FFFFFF
 titlepage-rule-color: FFFFFF
-titlepage-background: templates/front-page-background
+titlepage-background: config/front-page-background
 
-page-background: templates/all-page-background
+page-background: config/all-page-background
 page-background-opacity: 0.8
 
 linkcolor: blue
+
+bibliography: config/references.bib
+natbib: true
 ---
