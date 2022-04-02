@@ -150,14 +150,6 @@ LAHS::fig1_2_percentage_of_ownership()[["Housing association"]]
 \clearpage <!------------------------------------------------------------------>
 
 
-\section{Trends}
-
-- Might get absorbed into previous EDAs or need its own section.
-
-
-\clearpage <!------------------------------------------------------------------>
-
-
 \section{Data gaps}
 
 - Renewable technologies in EHS, but available in LAHS.
