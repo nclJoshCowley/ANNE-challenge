@@ -119,6 +119,22 @@ LAHS::fig1_1_sample_sizes_by_region()
 
 \subsection{General}
 
+Here we are interested in the general properties of stock sampled in the EHS,
+the reader is also advises to view the annual headline report \citep{ehs2020}.
+For example, Figure 1.1 in the 2020-21 version shows an increase in private 
+renters and a decrease in social renters from the start of the millennium.
+
+Figure 1.2 shows us the proportion of properties that are owned by 
+\textit{housing assocations}. Both the North East and North West have
+a higher proportion when compared to other regions with no signs of change.
+This could be due to a number of reasons such as fewer renters (when compared 
+to London) or fewer households being able to get on the property ladder.
+
+```{r fig.cap = "Housing Association highest in Northern regions"}
+LAHS::fig1_2_percentage_of_ownership()[["Housing association"]]
+```
+
+
 - EDA into tenure, vacant, alltypex, dampalf.
 
 \subsection{Energy Specific}
@@ -166,6 +182,11 @@ LAHS::fig1_1_sample_sizes_by_region()
 
 - Explain multilevel modelling as way to distinguish population effect and 
   group (region) effect.
+
+
+\newpage <!-------------------------------------------------------------------->
+\addcontentsline{toc}{chapter}{Bibliography}
+
 
 <!-- Links -->
 

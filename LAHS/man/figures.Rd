@@ -3,9 +3,12 @@
 \name{figures}
 \alias{figures}
 \alias{fig1_1_sample_sizes_by_region}
+\alias{fig1_2_percentage_of_ownership}
 \title{Figures used in Environmental Impact of Housing in England}
 \usage{
 fig1_1_sample_sizes_by_region()
+
+fig1_2_percentage_of_ownership()
 }
 \description{
 Methods that modularise each figure used in the final report.

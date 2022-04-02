@@ -1,3 +1,6 @@
+utils::globalVariables(".")
+
+
 #' Imports
 #'
 #' Imports from other packages used within this package

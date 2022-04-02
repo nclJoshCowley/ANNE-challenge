@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggplot-templates.R
 \name{ggplot_counts_by_group}
 \alias{ggplot_counts_by_group}
-\title{Show Counts by Group (ggplot template)}
+\title{Show Counts by Group}
 \usage{
 ggplot_counts_by_group(data, counts, group, ...)
 }
@@ -16,5 +16,5 @@ ggplot_counts_by_group(data, counts, group, ...)
 \item{...}{extra arguments passed to \code{\link[ggplot2]{geom_bar}}.}
 }
 \description{
-Create a barchart showing counts of 1 factor, grouped by another.
+Create a bar chart showing counts of 1 factor, grouped by another.
 }

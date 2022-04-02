@@ -22,7 +22,7 @@ display_gorEHS <- function(x) {
 
 #' @describeIn display Assumes financial year so `2018` becomes `2018-19`.
 #' @export
-display_YEAR <- function(x) sprintf("%i-%s", x, substr(x + 1, 3, 4))
+display_YEAR <- function(x) sprintf("%s-%s", x, substr(x + 1, 3, 4))
 
 
 #' Colour Schemes
