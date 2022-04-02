@@ -106,7 +106,7 @@ relationships.
 Figure 1.1 shows unequal, yet consistent, sample sizes across regions. This is
 expected as the number of houses in each region are not necessarily equal.
 
-```{r sample_size_by_region, fig.cap = "Unequal sample size across regions"}
+```{r fig1_1, fig.cap = "Unequal sample size across regions"}
 LAHS::fig1_1_sample_sizes_by_region()
 ```
 
@@ -130,7 +130,7 @@ a higher proportion when compared to other regions with no signs of change.
 This could be due to a number of reasons such as fewer renters (when compared 
 to London) or fewer households being able to get on the property ladder.
 
-```{r fig.cap = "Housing Association highest in Northern regions"}
+```{r fig1_2, fig.cap = "Housing Association highest in Northern regions"}
 LAHS::fig1_2_percentage_of_ownership()[["Housing association"]]
 ```
 
