@@ -5,9 +5,13 @@
 #' @param ... extra arguments passed to `knitr::opts_chunk$set` and overwrites
 #'   any defaults.
 #' @param base_size integer. Default font size for `ggplot` objects.
+#' @param root.dir character. Knitr root directory, defaults to project-level.
 #'
 #' @export
-common_report_setup <- function(..., base_size = 16) {
+common_report_setup <- function(..., base_size = 16, root.dir) {
+  root.dir <-
+    rlang::maybe_missing(root.dir, rprojroot::find_root("DESCRIPTION"))
+
   default_args <-
     list(
       # Figure(s)
@@ -29,11 +33,10 @@ common_report_setup <- function(..., base_size = 16) {
   updated_args <- utils::modifyList(default_args, rlang::list2(...))
   do.call(knitr::opts_chunk$set, updated_args)
 
+  knitr::opts_knit$set(root.dir = root.dir)
+
   # Hooks
   knitr::knit_hooks$set(source = get_knit_hook_source_hide())
-
-  # Using Project directory for filepaths
-  knitr::opts_knit$set(root.dir = rprojroot::find_root("DESCRIPTION"))
 
   return(invisible(NULL))
 }

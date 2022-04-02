@@ -4,13 +4,15 @@
 \alias{common_report_setup}
 \title{Common Report Setup}
 \usage{
-common_report_setup(..., base_size = 16)
+common_report_setup(..., base_size = 16, root.dir)
 }
 \arguments{
 \item{...}{extra arguments passed to \code{knitr::opts_chunk$set} and overwrites
 any defaults.}
 
 \item{base_size}{integer. Default font size for \code{ggplot} objects.}
+
+\item{root.dir}{character. Knitr root directory, defaults to project-level.}
 }
 \description{
 Sets up sensible defaults for a \code{ggplot2} theme and knitr options.
