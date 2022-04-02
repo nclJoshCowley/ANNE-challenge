@@ -107,7 +107,7 @@ Figure 1.1 shows unequal, yet consistent, sample sizes across regions. This is
 expected as the number of houses in each region are not necessarily equal.
 
 ```{r sample_size_by_region, fig.cap = "Unequal sample size across regions"}
-LAHS::vis_sample_sizes_by_region()
+LAHS::fig1_1_sample_sizes_by_region()
 ```
 
 
