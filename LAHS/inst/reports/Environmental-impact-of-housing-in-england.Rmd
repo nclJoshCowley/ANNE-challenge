@@ -10,15 +10,16 @@ output:
       in_header: templates/preamble.tex
 ---
 
-```{r, echo = FALSE, results = "asis"}
-# Load all YAML options stored in separate file
-cat(readLines("templates/options.yaml"), sep = "\n")
-```
-
 ```{r setup, include = FALSE}
 library(magrittr) # %>%
 LAHS::common_report_setup(fig.asp = 0.55)
 ```
+
+```{r setup-yaml, echo = FALSE, results = "asis"}
+# Load all YAML options stored in separate file
+cat(readLines("config/options.yaml"), sep = "\n")
+```
+
 
 \chapter{English Housing Survey (EHS)}
 
