@@ -43,3 +43,22 @@ fig1_2_percentage_of_ownership <- function() {
     rlang::set_names(purrr::map_chr(., ~ unique(as.character(.x$tenure4x)))) %>%
     purrr::map(create_plot)
 }
+
+#' @rdname figures
+#' @export
+tbl1_1_percentage_of_flats <- function() {
+  LAHS::EHS %>%
+    dplyr::mutate(alltypex = LAHS::condense_alltypex(.data$alltypex)) %>%
+    LAHS::count_by_group(prop = alltypex, .data$gorEHS) %>%
+    dplyr::mutate(prop = LAHS::display_percent(.data$prop, digits = 2)) %>%
+    dplyr::filter(.data$alltypex == "Flat") %>%
+    dplyr::select(-.data$alltypex) %>%
+    dplyr::arrange(dplyr::desc(.data$prop)) %>%
+    kableExtra::kbl(
+      col.names = c("Region", "Number of Flats", "Proportion"),
+      caption = "Proportion of Flats",
+      booktabs = TRUE
+    ) %>%
+    kableExtra::kable_styling() %>%
+    kableExtra::footnote("EHS Physical Sample (April 2014 to March 2020)")
+}

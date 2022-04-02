@@ -134,6 +134,28 @@ to London) or fewer households being able to get on the property ladder.
 LAHS::fig1_2_percentage_of_ownership()[["Housing association"]]
 ```
 
+Properties that are vacant are few and far between in the data; all regions
+report 96% to 98% of sampled properties are inhabited for the period between 
+April 2014 and March 2020.
+
+```{r tbl_vacant, include = FALSE}
+# NOT DISPLAYED. For proof of above statement only.
+LAHS::EHS %>%
+  dplyr::group_by(.data$gorEHS) %>%
+  dplyr::summarise(
+    pct_occupied = sprintf("%.1f%%", 100 * mean(.data$vacantx == "Occupied"))
+  )
+```
+
+Each dwelling is assigned into one of 10 categories based on the type of
+dwelling and when it was built. One clear discrepancy in the regions that is 
+highlighted by these data are flats, defined as a purpose built flat or 
+converted flat.
+
+```{r tbl1_1}
+LAHS::tbl1_1_percentage_of_flats()
+```
+
 
 - EDA into tenure, vacant, alltypex, dampalf.
 
