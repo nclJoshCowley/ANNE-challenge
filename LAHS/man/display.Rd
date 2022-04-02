@@ -4,11 +4,14 @@
 \alias{display}
 \alias{display_gorEHS}
 \alias{display_YEAR}
+\alias{display_percent}
 \title{Display Version(s) of Data}
 \usage{
 display_gorEHS(x)
 
 display_YEAR(x)
+
+display_percent(x, ...)
 }
 \arguments{
 \item{x}{vector. Data to be converted.}
@@ -22,5 +25,7 @@ pleasing version for visualisation.
 \item \code{display_gorEHS}: Line splits long region name, ``Yorkshire and ...`
 
 \item \code{display_YEAR}: Assumes financial year so \code{2018} becomes \code{2018-19}.
+
+\item \code{display_percent}: Convert numeric (say 0.154) to percentage (15.4\%).
 }}
 

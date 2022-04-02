@@ -33,7 +33,7 @@ fig1_2_percentage_of_ownership <- function() {
       ggplot_trend_by_group(.data$prop, .data$gorEHS, nudge_x = 0.3) +
       ggplot2::guides(colour = "none") +
       ggplot2::scale_x_continuous(labels = display_YEAR, expand = c(0, 0, 0.15, 0)) +
-      ggplot2::scale_y_continuous(labels = ~ sprintf("%0.f%%", 100 * .x)) +
+      ggplot2::scale_y_continuous(labels = display_percent) +
       ggplot2::labs(y = NULL, x = NULL)
   }
 
