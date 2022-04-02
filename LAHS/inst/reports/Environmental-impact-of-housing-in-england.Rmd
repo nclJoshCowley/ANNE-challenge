@@ -157,7 +157,7 @@ LAHS::tbl1_1_percentage_of_flats()
 ```
 
 
-- EDA into tenure, vacant, alltypex, dampalf.
+- **TODO** Look into `dampalf`.
 
 \subsection{Energy Specific}
 
@@ -172,11 +172,55 @@ LAHS::tbl1_1_percentage_of_flats()
 \clearpage <!------------------------------------------------------------------>
 
 
-\section{Data gaps}
+\section{Data Availability}
 
-- Renewable technologies in EHS, but available in LAHS.
-- Exact CO2 not given in EHS, EPC impact given instead.
-- Environmental impact of retrofit.
+\subsection{EPC}
+
+Energy and impact ratings are measures that are considered to be indicators 
+of efficiency and emissions respectively. However, these ratings are subject to
+undergoing changes in an effort to improve their accuracy and utility to
+decision makers.
+For example, there was a \textit{call for evidence on EPCs} 
+\citep{epcaction2018} that aimed to evaluate the current system and improve any
+shortcomings.
+
+Hence, in an ideal scenario we would have data on energy used, energy demand 
+and CO2 emissions per house, however such an undertaking on a dataset of this 
+scale is simply infeasible and unlikely to be improvement on the already
+scrutinised EPC measure.
+
+\subsection{Renewable Technologies}
+
+Omitted from the EHS is the mention of renewable technologies (RT).
+Such technologies are a significant investment and as such will have a 
+substantial impact on a households energy bill and also the energy efficiency
+rating.
+
+Datasets such as the Local Authority Housing Data \citep{lahsdata2020}
+contain data on the total number of RT(s) a local authority has installed in
+its own dwellings that are leased to social renters.
+These data also indicate which RT(s) such as heat pumps or biomass boilers but
+neglect to reveal the degree of which each is utilised.
+
+\subsection{Retrofit Impact}
+
+As a product of previous improvements, many dwellings are in a condition where
+improvements to efficiency or emissions are more 'difficult'. 
+That is, a higher economical cost, more resources need or higher skilled labour.
+For example, a dwelling with mainly cavity walls is much more likely to be
+insulated than a dwelling with solid walls for this reason.
+<!--  -->
+**TODO** Check data for this.
+<!-- -->
+Data on the environmental cost of such retrofits are meagre and no such dataset
+has been found during the research phase of this project.
+
+To achieve the carbon neutral goals set out by the UK government and others in
+the Paris agreement, we must ask is the carbon investment and other pollution
+costs worth the offset that they will achieve.
+SImilar to various improvements are financially infeasible due to cost, we must
+collect more data to rule out improvements that have too high an environmental 
+cost.
 
 
 \clearpage <!------------------------------------------------------------------>

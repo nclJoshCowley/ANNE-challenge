@@ -23,4 +23,5 @@ linkcolor: blue
 
 bibliography: config/references.bib
 natbib: true
+natbiboptions: round
 ---
