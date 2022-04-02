@@ -27,19 +27,33 @@ display_YEAR <- function(x) sprintf("%i-%s", x, substr(x + 1, 3, 4))
 
 #' Colour Schemes
 #'
-#' Consistency with colour schemes enforced by defining them here.
+#' Consistency with colour schemes enforced by defining them here. Returns a
+#'   character vector as opposed to do something clever like RColorBrewer.
 #'
-#' @param type choice. Must be a defined scheme.
+#' @param name choice. Must be a defined scheme.
 #'
-#' @section Type(s):
-#'     - `YEAR`. Data can be 2014-15 to 2019-20
+#' @section Available Colour Scheme(s):
+#'   - `ibm`: IBM Colour Blind safe scheme, nominal, 5 colours,
+#'     <https://lospec.com/palette-list/ibm-color-blind-safe>.
+#'   - `moor64green` and `moor64blue`. Derived from MOOR64, ordinal, 6 colours,
+#'     <https://lospec.com/palette-list/moor64>.
 #'
 #' @export
-get_colour_scheme <- function(type) {
-  if (type == "YEAR") {
-    # Subject to change (too much green!?)
-    return(utils::tail(RColorBrewer::brewer.pal(9, "Greens"), 6))
-  }
+get_colour_scheme <- function(name) {
+  col_env <- rlang::new_environment(list(
+    ibm =
+      c("#648fff", "#785ef0", "#dc267f", "#fe6100", "#ffb000"),
 
-  stop(type, " not found.")
+    moor64green =
+      c("#8dc168", "#65a84f", "#438e3e", "#2d782f", "#12561d", "#0d421c"),
+
+    moor64blue =
+      c("#a8ebbf","#78d9c4","#42bdb5","#2e9298","#206f85","#004e78")
+  ))
+
+  if (!name %in% names(col_env)) stop("Colour scheme missing - ", name)
+  return(get(name, envir = col_env))
 }
+
+
+

@@ -4,16 +4,22 @@
 \alias{get_colour_scheme}
 \title{Colour Schemes}
 \usage{
-get_colour_scheme(type)
+get_colour_scheme(name)
 }
 \arguments{
-\item{type}{choice. Must be a defined scheme.}
+\item{name}{choice. Must be a defined scheme.}
 }
 \description{
-Consistency with colour schemes enforced by defining them here.
+Consistency with colour schemes enforced by defining them here. Returns a
+character vector as opposed to do something clever like RColorBrewer.
 }
-\section{Type(s)}{
+\section{Available Colour Scheme(s)}{
 
-- \code{YEAR}. Data can be 2014-15 to 2019-20
+\itemize{
+\item \code{ibm}: IBM Colour Blind safe scheme, nominal, 5 colours,
+\url{https://lospec.com/palette-list/ibm-color-blind-safe}.
+\item \code{moor64green} and \code{moor64blue}. Derived from MOOR64, ordinal, 6 colours,
+\url{https://lospec.com/palette-list/moor64}.
+}
 }
 

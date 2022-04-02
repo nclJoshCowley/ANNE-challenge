@@ -14,6 +14,6 @@ fig1_1_sample_sizes_by_region <- function() {
       YEAR = LAHS::display_YEAR(.data$YEAR)
     ) %>%
     LAHS::ggplot_counts_by_group(counts = .data$YEAR, group = .data$gorEHS) +
-    ggplot2::scale_fill_discrete(type = LAHS::get_colour_scheme("YEAR")) +
+    ggplot2::scale_fill_discrete(type = LAHS::get_colour_scheme("moor64green")) +
     ggplot2::labs(y = NULL, x = NULL, fill = NULL)
 }
