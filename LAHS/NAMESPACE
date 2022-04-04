@@ -3,6 +3,7 @@
 export(common_report_setup)
 export(condense_alltypex)
 export(count_by_group)
+export(custom_tidy_tbl)
 export(display_YEAR)
 export(display_ehs_cnames)
 export(display_gorEHS)
