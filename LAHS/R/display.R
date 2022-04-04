@@ -8,6 +8,32 @@
 NULL
 
 
+#' @describeIn display Human-friendly column names for EHS data.
+#' @export
+display_ehs_cnames <- function(x) {
+  dplyr::recode(
+    x,
+    YEAR = "Year",
+    serialanon = "ID",
+    gorEHS = "Region",
+    tenure4x = "Tenure",
+    vacantx = "Vacant",
+    alltypex = "Type",
+    boiler = "Boiler",
+    dampalf = "Dampness",
+    dblglaz4 = "Double Glazing",
+    EPceeb12e = "EPC Band",
+    EPceir12e = "Environmental Impact Rating",
+    EPceib12e = "Environmental Impact Band",
+    fuelx = "Space Heating",
+    loftins6 = "Loft Insulation",
+    sap12 = "SAP Rating",
+    wallinsz = "Wall Insulation",
+    watersys = "Water Heating"
+  )
+}
+
+
 #' @describeIn display Line splits long region name, ``Yorkshire and ...`
 #' @export
 display_gorEHS <- function(x) {
