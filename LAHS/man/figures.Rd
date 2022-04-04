@@ -6,6 +6,7 @@
 \alias{fig1_2_percentage_of_ownership}
 \alias{fig1_3_fuelx_trend}
 \alias{tbl1_1_percentage_of_flats}
+\alias{tbl1_2_counts_of_wallinsx}
 \alias{tbl1_x_linear_models}
 \title{Figures used in Environmental Impact of Housing in England}
 \usage{
@@ -16,6 +17,8 @@ fig1_2_percentage_of_ownership()
 fig1_3_fuelx_trend()
 
 tbl1_1_percentage_of_flats()
+
+tbl1_2_counts_of_wallinsx()
 
 tbl1_x_linear_models(fit_sap12, fit_EPceir12e)
 }

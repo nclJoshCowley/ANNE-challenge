@@ -80,6 +80,34 @@ tbl1_1_percentage_of_flats <- function() {
 
 
 #' @rdname figures
+#' @export
+tbl1_2_counts_of_wallinsx <- function() {
+  LAHS::EHS %>%
+    dplyr::count(.data$wallinsz) %>%
+    tidyr::separate(
+      .data$wallinsz,
+      into = c("Type", "Insulated"),
+      sep = "\\s(with )*",
+      fill = "right"
+    ) %>%
+    dplyr::mutate(
+      Insulated = tidyr::replace_na(.data$Insulated, "unknown"),
+      dplyr::across(where(is.numeric), format, big.mark = ","),
+    ) %>%
+    tidyr::pivot_wider(
+      names_from = .data$Insulated,
+      values_from = .data$n,
+      values_fill = "N/A"
+    ) %>%
+    kableExtra::kbl(
+      col.names = c("Wall Type", "Uninsulated", "Insulated", "Unknown"),
+      booktabs = TRUE
+    ) %>%
+    kableExtra::kable_styling()
+}
+
+
+#' @rdname figures
 #' @param fit_sap12,fit_EPceir12e Linear model objects, fit in RMD.
 #' @export
 tbl1_x_linear_models <- function(fit_sap12, fit_EPceir12e) {

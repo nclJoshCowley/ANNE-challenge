@@ -111,7 +111,6 @@ LAHS::fig1_1_sample_sizes_by_region()
 ```
 
 
-
 \clearpage <!------------------------------------------------------------------>
 
 
@@ -135,8 +134,8 @@ LAHS::fig1_2_percentage_of_ownership()[["Housing association"]]
 ```
 
 Properties that are vacant are few and far between in the data; all regions
-report 96% to 98% of sampled properties are inhabited for the period between 
-April 2014 and March 2020.
+report $96\%$ to $98\%$ of sampled properties are inhabited for the period 
+between April 2014 and March 2020.
 
 ```{r tbl_vacant, include = FALSE}
 # NOT DISPLAYED. For proof of above statement only.
@@ -156,12 +155,25 @@ converted flat.
 LAHS::tbl1_1_percentage_of_flats()
 ```
 
+Also reported in the EHS is if there is any damp present, damp could be a 
+symptom of bigger problems. Thankfully, the percentage at which this occurs is
+down from $5.18\%$ in 2014-15 to $4.01$ in 2019-20 although to understand if
+these changes are indicative of an actual decline or just variance in the 
+sampling methodology would require further investigation over a larger 
+timescale.
 
-- **TODO** Look into `dampalf`.
+```{r tbl_damp, include = FALSE}
+# NOT DISPLAYED. For proof of above statement only.
+LAHS::EHS %>%
+  dplyr::group_by(.data$YEAR) %>%
+  dplyr::summarise(pcT_damp = mean(.data$dampalf == "Damp present"))
+```
 
 \subsection{Energy Specific}
 
-- EDA into boiler, dblglaz4, loftinsx, wallinsz, watersys
+- **TODO**. EDA into boiler, dblglaz4, loftinsx, watersys
+
+\subsubsection{Space Heating}
 
 Figure 1.3 shows us that there is a clear reliance on gas for systems related to
 heating up space with no clear trend emerging from the data. In 
@@ -173,6 +185,23 @@ reliance on gas.
 LAHS::fig1_3_fuelx_trend()
 ```
 
+\subsubsection{Wall Types}
+
+Wall type data in these data refers to the predominant external wall of a 
+dwelling. If a surveyor deems at least $50\%$ of the external wall to be of 
+cavity or solid construction, that is recorded, otherwise it is recorded as 
+"other".
+Similarly, if a surveyor deems at least $50\%$ of the wall to be insulated, 
+that is also recorded in the data.
+As such, any dwelling can be one of 5 types summarised in Table 1.2
+
+```{r}
+LAHS::tbl1_2_counts_of_wallinsx()
+```
+
+Note that the insulation frequency of cavity walls is much higher than the 
+solid walls. As expected due to the difficulties involved with insulating a 
+solid wall relative to a cavity type wall.
 
 \subsection{Energy Ratings}
 
@@ -219,10 +248,8 @@ As a product of previous improvements, many dwellings are in a condition where
 improvements to efficiency or emissions are more 'difficult'. 
 That is, a higher economical cost, more resources need or higher skilled labour.
 For example, a dwelling with mainly cavity walls is much more likely to be
-insulated than a dwelling with solid walls for this reason.
-<!--  -->
-**TODO** Check data for this.
-<!-- -->
+insulated than a dwelling with solid walls for this reason, see Table 1.2.
+
 Data on the environmental cost of such retrofits are meagre and no such dataset
 has been found during the research phase of this project.
 
@@ -374,7 +401,7 @@ both insulated and wall type. We have chose the solid uninsulated wall as a
 reference level although modifying walls between solid and cavity is clearly 
 an infeasibility and only serves as a comparison on the population scale.
 
-\subection{Further Work}
+\subsection{Further Work}
 
 As previously mentioned, this model could be improved by increasing the range
 of data available, as is the case for almost all models.
