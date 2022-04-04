@@ -47,6 +47,20 @@ fig1_2_percentage_of_ownership <- function() {
 
 #' @rdname figures
 #' @export
+fig1_3_fuelx_trend <- function() {
+  LAHS::EHS %>%
+    dplyr::count(.data$YEAR, .data$fuelx) %>%
+    dplyr::filter(!is.na(.data$fuelx)) %>%
+    ggplot_trend_by_group(.data$n, .data$fuelx, nudge_x = 0.2) +
+    ggplot2::guides(colour = "none") +
+    ggplot2::scale_x_continuous(labels = display_YEAR, expand = c(0, 0, 0.15, 0)) +
+    ggplot2::scale_y_continuous(labels = ~ paste0(.x / 1000, "K")) +
+    ggplot2::labs(y = NULL, x = NULL)
+}
+
+
+#' @rdname figures
+#' @export
 tbl1_1_percentage_of_flats <- function() {
   LAHS::EHS %>%
     dplyr::mutate(alltypex = LAHS::condense_alltypex(.data$alltypex)) %>%
@@ -68,7 +82,7 @@ tbl1_1_percentage_of_flats <- function() {
 #' @rdname figures
 #' @param fit_sap12,fit_EPceir12e Linear model objects, fit in RMD.
 #' @export
-tbl_linear_models <- function(fit_sap12, fit_EPceir12e) {
+tbl1_2_linear_models <- function(fit_sap12, fit_EPceir12e) {
 
   joined_tidy_tbls <-
     dplyr::full_join(
@@ -82,6 +96,7 @@ tbl_linear_models <- function(fit_sap12, fit_EPceir12e) {
     dplyr::select(-.data$term_name) %>%
     kableExtra::kbl(
       col.names = c("Term", rep(c("Estimate (95% CI)", "P Value"), 2)),
+      caption = "Linear Regression Results",
       booktabs = TRUE
     ) %>%
     kableExtra::kable_styling() %>%

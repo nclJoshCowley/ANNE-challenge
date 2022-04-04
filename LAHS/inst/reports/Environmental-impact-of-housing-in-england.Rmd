@@ -163,6 +163,17 @@ LAHS::tbl1_1_percentage_of_flats()
 
 - EDA into boiler, dblglaz4, loftinsx, wallinsz, watersys
 
+Figure 1.3 shows us that there is a clear reliance on gas for systems related to
+heating up space with no clear trend emerging from the data. In 
+\citet{electricheatingoptions2019}, it is claimed that significant increases
+in heating bills and lifetime costs may pose a barrier that would explain this
+reliance on gas.
+
+```{r}
+LAHS::fig1_3_fuelx_trend()
+```
+
+
 \subsection{Energy Ratings}
 
 - EDA into sap12, EP_*.
@@ -228,9 +239,156 @@ cost.
 
 \section{Modelling EPC}
 
-- Aiming to explain EPC using predictors,
-- Modelling EPC is only as good as EPC rating quality which is being upgraded 
-  soon.
+An EPC certificate contains various information that is then used to calculate
+two typically correlated measures:
+
+1. Energy efficiency rating (EER).
+
+1. Energy impact rating (EIR).
+
+These ratings range from 1 to 100 where higher values indicate dwellings that
+are better for the environment. Data is collected using a Standard Assessment
+Procedure (SAP) in an attempt to standardise these values across heterogeneous 
+properties.
+
+The energy efficiency rating measures the efficiency of the entire building
+and is framed to a tenant as a key influence on running costs. That is,
+higher values of EER can not only yield benefits for the environment (as less 
+energy will be used) but also for the household paying the energy bill.
+
+As shown by the sample certificate provided by the UK Government, the EIR is
+more indicative of CO2 emissions \citep{epccertificate2022}.
+
+\vspace{0.6 em}
+
+> The environmental impact rating is a measure of a home’s impact on the 
+> environment in terms of carbon dioxide (CO2) emissions. The higher the rating 
+> the less impact it has on the environment.
+
+Expectedly, these two ratings tend to be correlated; in our cohort of dwellings
+the pearson correlation coefficient is as high as
+`r LAHS::display_percent(cor(LAHS::EHS$EPceir12e, LAHS::EHS$sap12), digits = 3)`.
+
+As previously mentioned, the methodology that creates both ratings has been 
+under some criticism \citep{epcaction2018} and hence any measure derived from
+these data will inherit any limitations.
+
+\subsection{Model Description}
+
+Our initial model comprises of two multivariate linear regressions, one for each
+rating described above. The aim of such models is to verify that the variables
+that experts would think are important to energy efficiency and emissions are 
+then also highly correlated with EER and EIR respectively.
+
+Currently we make use of 6 predictors in our model.
+
+- boiler type,
+
+- double glazing percentage,
+
+- fuel used for space heating,
+
+- degree of loft insulation,
+
+- degree of wall insulation and wall type,
+
+- system used for water heating
+
+We expect all predictors will be statistically significant due to the data 
+source, we reason that these specific variables are collected because they are 
+seen as important to EPC ratings, and as such this section is a proof of concept
+for a greater set of variables.
+
+Greater benefits would be realised from using predictors that are less 
+prominent, such as renewable technologies highlighted in the data availability 
+section, where parameter estimates would potentially highlight a shortcoming in 
+the current rating system.
+
+```{r}
+fit_sap12 <- 
+  stats::lm(
+    sap12 ~ boiler + dblglaz4 + fuelx + loftins6 + wallinsz + watersys,
+    data = LAHS::EHS
+  )
+
+fit_EPceir12e <- 
+  stats::lm(
+    EPceir12e ~ boiler + dblglaz4 + fuelx + loftins6 + wallinsz + watersys,
+    data = LAHS::EHS
+  )
+```
+
+Table 1.2 shows an estimates for various categories found in the data. One can
+calculate an expected EER and EIR by finding the corresponding attributes
+and summing the estimates (the intercept is added for all dwellings).
+
+This leads to the intuition that we can compare attributes to each reference 
+level and infer its impact on the rating, subject to keeping all other 
+attributes fixed.
+
+For example, see that the reference level for boiler type is "Standard" and the 
+estimate for "Combination" boiler is 2.6 to 3.3 with a significant P value
+($p<0.05$). Thus, we expect that upgrading a house from a standard to a 
+combination boiler would increase their EER by approximately 3 points.
+
+```{r}
+LAHS::tbl1_2_linear_models(fit_sap12, fit_EPceir12e)
+```
+
+
+\clearpage <!------------------------------------------------------------------>
+
+
+\subsection{Discussion}
+
+Table 1.2 shows us that a dwelling with a standard boiler, no double glazing or
+insulation that is still reliant on oil systems and an electric water heater
+would expect to have a G band EPC rating.
+This hypothetical does not meet the current minimum energy efficiency standard
+(MEES) allowed for rented properties and such an anti-environment dwelling is 
+likely in need of other repairs, and will be potentially vacant.
+
+The impact of different types of boilers is typical with the worst being a 
+back boiler, as expected. Interestingly, the impact on efficiency for condensing
+and condensing combination boilers appear to be very similar but the latter 
+appears to produce less CO2 emissions on average.
+
+Double glazing in many modern homes is a necessity and can be seen as a good
+candidate for retrofitting, the data supports this implying a upgrade of 
+\textit{all} windows in a house may increase the EER by as many as 7 points.
+
+For space heating there is a single high rating choice, gas fired systems.
+There is not significant evidence to distinguish the other options.
+As mentioned in an earlier section (see Figure 1.3) electric heating systems
+have higher running costs and the efficiency comparison needs to be 
+investigated further.
+A similar story is told by the water heating estimates, although it should be
+noted that a dedicated boiler could include both gas and electric boilers.
+
+Loft insulation appears to increase both EER and EIR as expected but as the 
+different between estimates decrease it may be a case of diminishing returns
+and warrants further investigation.
+
+Wall insulation is less straightforward to compare since the data has encoded
+both insulated and wall type. We have chose the solid uninsulated wall as a 
+reference level although modifying walls between solid and cavity is clearly 
+an infeasibility and only serves as a comparison on the population scale.
+
+\subection{Further Work}
+
+As previously mentioned, this model could be improved by increasing the range
+of data available, as is the case for almost all models.
+
+One prospect for this model could be decision makers in organisations holding 
+dwelling stock as it could serve as a predictive model that highlights any 
+properties that have rating less than expected and would benefit from the 
+investment of a renewed EPC certificate.
+
+Further work on the current data could be an investigation into interaction
+terms, the process of understanding the role of each predictor without the 
+restrictive assumption of keeping everything constant. Leading to answers from
+questions such as "what is the impact of double glazing in a well insulated
+house compared to a less insulated house?".
 
 
 \clearpage <!------------------------------------------------------------------>
