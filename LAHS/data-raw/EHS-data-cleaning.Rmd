@@ -240,8 +240,9 @@ physical_data <-
     column = "boiler",
     ~id, ~nm,
     -9, "NA",
-    1, "Standard boiler (floor or wall)",
-    2, "Back boiler (to fire or stove)",
+    1, "Standard boiler", # Reference level
+    
+    2, "Back boiler",
     3, "Combination boiler",
     4, "Condensing boiler",
     5, "Condensing-combination boiler"
@@ -289,9 +290,10 @@ physical_data <-
   label_data_column(
     column = "fuelx",
     ~id, ~nm,
+    2, "Oil fired system", # Reference level
     -8, "NA",
+    
     1, "Gas fired system",
-    2, "Oil fired system",
     3, "Solid fuel fired system",
     4, "Electrical system"
   ) %>%
@@ -311,19 +313,21 @@ physical_data <-
   label_data_column(
     column = "wallinsz",
     ~id, ~nm,
+    4, "Solid uninsulated", # Reference level
+    
     1, "Cavity with insulation",
     2, "Cavity uninsulated",
     3, "Solid with insulation",
-    4, "Solid uninsulated",
     5, "Other"
   ) %>%
   
   label_data_column(
     column = "watersys",
     ~id, ~nm,
+    3, "Electric immersion heater", # Reference level
+    
     1, "With central heating",
     2, "Dedicated boiler",
-    3, "Electric immersion heater",
     4, "Instantaneous",
     5, "Other"
   )
