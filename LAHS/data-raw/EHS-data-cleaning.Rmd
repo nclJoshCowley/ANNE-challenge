@@ -245,7 +245,7 @@ physical_data <-
     2, "Back (to fire / stove)",
     3, "Combination",
     4, "Condensing",
-    5, "Condensing-combinationr"
+    5, "Condensing-combination"
   ) %>%
   
   label_data_column(
