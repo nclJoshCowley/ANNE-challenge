@@ -62,3 +62,45 @@ tbl1_1_percentage_of_flats <- function() {
     kableExtra::kable_styling() %>%
     kableExtra::footnote("EHS Physical Sample (April 2014 to March 2020)")
 }
+#' @rdname figures
+#' @param fit_sap12,fit_EPceir12e Linear model objects, fit in RMD.
+#' @export
+tbl_linear_models <- function(fit_sap12, fit_EPceir12e) {
+
+  joined_tidy_tbls <-
+    dplyr::full_join(
+      LAHS::custom_tidy_tbl(fit_sap12, digits = 1),
+      LAHS::custom_tidy_tbl(fit_EPceir12e, digits = 1),
+      by = c("term_name", "term_level")
+    )
+
+  out <-
+    joined_tidy_tbls %>%
+    dplyr::select(-.data$term_name) %>%
+    kableExtra::kbl(
+      col.names = c("Term", rep(c("Estimate (95% CI)", "P Value"), 2)),
+      booktabs = TRUE
+    ) %>%
+    kableExtra::kable_styling() %>%
+    kableExtra::add_header_above(
+      c(" ", "Efficiency Rating" = 2, "Impact Rating" = 2)
+    )
+
+  # Want one row heading for each factor fitted
+  groupings <-
+    unique(stats::na.omit(joined_tidy_tbls$term_name)) %>%
+    rlang::set_names(nm = LAHS::display_ehs_cnames(.)) %>%
+    purrr::map(~ range(which(joined_tidy_tbls$term_name == .x)))
+
+  for (gi in seq_along(groupings)) {
+    out <-
+      kableExtra::pack_rows(
+        out,
+        group_label = names(groupings)[gi],
+        start_row = groupings[[gi]][1],
+        end_row = groupings[[gi]][2]
+      )
+  }
+
+  return(out)
+}

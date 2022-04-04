@@ -5,6 +5,7 @@
 \alias{fig1_1_sample_sizes_by_region}
 \alias{fig1_2_percentage_of_ownership}
 \alias{tbl1_1_percentage_of_flats}
+\alias{tbl_linear_models}
 \title{Figures used in Environmental Impact of Housing in England}
 \usage{
 fig1_1_sample_sizes_by_region()
@@ -12,6 +13,11 @@ fig1_1_sample_sizes_by_region()
 fig1_2_percentage_of_ownership()
 
 tbl1_1_percentage_of_flats()
+
+tbl_linear_models(fit_sap12, fit_EPceir12e)
+}
+\arguments{
+\item{fit_sap12, fit_EPceir12e}{Linear model objects, fit in RMD.}
 }
 \description{
 Methods that modularise each figure used in the final report.
