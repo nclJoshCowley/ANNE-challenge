@@ -45,7 +45,7 @@ read_physical_tsv <- function(path) {
   desired_cols <-
     c(
       "serialanon", "alltypex", "boiler", "dampalf", "dblglaz4",
-      "EPceeb12e", "EPceir12e", "EPceib12e", "fuelx", "loftinsx", "sap12",
+      "EPceeb12e", "EPceir12e", "EPceib12e", "fuelx", "loftins6", "sap12",
       "wallinsz", "watersys"
     )
 

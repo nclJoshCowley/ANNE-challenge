@@ -1,7 +1,7 @@
 ---
 title: "English Housing Survey - Data Cleaning Script"
 author: "Josh Cowley"
-date: "April 01, 2022"
+date: "April 04, 2022"
 output:
   html_document:
     number_sections: true
@@ -351,7 +351,12 @@ physical_data <-
     5, "Condensing-combination boiler"
   ) %>%
   
-  dplyr::mutate(dampalf = as.logical(.data$dampalf)) %>%
+  label_data_column(
+    column = "dampalf",
+    ~id, ~nm,
+    0, "Not present",
+    1, "Damp present"
+  ) %>%
   
   label_data_column(
     column = "dblglaz4",
@@ -393,6 +398,18 @@ physical_data <-
     2, "Oil fired system",
     3, "Solid fuel fired system",
     4, "Electrical system"
+  ) %>%
+  
+  label_data_column(
+    column = "loftins6",
+    ~id, ~nm,
+    -9, "NA",
+    1, "None",
+    2, "Less than 50mm",
+    3, "50 up to 99mm",
+    4, "100 up to 149mm",
+    5, "150 up to 199mm",
+    6, "200mm or more"
   ) %>%
 
   label_data_column(
