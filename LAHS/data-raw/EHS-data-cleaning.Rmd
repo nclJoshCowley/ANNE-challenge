@@ -240,12 +240,12 @@ physical_data <-
     column = "boiler",
     ~id, ~nm,
     -9, "NA",
-    1, "Standard boiler", # Reference level
+    1, "Standard", # Reference level
     
-    2, "Back boiler",
-    3, "Combination boiler",
-    4, "Condensing boiler",
-    5, "Condensing-combination boiler"
+    2, "Back (to fire / stove)",
+    3, "Combination",
+    4, "Condensing",
+    5, "Condensing-combinationr"
   ) %>%
   
   label_data_column(
