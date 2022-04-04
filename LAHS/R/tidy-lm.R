@@ -81,16 +81,16 @@ combine_tidy_estimates <- function(x, digits) {
   combine <- function(est, low, high) {
     sprintf(
       "%s (%s to %s)",
-      format(est, digits = digits),
-      format(low, digits = digits),
-      format(high, digits = digits)
+      formatC(est, digits = digits, format = "f", flag = "#"),
+      formatC(low, digits = digits, format = "f", flag = "#"),
+      formatC(high, digits = digits, format = "f", flag = "#")
     )
   }
 
   x %>%
     dplyr::mutate(
       estimate = ifelse(
-        is.na(estimate),
+        is.na(.data$estimate),
         NA_character_,
         combine(.data$estimate, .data$conf.low, .data$conf.high)
       ),

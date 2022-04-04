@@ -52,6 +52,7 @@ display_YEAR <- function(x) sprintf("%s-%s", x, substr(x + 1, 3, 4))
 
 
 #' @describeIn display Convert numeric (say 0.154) to percentage (15.4%).
+#' @param ... extra arguments in `display_percent` passed to `format`.
 #' @export
 display_percent <- function(x, ...) {
   args <- utils::modifyList(list(x = 100 * x, digits = 1), rlang::list2(...))

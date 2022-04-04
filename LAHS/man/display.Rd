@@ -2,11 +2,14 @@
 % Please edit documentation in R/display.R
 \name{display}
 \alias{display}
+\alias{display_ehs_cnames}
 \alias{display_gorEHS}
 \alias{display_YEAR}
 \alias{display_percent}
 \title{Display Version(s) of Data}
 \usage{
+display_ehs_cnames(x)
+
 display_gorEHS(x)
 
 display_YEAR(x)
@@ -15,6 +18,8 @@ display_percent(x, ...)
 }
 \arguments{
 \item{x}{vector. Data to be converted.}
+
+\item{...}{extra arguments in \code{display_percent} passed to \code{format}.}
 }
 \description{
 These functions convert data for understanding to a more aesthetically
@@ -22,6 +27,8 @@ pleasing version for visualisation.
 }
 \section{Functions}{
 \itemize{
+\item \code{display_ehs_cnames}: Human-friendly column names for EHS data.
+
 \item \code{display_gorEHS}: Line splits long region name, ``Yorkshire and ...`
 
 \item \code{display_YEAR}: Assumes financial year so \code{2018} becomes \code{2018-19}.

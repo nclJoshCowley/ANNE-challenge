@@ -20,7 +20,7 @@ A data frame with 36,971 rows and 17 variables:
 \item{EPceir12e}{Environmental impact rating (EHS SAP 2012).}
 \item{EPceib12e}{Environmental impact rating band (EHS SAP 2012).}
 \item{fuelx}{Main fuel type used for primary space heating system.}
-\item{loftinsx}{Loft insulation (continuous).}
+\item{loftins6}{Loft insulation (6 ordinal levels).}
 \item{sap12}{Energy efficiency (SAP12) rating.}
 \item{wallinsz}{Type of wall and insulation.}
 \item{watersys}{Water heating system.}

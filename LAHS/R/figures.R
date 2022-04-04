@@ -44,12 +44,13 @@ fig1_2_percentage_of_ownership <- function() {
     purrr::map(create_plot)
 }
 
+
 #' @rdname figures
 #' @export
 tbl1_1_percentage_of_flats <- function() {
   LAHS::EHS %>%
     dplyr::mutate(alltypex = LAHS::condense_alltypex(.data$alltypex)) %>%
-    LAHS::count_by_group(prop = alltypex, .data$gorEHS) %>%
+    LAHS::count_by_group(prop = .data$alltypex, .data$gorEHS) %>%
     dplyr::mutate(prop = LAHS::display_percent(.data$prop, digits = 2)) %>%
     dplyr::filter(.data$alltypex == "Flat") %>%
     dplyr::select(-.data$alltypex) %>%
@@ -62,6 +63,8 @@ tbl1_1_percentage_of_flats <- function() {
     kableExtra::kable_styling() %>%
     kableExtra::footnote("EHS Physical Sample (April 2014 to March 2020)")
 }
+
+
 #' @rdname figures
 #' @param fit_sap12,fit_EPceir12e Linear model objects, fit in RMD.
 #' @export
