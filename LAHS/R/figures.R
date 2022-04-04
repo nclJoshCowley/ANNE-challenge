@@ -54,7 +54,25 @@ fig1_3_fuelx_trend <- function() {
     ggplot_trend_by_group(.data$n, .data$fuelx, nudge_x = 0.2) +
     ggplot2::guides(colour = "none") +
     ggplot2::scale_x_continuous(labels = display_YEAR, expand = c(0, 0, 0.15, 0)) +
-    ggplot2::scale_y_continuous(labels = ~ paste0(.x / 1000, "K")) +
+    ggplot2::scale_y_continuous(labels = ~ format(.x, big.mark = ",")) +
+    ggplot2::labs(y = NULL, x = NULL)
+}
+
+
+#' @rdname figures
+#' @export
+fig1_4_boiler_trend <- function() {
+  LAHS::EHS %>%
+    dplyr::count(.data$YEAR, .data$boiler) %>%
+    dplyr::mutate(
+      boiler = .data$boiler %>%
+        forcats::fct_explicit_na("No Boiler") %>%
+        dplyr::recode_factor(`Condensing-combination` = "Condensing/\nCombination")
+    ) %>%
+    ggplot_trend_by_group(.data$n, .data$boiler, nudge_x = 0.6) +
+    ggplot2::guides(colour = "none") +
+    ggplot2::scale_x_continuous(labels = display_YEAR, expand = c(0, 0, 0.15, 0)) +
+    ggplot2::scale_y_continuous(labels = ~ format(.x, big.mark = ",")) +
     ggplot2::labs(y = NULL, x = NULL)
 }
 
@@ -101,6 +119,7 @@ tbl1_2_counts_of_wallinsx <- function() {
     ) %>%
     kableExtra::kbl(
       col.names = c("Wall Type", "Uninsulated", "Insulated", "Unknown"),
+      caption = "Insulation more dominant in 'Cavity' type walls",
       booktabs = TRUE
     ) %>%
     kableExtra::kable_styling()

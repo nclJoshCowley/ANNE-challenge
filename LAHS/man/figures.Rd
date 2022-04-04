@@ -5,6 +5,7 @@
 \alias{fig1_1_sample_sizes_by_region}
 \alias{fig1_2_percentage_of_ownership}
 \alias{fig1_3_fuelx_trend}
+\alias{fig1_4_boiler_trend}
 \alias{tbl1_1_percentage_of_flats}
 \alias{tbl1_2_counts_of_wallinsx}
 \alias{tbl1_x_linear_models}
@@ -15,6 +16,8 @@ fig1_1_sample_sizes_by_region()
 fig1_2_percentage_of_ownership()
 
 fig1_3_fuelx_trend()
+
+fig1_4_boiler_trend()
 
 tbl1_1_percentage_of_flats()
 

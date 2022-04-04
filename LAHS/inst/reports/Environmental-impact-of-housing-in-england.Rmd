@@ -171,7 +171,7 @@ LAHS::EHS %>%
 
 \subsection{Energy Specific}
 
-- **TODO**. EDA into boiler, dblglaz4, loftinsx, watersys
+<!-- Omitted in interest of time & brevity: dblglaz4, loftinsx, watersys -->
 
 \subsubsection{Space Heating}
 
@@ -181,7 +181,7 @@ heating up space with no clear trend emerging from the data. In
 in heating bills and lifetime costs may pose a barrier that would explain this
 reliance on gas.
 
-```{r}
+```{r fig.cap = "Little to no change in heating systems"}
 LAHS::fig1_3_fuelx_trend()
 ```
 
@@ -202,6 +202,27 @@ LAHS::tbl1_2_counts_of_wallinsx()
 Note that the insulation frequency of cavity walls is much higher than the 
 solid walls. As expected due to the difficulties involved with insulating a 
 solid wall relative to a cavity type wall.
+
+\subsubsection{Boiler Type}
+
+For any dwelling that uses central heating, we have information on the type of 
+boiler used. If we were to look across the regions we see a similar trend 
+occurring that is summarised in Figure 1.4. That is, the volume condensing
+boilers in each sample is increasing with time. 
+
+\citet{britishgas2022} claim that these are generally the most efficient boilers
+"on the market" and that "nearly all modern boilers are A-rated condensing 
+boilers" which is a good sign of newer technology that is better for the 
+environment is being implemented across all regions.
+
+As with any emerging technology, it is important to remember that a minor 
+increase in efficiency may not justify a full boiler replacement and the oldest
+or least efficient appliances should be replaced as a priority.
+
+```{r, fig.cap = "Newer boiler types being adopted, nationwide"}
+LAHS::fig1_4_boiler_trend()
+```
+
 
 \subsection{Energy Ratings}
 
