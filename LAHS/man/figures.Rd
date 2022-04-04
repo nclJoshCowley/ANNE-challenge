@@ -6,7 +6,7 @@
 \alias{fig1_2_percentage_of_ownership}
 \alias{fig1_3_fuelx_trend}
 \alias{tbl1_1_percentage_of_flats}
-\alias{tbl1_2_linear_models}
+\alias{tbl1_x_linear_models}
 \title{Figures used in Environmental Impact of Housing in England}
 \usage{
 fig1_1_sample_sizes_by_region()
@@ -17,7 +17,7 @@ fig1_3_fuelx_trend()
 
 tbl1_1_percentage_of_flats()
 
-tbl1_2_linear_models(fit_sap12, fit_EPceir12e)
+tbl1_x_linear_models(fit_sap12, fit_EPceir12e)
 }
 \arguments{
 \item{fit_sap12, fit_EPceir12e}{Linear model objects, fit in RMD.}

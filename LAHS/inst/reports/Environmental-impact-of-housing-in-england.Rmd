@@ -332,7 +332,7 @@ estimate for "Combination" boiler is 2.6 to 3.3 with a significant P value
 combination boiler would increase their EER by approximately 3 points.
 
 ```{r}
-LAHS::tbl1_2_linear_models(fit_sap12, fit_EPceir12e)
+LAHS::tbl1_x_linear_models(fit_sap12, fit_EPceir12e)
 ```
 
 

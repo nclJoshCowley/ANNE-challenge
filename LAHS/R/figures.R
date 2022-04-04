@@ -82,7 +82,7 @@ tbl1_1_percentage_of_flats <- function() {
 #' @rdname figures
 #' @param fit_sap12,fit_EPceir12e Linear model objects, fit in RMD.
 #' @export
-tbl1_2_linear_models <- function(fit_sap12, fit_EPceir12e) {
+tbl1_x_linear_models <- function(fit_sap12, fit_EPceir12e) {
 
   joined_tidy_tbls <-
     dplyr::full_join(
