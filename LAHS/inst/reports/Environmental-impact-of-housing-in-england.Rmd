@@ -38,7 +38,7 @@ the data collections,' any user of this report must also be in agreement to
 these terms.
 
 
-\clearpage <!------------------------------------------------------------------>
+\newpage <!-------------------------------------------------------------------->
 
 
 \section{Aims}
@@ -66,10 +66,6 @@ The final aim is realised using a multi-level modelling framework that allows
 practitioners to separate population-level effects with group-level effects where
 the population in this context is at a national level and the regions, such as
 the North East, are groupings.
-
-
-\clearpage <!------------------------------------------------------------------>
-
 
 \section{Sampling Methodology}
 
@@ -107,13 +103,10 @@ relationships.
 Figure 1.1 shows unequal, yet consistent, sample sizes across regions. This is
 expected as the number of houses in each region are not necessarily equal.
 
+\vspace{1.0 em} <!-- NOTE: Make use of space surrounding Figure 1.1 -->
 ```{r fig1_1, fig.cap = "Unequal sample size across regions"}
 LAHS::fig1_1_sample_sizes_by_region()
 ```
-
-
-\clearpage <!------------------------------------------------------------------>
-
 
 \section{Dwelling Stock}
 
@@ -149,8 +142,8 @@ LAHS::EHS %>%
 
 Each dwelling is assigned into one of 10 categories based on the type of
 dwelling and when it was built. One clear discrepancy in the regions that is 
-highlighted by these data are flats, defined as a purpose built flat or 
-converted flat.
+highlighted by these data is the proportion of flats, defined as a purpose 
+built flat or converted flat, as shown in Table 1.1.
 
 ```{r tbl1_1}
 LAHS::tbl1_1_percentage_of_flats()
@@ -158,7 +151,7 @@ LAHS::tbl1_1_percentage_of_flats()
 
 Also reported in the EHS is if there is any damp present, damp could be a 
 symptom of bigger problems. Thankfully, the percentage at which this occurs is
-down from $5.18\%$ in 2014-15 to $4.01$ in 2019-20 although to understand if
+down from 5.18% in 2014-15 to 4.01% in 2019-20 although to understand if
 these changes are indicative of an actual decline or just variance in the 
 sampling methodology would require further investigation over a larger 
 timescale.
@@ -182,17 +175,17 @@ heating up space with no clear trend emerging from the data. In
 in heating bills and lifetime costs may pose a barrier that would explain this
 reliance on gas.
 
-```{r fig1_3, fig.cap = "Little to no change in heating systems"}
+```{r fig1_3, fig.asp = 0.4, fig.cap = "Little to no change in heating systems"}
 LAHS::fig1_3_fuelx_trend()
 ```
 
 \subsubsection{Wall Types}
 
 Wall type data in these data refers to the predominant external wall of a 
-dwelling. If a surveyor deems at least $50\%$ of the external wall to be of 
+dwelling. If a surveyor deems at least 50% of the external wall to be of 
 cavity or solid construction, that is recorded, otherwise it is recorded as 
 "other".
-Similarly, if a surveyor deems at least $50\%$ of the wall to be insulated, 
+Similarly, if a surveyor deems at least 50% of the wall to be insulated, 
 that is also recorded in the data.
 As such, any dwelling can be one of 5 types summarised in Table 1.2
 
@@ -201,7 +194,6 @@ Note that the insulation frequency of cavity walls is much higher than the
 solid walls. As expected due to the difficulties involved with insulating a 
 solid wall relative to a cavity type wall.
 
-\clearpage <!-- Force Table 1.2 to appear in this subsubsection -->
 ```{r tbl1_2}
 LAHS::tbl1_2_counts_of_wallinsx()
 ```
@@ -213,29 +205,24 @@ boiler used. If we were to look across the regions we see a similar trend
 occurring that is summarised in Figure 1.4. That is, the volume condensing
 boilers in each sample is increasing with time. 
 
-\citet{britishgas2022} claim that these are generally the most efficient boilers
-"on the market" and that "nearly all modern boilers are A-rated condensing 
-boilers" which is a good sign of newer technology that is better for the 
-environment is being implemented across all regions.
+\citet{britishgas2022} claim that condensing boilers these are generally the 
+most efficient boilers "on the market" and that "nearly all modern boilers are 
+A-rated condensing  boilers" which is a good sign of newer technology that is 
+better for the environment is being implemented across all regions.
 
 As with any emerging technology, it is important to remember that a minor 
 increase in efficiency may not justify a full boiler replacement and the oldest
 or least efficient appliances should be replaced as a priority.
 
-```{r fig1_4, fig.cap = "Newer boiler types being adopted, nationwide"}
+```{r fig1_4, fig.asp = 0.4, fig.cap = "Newer boiler types being adopted, nationwide"}
 LAHS::fig1_4_boiler_trend()
 ```
-
 
 \subsection{Energy Ratings}
 
 - **TODO**.
     - EDA into sap12, EP_*.
     - Correlation with sap12, EPceir12 *and* boiler, dblglaz4, etc.
-
-
-\clearpage <!------------------------------------------------------------------>
-
 
 \section{Data Availability}
 
@@ -286,7 +273,8 @@ collect more data to rule out improvements that have too high an environmental
 cost.
 
 
-\clearpage <!------------------------------------------------------------------>
+\newpage <!-------------------------------------------------------------------->
+
 
 \chapter{Model A} \label{chap:model-a}
 \section{Modelling EPC}
@@ -387,10 +375,6 @@ combination boiler would increase their EER by approximately 3 points.
 LAHS::tbl2_1_linear_models(fit_sap12, fit_EPceir12e)
 ```
 
-
-\clearpage <!------------------------------------------------------------------>
-
-
 \subsection{Discussion}
 
 Table 1.2 shows us that a dwelling with a standard boiler, no double glazing or
@@ -443,7 +427,8 @@ questions such as "what is the impact of double glazing in a well insulated
 house compared to a less insulated house?".
 
 
-\clearpage <!------------------------------------------------------------------>
+\newpage <!-------------------------------------------------------------------->
+
 
 \chapter{Model B}
 \section{Modelling Regional Impact}
@@ -465,7 +450,7 @@ In our model, we fit no intercept and instead only fit:
 1. a group-level effect for each year that the data spans.
 
 Suppose $n_y$ denotes the number of years our dataset spans; for the EHS data
-from $2014$ to $2019$, $n_y = 6$.
+from 2014 to 2019, $n_y = 6$.
 This model will result in $n_y$ population parameters to estimate, 
 each summarising the SAP rating, irrespective of regions.
 Then, we also have $n_y$ group-level parameters for each defined region that 
@@ -539,7 +524,7 @@ In this model, we summarise our estimate in the same way as the other
 parameters, by looking at the mean and credible region of the samples 
 arising from the Markov chain Monte Carlo samples.
 
-```{r}
+```{r warning = FALSE, message = FALSE}
 LAHS::tbl3_1_sigma(fit_mlm)
 ```
 
@@ -562,6 +547,8 @@ a population level but at a regional level as well.
 
 
 \newpage <!-------------------------------------------------------------------->
+
+
 \appendix
 \chapter*{Appendix} \addcontentsline{toc}{chapter}{Appendix}
 \renewcommand\thesection{\Alph{section}}
@@ -570,8 +557,15 @@ a population level but at a regional level as well.
 
 TODO: Describe Model B in statistical rigour.
 
+Suppose we let $Y_i$ be the variable we are interested in, such as 
+energy efficiency rating, for $i = 1, \dots, n$, where $n$ is the sample size.
+
+In a multivariate linear regression (model A), we 
+
 
 \newpage <!-------------------------------------------------------------------->
+
+
 \addcontentsline{toc}{chapter}{Bibliography}
 
 
