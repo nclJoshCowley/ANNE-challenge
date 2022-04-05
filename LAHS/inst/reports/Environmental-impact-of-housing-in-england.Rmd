@@ -540,7 +540,7 @@ parameters, by looking at the mean and credible region of the samples
 arising from the Markov chain Monte Carlo samples.
 
 ```{r}
-LAHS::tbl3_1_sigma()
+LAHS::tbl3_1_sigma(fit_mlm)
 ```
 
 The parameter Table 3.1 is trying to estimate is representative of the 
