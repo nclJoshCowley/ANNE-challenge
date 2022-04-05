@@ -505,7 +505,14 @@ TODO: Mention Stan MCMC sample length and any problems that might indicate non-c
 
 ```{r load-fit-mlm, include = FALSE}
 # Fit and cached in own script to be used here (see `LAHS/R/scripts`).
-fit_mlm <- readRDS("C:/Users/Joshc/Git/ANNE-challenge/LAHS/cache/mlm_regional_epc.rds")
+fit_mlm <- 
+  readRDS(
+    file.path(
+      rprojroot::find_root("DESCRIPTION"),
+      "cache",
+      "mlm_regional_epc_run1.rds"
+    )
+  )
 ```
 
 \subsubsection{Population Level Parameters}

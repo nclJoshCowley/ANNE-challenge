@@ -45,10 +45,10 @@ fit <-
     brms::brm(
       formula = brms_formula,
       data = EHS_subset,
-      chains = 4,
-      iter = 5e3,
-      warmup = 1e3,
-      thin = 1,
+      chains  = 2,
+      iter    = 2e3,
+      warmup  = 1e3,
+      thin    = 1,
       refresh = 20
     ),
     file = "mlm_regional_epc.rds",
