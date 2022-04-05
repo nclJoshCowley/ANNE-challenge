@@ -1,6 +1,7 @@
 ---
 title: "Environmental Impact of Housing in England"
 author: "Josh Cowley (Newcastle University)"
+date: "`r format(Sys.time(), '%B %Y')`"
 output:
   pdf_document:
     # https://github.com/Wandmalfarbe/pandoc-latex-template
