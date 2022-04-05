@@ -138,7 +138,7 @@ Properties that are vacant are few and far between in the data; all regions
 report $96\%$ to $98\%$ of sampled properties are inhabited for the period 
 between April 2014 and March 2020.
 
-```{r tbl_vacant, include = FALSE}
+```{r reftbl_vacant, include = FALSE}
 # NOT DISPLAYED. For proof of above statement only.
 LAHS::EHS %>%
   dplyr::group_by(.data$gorEHS) %>%
@@ -163,7 +163,7 @@ these changes are indicative of an actual decline or just variance in the
 sampling methodology would require further investigation over a larger 
 timescale.
 
-```{r tbl_damp, include = FALSE}
+```{r reftbl_damp, include = FALSE}
 # NOT DISPLAYED. For proof of above statement only.
 LAHS::EHS %>%
   dplyr::group_by(.data$YEAR) %>%
@@ -172,7 +172,7 @@ LAHS::EHS %>%
 
 \subsection{Energy Specific}
 
-<!-- Omitted in interest of time & brevity: dblglaz4, loftinsx, watersys -->
+<!-- NOTE: Omitted due to time & brevity: dblglaz4, loftinsx, watersys -->
 
 \subsubsection{Space Heating}
 
@@ -182,7 +182,7 @@ heating up space with no clear trend emerging from the data. In
 in heating bills and lifetime costs may pose a barrier that would explain this
 reliance on gas.
 
-```{r fig.cap = "Little to no change in heating systems"}
+```{r fig1_3, fig.cap = "Little to no change in heating systems"}
 LAHS::fig1_3_fuelx_trend()
 ```
 
@@ -196,13 +196,15 @@ Similarly, if a surveyor deems at least $50\%$ of the wall to be insulated,
 that is also recorded in the data.
 As such, any dwelling can be one of 5 types summarised in Table 1.2
 
-```{r}
-LAHS::tbl1_2_counts_of_wallinsx()
-```
 
 Note that the insulation frequency of cavity walls is much higher than the 
 solid walls. As expected due to the difficulties involved with insulating a 
 solid wall relative to a cavity type wall.
+
+\clearpage <!-- Force Table 1.2 to appear in this subsubsection -->
+```{r tbl1_2}
+LAHS::tbl1_2_counts_of_wallinsx()
+```
 
 \subsubsection{Boiler Type}
 
@@ -220,15 +222,16 @@ As with any emerging technology, it is important to remember that a minor
 increase in efficiency may not justify a full boiler replacement and the oldest
 or least efficient appliances should be replaced as a priority.
 
-```{r, fig.cap = "Newer boiler types being adopted, nationwide"}
+```{r fig1_4, fig.cap = "Newer boiler types being adopted, nationwide"}
 LAHS::fig1_4_boiler_trend()
 ```
 
 
 \subsection{Energy Ratings}
 
-- EDA into sap12, EP_*.
-- Correlation with sap12, EPceir12 *and* boiler, dblglaz4, etc.
+- **TODO**.
+    - EDA into sap12, EP_*.
+    - Correlation with sap12, EPceir12 *and* boiler, dblglaz4, etc.
 
 
 \clearpage <!------------------------------------------------------------------>
@@ -285,7 +288,7 @@ cost.
 
 \clearpage <!------------------------------------------------------------------>
 
-
+\chapter{Model A} \label{chap:model-a}
 \section{Modelling EPC}
 
 An EPC certificate contains various information that is then used to calculate
@@ -353,7 +356,7 @@ prominent, such as renewable technologies highlighted in the data availability
 section, where parameter estimates would potentially highlight a shortcoming in 
 the current rating system.
 
-```{r}
+```{r fit_lms}
 fit_sap12 <- 
   stats::lm(
     sap12 ~ boiler + dblglaz4 + fuelx + loftins6 + wallinsz + watersys,
@@ -380,8 +383,8 @@ estimate for "Combination" boiler is 2.6 to 3.3 with a significant P value
 ($p<0.05$). Thus, we expect that upgrading a house from a standard to a 
 combination boiler would increase their EER by approximately 3 points.
 
-```{r}
-LAHS::tbl1_x_linear_models(fit_sap12, fit_EPceir12e)
+```{r tbl2_1}
+LAHS::tbl2_1_linear_models(fit_sap12, fit_EPceir12e)
 ```
 
 

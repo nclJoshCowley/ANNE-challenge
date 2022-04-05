@@ -89,7 +89,7 @@ tbl1_1_percentage_of_flats <- function() {
     dplyr::arrange(dplyr::desc(.data$prop)) %>%
     kableExtra::kbl(
       col.names = c("Region", "Number of Flats", "Proportion"),
-      caption = "Proportion of Flats",
+      caption = "Proportion of flats by region",
       booktabs = TRUE
     ) %>%
     kableExtra::kable_styling() %>%
@@ -129,7 +129,7 @@ tbl1_2_counts_of_wallinsx <- function() {
 #' @rdname figures
 #' @param fit_sap12,fit_EPceir12e Linear model objects, fit in RMD.
 #' @export
-tbl1_x_linear_models <- function(fit_sap12, fit_EPceir12e) {
+tbl2_1_linear_models <- function(fit_sap12, fit_EPceir12e) {
 
   joined_tidy_tbls <-
     dplyr::full_join(
