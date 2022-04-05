@@ -445,11 +445,74 @@ house compared to a less insulated house?".
 
 \clearpage <!------------------------------------------------------------------>
 
-
+\chapter{Model B}
 \section{Modelling Regional Impact}
 
-- Explain multilevel modelling as way to distinguish population effect and 
-  group (region) effect.
+\subsection{Multilevel Modelling}
+
+Multilevel modelling allows us to distinguish between population effects and 
+group level effects \citep{raudenbush2002hierarchical}.
+In our context, the population would be all dwellings within England and each
+group can be asserted to be the regions. 
+Trivially the scope can be decreased, say to a local authority level, or even
+increased, say to a worldwide level, depending on the application and available
+data.
+
+In our model, we fit no intercept and instead only fit:
+
+1. a population effect for each year that the data spans,
+
+1. a group-level effect for each year that the data spans.
+
+Suppose $n_y$ denotes the number of years our dataset spans; for the EHS data
+from $2014$ to $2019$, $n_y = 6$.
+This model will result in $n_y$ population parameters to estimate, 
+each summarising the SAP rating, irrespective of regions.
+Then, we also have $n_y$ group-level parameters for each defined region that 
+summarises how the SAP rating for that region compares to the overall population
+on a year-by-year basis.
+A formal description of this model is available in Appendix 
+\ref{append:mlm-descrip} for the statistically minded reader.
+
+By inferring these parameters we can form an environmental indicator on a 
+national level and a more granular indicator for each region that is derived
+from the energy efficiency ratings of the English Housing Survey sample.
+We focus on efficiency but the methodology can be re-executed for the impact
+rating to shift focus from energy use to CO2 emissions.
+
+\subsection{Bayesian Inference}
+
+TODO: Mention Bayesian paradigm, what priors, use of `brms` / `stan`.
+
+\subsection{Results}
+
+TODO: Visualise results as faceted time series (using MCMC estimate + CIs).
+
+\subsection{Discussion}
+
+TODO: Discuss results once **full** model has been fit in Stan.
+
+\subsection{Model Extensibility}
+
+This model, in its current form is closely related to an intercept only 
+regression and as such aims to describe data without any ambition to understand
+any underlying correlation.
+
+It is straightforward to combine this model described in Chapter 
+\ref{chap:model-a} to create a framework that is able to understand the impact 
+of various predictors such as boiler type, insulation and others. 
+However, unlike before we would be able to understand correlations not only at 
+a population level but at a regional level as well.
+
+
+\newpage <!-------------------------------------------------------------------->
+\appendix
+\chapter*{Appendix} \addcontentsline{toc}{chapter}{Appendix}
+\renewcommand\thesection{\Alph{section}}
+
+\section{Multilevel Model Description} \label{append:mlm-descrip}
+
+TODO: Describe Model B in statistical rigour.
 
 
 \newpage <!-------------------------------------------------------------------->
