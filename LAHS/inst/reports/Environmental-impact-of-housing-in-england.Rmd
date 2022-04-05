@@ -130,7 +130,7 @@ a higher proportion when compared to other regions with no signs of change.
 This could be due to a number of reasons such as fewer renters (when compared 
 to London) or fewer households being able to get on the property ladder.
 
-```{r fig1_2, fig.cap = "Housing Association highest in Northern regions"}
+```{r fig1_2, fig.cap = "Housing Association market share highest in Northern regions"}
 LAHS::fig1_2_percentage_of_ownership()[["Housing association"]]
 ```
 
