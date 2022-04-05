@@ -95,7 +95,7 @@ tbl1_1_percentage_of_flats <- function() {
       caption = "Proportion of flats by region",
       booktabs = TRUE
     ) %>%
-    kableExtra::kable_styling() %>%
+    kableExtra::kable_styling(latex_options = "HOLD_position") %>%
     kableExtra::footnote("EHS Physical Sample (April 2014 to March 2020)")
 }
 
@@ -125,7 +125,7 @@ tbl1_2_counts_of_wallinsx <- function() {
       caption = "Insulation more dominant in 'Cavity' type walls",
       booktabs = TRUE
     ) %>%
-    kableExtra::kable_styling()
+    kableExtra::kable_styling(latex_options = "HOLD_position")
 }
 
 
@@ -228,5 +228,5 @@ tbl3_1_sigma <- function(fit_mlm) {
       digits = 2,
       booktabs = TRUE
     ) %>%
-    kableExtra::kable_styling()
+    kableExtra::kable_styling(latex_options = "HOLD_position")
 }
