@@ -52,6 +52,10 @@ rsconnect/
 ### Project specific
 .vscode/spellright.dict
 
+# EHS dataset not to be made public on Github
 LAHS/data-raw/source/EHS/
 !LAHS/data-raw/source/EHS/README_*
 LAHS/data/EHS.rda
+
+# Cache file(s) too large for git
+LAHS/cache
