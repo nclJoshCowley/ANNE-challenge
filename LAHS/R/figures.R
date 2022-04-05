@@ -187,6 +187,7 @@ fig3_1_population_effects <- function(fit_mlm) {
       size = 2,
       alpha = 0.6
     ) +
+    ggplot2::scale_x_continuous(labels = display_YEAR) +
     ggplot2::scale_y_continuous(name = NULL, breaks = c(55, 60, 65, 68))  +
     ggplot2::labs(
       title = "Population estimates imply increasing efficiency",

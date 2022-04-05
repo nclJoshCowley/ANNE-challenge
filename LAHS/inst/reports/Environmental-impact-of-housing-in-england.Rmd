@@ -220,9 +220,7 @@ LAHS::fig1_4_boiler_trend()
 
 \subsection{Energy Ratings}
 
-- **TODO**.
-    - EDA into sap12, EP_*.
-    - Correlation with sap12, EPceir12 *and* boiler, dblglaz4, etc.
+TODO: EDA into sap12, EP_*.
 
 \section{Data Availability}
 
@@ -486,8 +484,6 @@ and efficiency of our model, for example see \citet{gosling2018shelf}.
 
 \subsection{Results}
 
-TODO: Mention Stan MCMC sample length and any problems that might indicate non-convergence.
-
 ```{r load-fit-mlm, include = FALSE}
 # Fit and cached in own script to be used here (see `LAHS/R/scripts`).
 fit_mlm <- 
@@ -500,19 +496,41 @@ fit_mlm <-
   )
 ```
 
-\subsubsection{Population Level Parameters}
+We run our MCMC scheme over `r length(fit_mlm$fit@stan_args)` chains for 
+`r format(fit_mlm$fit@stan_args[[1]]$iter, big.mark = ",")` iterations 
+(`r format(fit_mlm$fit@stan_args[[1]]$warmup, big.mark = ",")` discarded 
+as warm-up).
+\citet{burkner2017brms} remarks that we need much fewer samples than a 
+traditional MCMC scheme due to the higher quality of samples produced,
+that is, a higher effective sample size per iteration.
 
-TODO: Discuss results once **full** model has been fit in Stan.
+Figure 3.1 shows us the population estimates by year with uncertainty quantified
+by the 95% credible intervals of the parameters. Using knowledge of the EPC 
+bands, we see that the estimate is representative of a D rating which is not
+overly surprising given that the majority of dwellings have a C-D rating.
 
-```{r fig3_1, fig.asp = 0.9 * knitr::opts_chunk$get("fig.asp"), fig.cap = "Population estimates imply increasing efficiency"}
+Positively, we see for the years we have selected the posterior estimate is
+increasing indicating an increase in efficiency ratings.
+
+\clearpage <!-- Note: Clear page to force following text below Fig 3.1 -->
+```{r fig3_1, fig.asp = 0.5, fig.cap = "Population estimates imply increasing efficiency"}
 LAHS::fig3_1_population_effects(fit_mlm)
 ```
 
-\subsubsection{Region-Level Parameters}
+For a region-specific indicator one could combine the estimates from Figure 3.1
+with those from Figure 3.2.
+However just by investigating the latter Figure, we see that no region's 
+estimate(s) are substantially different to 0, implying no region is 
+substantially different from the population.
+North east credible regions do exceed 0 implying a marginal statistical 
+significance but only by a few points at best.
 
-TODO: Discuss results once **full** model has been fit in Stan.
+In the author's opinion, small differences on a regional level are likely due 
+to the fact that substantial change in housing efficiency tend to come from
+\textit{green} government scheme(s) that are available nationwide. Such a claim
+warrants further investigation as these models show correlation, not causation.
 
-```{r fig3_2, fig.asp = 1.1 * knitr::opts_chunk$get("fig.asp"), fig.cap = "Region-level estimates not significant"}
+```{r fig3_2, fig.asp = 0.70, fig.cap = "Region-level estimates not significant"}
 LAHS::fig3_2_population_effects(fit_mlm)
 ```
 
