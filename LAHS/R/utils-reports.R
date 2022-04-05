@@ -27,7 +27,11 @@ common_report_setup <- function(..., base_size = 16, root.dir) {
 
   # ggplot2 theme
   ggplot2::theme_set(ggplot2::theme_minimal(base_size = base_size))
-  ggplot2::theme_update(legend.position = "bottom")
+  ggplot2::theme_update(
+    legend.position = "bottom",
+    plot.subtitle = ggplot2::element_text(colour = "grey60"),
+    panel.spacing = ggplot2::unit(2.5, "lines")
+  )
 
   # Knitr options
   updated_args <- utils::modifyList(default_args, rlang::list2(...))
