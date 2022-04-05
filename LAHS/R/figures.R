@@ -2,6 +2,9 @@
 #'
 #' Methods that modularise each figure used in the final report.
 #'
+#' @param fit_sap12,fit_EPceir12e Linear model objects.
+#' @param fit_mlm Multilevel objects.
+#'
 #' @name figures
 NULL
 
@@ -127,7 +130,6 @@ tbl1_2_counts_of_wallinsx <- function() {
 
 
 #' @rdname figures
-#' @param fit_sap12,fit_EPceir12e Linear model objects, fit in RMD.
 #' @export
 tbl2_1_linear_models <- function(fit_sap12, fit_EPceir12e) {
 
@@ -168,4 +170,63 @@ tbl2_1_linear_models <- function(fit_sap12, fit_EPceir12e) {
   }
 
   return(out)
+}
+
+
+#' @rdname figures
+#' @export
+fig3_1_population_effects <- function(fit_mlm) {
+  fit_mlm %>%
+    LAHS::tidy_fixef() %>%
+    LAHS::rename_quantile_colnames() %>%
+    ggplot_mlm_estimates_by_year(fill = "grey", alpha = 0.45) +
+    # EPC Bands: A/B (81+), C (69-80), D (55-68), E (39-54)
+    ggplot2::geom_hline(
+      yintercept = c(55, 68),
+      colour = "#F1EC37",
+      size = 2,
+      alpha = 0.6
+    ) +
+    ggplot2::scale_y_continuous(name = NULL, breaks = c(55, 60, 65, 68))  +
+    ggplot2::labs(
+      title = "Population estimates imply increasing efficiency",
+      subtitle = "Axis scaled to EPC D: (55 - 68)"
+    )
+}
+
+
+#' @rdname figures
+#' @export
+fig3_2_population_effects <- function(fit_mlm) {
+  fit_mlm %>%
+    LAHS::tidy_ranef() %>%
+    LAHS::rename_quantile_colnames() %>%
+    ggplot_mlm_estimates_by_year() +
+    ggplot2::facet_wrap(ggplot2::vars(.data$Region), ncol = 3) +
+    ggplot2::expand_limits(y = c(-4, 4)) +
+    ggplot2::guides(fill = "none", colour = "none") +
+    ggplot2::labs(title = "Region-level estimates not significant", y = NULL)
+}
+
+
+#' @rdname figures
+#' @export
+tbl3_1_sigma <- function(fit_mlm) {
+  tbl <-
+    fit_mlm %>%
+    summary() %>%
+    purrr::pluck("spec_pars") %>%
+    tibble::as_tibble(rownames = "Term") %>%
+    dplyr::mutate(Term = stringr::str_to_title(.data$Term)) %>%
+    dplyr::select(.data$Term, .data$Estimate, tidyselect::ends_with("CI")) %>%
+    dplyr::rename_with(~ gsub("u-", "Upper ", .x)) %>%
+    dplyr::rename_with(~ gsub("l-", "Lower ", .x))
+
+  tbl %>%
+    kableExtra::kbl(
+      caption = "Error term summary",
+      digits = 2,
+      booktabs = TRUE
+    ) %>%
+    kableExtra::kable_styling()
 }

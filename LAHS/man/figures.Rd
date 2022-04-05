@@ -9,6 +9,9 @@
 \alias{tbl1_1_percentage_of_flats}
 \alias{tbl1_2_counts_of_wallinsx}
 \alias{tbl2_1_linear_models}
+\alias{fig3_1_population_effects}
+\alias{fig3_2_population_effects}
+\alias{tbl3_1_sigma}
 \title{Figures used in Environmental Impact of Housing in England}
 \usage{
 fig1_1_sample_sizes_by_region()
@@ -24,9 +27,17 @@ tbl1_1_percentage_of_flats()
 tbl1_2_counts_of_wallinsx()
 
 tbl2_1_linear_models(fit_sap12, fit_EPceir12e)
+
+fig3_1_population_effects(fit_mlm)
+
+fig3_2_population_effects(fit_mlm)
+
+tbl3_1_sigma(fit_mlm)
 }
 \arguments{
-\item{fit_sap12, fit_EPceir12e}{Linear model objects, fit in RMD.}
+\item{fit_sap12, fit_EPceir12e}{Linear model objects.}
+
+\item{fit_mlm}{Multilevel objects.}
 }
 \description{
 Methods that modularise each figure used in the final report.

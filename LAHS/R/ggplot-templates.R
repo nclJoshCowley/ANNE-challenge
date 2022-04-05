@@ -63,3 +63,31 @@ ggplot_trend_by_group <- function(data, yvalue, group, nudge_x = 0, expand_x) {
 
   p + ggplot2::scale_x_continuous(expand = c(0, 0, expand_x, 0))
 }
+
+
+#' Show Multilevel Estimates by Year
+#'
+#' Given a table of estimates will plot the estimates as a time series with
+#'   shaded region showing previously chosen credible interval.
+#'
+#' @param tidy_tbl tibble. Output from \code{\link{tidy_fixef}} or
+#'   \code{\link{tidy_ranef}}.
+#' @param ...,alpha extra arguments passed to \code{\link[ggplot2]{geom_ribbon}}.
+#'
+#' @export
+ggplot_mlm_estimates_by_year <- function(tidy_tbl, alpha = 0.2, ...) {
+  tidy_tbl %>%
+    ggplot2::ggplot(ggplot2::aes(
+      x = .data$Year,
+      y = .data$Estimate,
+      colour = if ("Region" %in% colnames(tidy_tbl)) .data$Region else NULL,
+      fill = if ("Region" %in% colnames(tidy_tbl)) .data$Region else NULL
+    )) +
+    ggplot2::geom_ribbon(
+      ggplot2::aes(ymin = .data$ci.low, ymax = .data$ci.high),
+      alpha = alpha,
+      ...
+    ) +
+    ggplot2::geom_point() +
+    ggplot2::geom_line()
+}

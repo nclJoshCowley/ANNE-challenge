@@ -18,6 +18,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports:
+    brms,
     broom,
     dplyr,
     forcats,
@@ -28,7 +29,8 @@ Imports:
     rlang,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    tidyselect
 Suggests:
     kableExtra,
     knitr,

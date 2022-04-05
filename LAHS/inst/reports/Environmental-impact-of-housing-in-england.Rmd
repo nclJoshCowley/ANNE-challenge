@@ -501,11 +501,45 @@ and efficiency of our model, for example see \citet{gosling2018shelf}.
 
 \subsection{Results}
 
-TODO: Visualise results as faceted time series (using MCMC estimate + CIs).
+TODO: Mention Stan MCMC sample length and any problems that might indicate non-convergence.
 
-\subsection{Discussion}
+```{r load-fit-mlm, include = FALSE}
+# Fit and cached in own script to be used here (see `LAHS/R/scripts`).
+fit_mlm <- readRDS("C:/Users/Joshc/Git/ANNE-challenge/LAHS/cache/mlm_regional_epc.rds")
+```
+
+\subsubsection{Population Level Parameters}
 
 TODO: Discuss results once **full** model has been fit in Stan.
+
+```{r fig3_1, fig.asp = 0.9 * knitr::opts_chunk$get("fig.asp"), fig.cap = "Population estimates imply increasing efficiency"}
+LAHS::fig3_1_population_effects(fit_mlm)
+```
+
+\subsubsection{Region-Level Parameters}
+
+TODO: Discuss results once **full** model has been fit in Stan.
+
+```{r fig3_2, fig.asp = 1.1 * knitr::opts_chunk$get("fig.asp"), fig.cap = "Region-level estimates not significant"}
+LAHS::fig3_2_population_effects(fit_mlm)
+```
+
+\subsubsection{Noise Term}
+
+For both models we have assumed an independently and identically normally
+distributed error term that is required to allow for variance in the data.
+In this model, we summarise our estimate in the same way as the other 
+parameters, by looking at the mean and credible region of the samples 
+arising from the Markov chain Monte Carlo samples.
+
+```{r}
+LAHS::tbl3_1_sigma()
+```
+
+The parameter Table 3.1 is trying to estimate is representative of the 
+measurement error in the SAP rating and would ideally be minimised. A further
+investigation could use this variable as supplementary information to determine
+if the accuracy of \textit{Standard Assessment Procedure}.
 
 \subsection{Model Extensibility}
 
