@@ -52,5 +52,5 @@ fit <-
       refresh = 20
     ),
     file = "mlm_regional_epc.rds",
-    dir = cache_dir
+    dir = paste0(cache_dir, "/")
   )
