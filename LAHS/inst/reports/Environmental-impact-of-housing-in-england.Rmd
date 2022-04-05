@@ -482,7 +482,22 @@ rating to shift focus from energy use to CO2 emissions.
 
 \subsection{Bayesian Inference}
 
-TODO: Mention Bayesian paradigm, what priors, use of `brms` / `stan`.
+To fit this model we make use of R and the popular package `brms`
+\citep{brms2021}. R version: `r paste(version$major, version$minor, sep = ".")`
+and `brms` version: `r utils::packageVersion("brms")`.
+The aforementioned software will fit our model in Stan \citep{carpenter2017stan}
+that uses Bayesian methods such as Hamiltonian Monte Carlo and a No U-Turn 
+sampler, neither of which will be explained in any detail here.
+
+More importantly, these methods allow us to perform Bayesian inference in an
+efficient manner. When using the Bayesian paradigm we combine expert knowledge,
+known as a \textit{prior}, with what the data tells us, a \textit{likelihood},
+to form our \textit{posterior} beliefs.
+
+In this report we use naive priors in the absence of clear expert opinion, 
+should such an expert be made available for the benefit of this model, there 
+exists many methodologies of prior elicitation that will increase the accuracy
+and efficiency of our model, for example see \citet{gosling2018shelf}.
 
 \subsection{Results}
 
