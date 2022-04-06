@@ -18,7 +18,9 @@ fig1_1_sample_sizes_by_region <- function() {
       YEAR = LAHS::display_YEAR(.data$YEAR)
     ) %>%
     LAHS::ggplot_counts_by_group(counts = .data$YEAR, group = .data$gorEHS) +
-    ggplot2::scale_fill_discrete(type = LAHS::get_colour_scheme("moor64green")) +
+    ggplot2::scale_fill_discrete(
+      type = LAHS::get_colour_scheme("adobeseqforest")[4:10]
+    ) +
     ggplot2::labs(y = NULL, x = NULL, fill = NULL)
 }
 
@@ -37,6 +39,7 @@ fig1_2_percentage_of_ownership <- function() {
       ggplot2::guides(colour = "none") +
       ggplot2::scale_x_continuous(labels = display_YEAR, expand = c(0, 0, 0.15, 0)) +
       ggplot2::scale_y_continuous(labels = display_percent) +
+      ggplot2::scale_color_discrete(type = get_colour_scheme_region()) +
       ggplot2::labs(y = NULL, x = NULL)
   }
 
@@ -203,6 +206,8 @@ fig3_2_population_effects <- function(fit_mlm) {
     LAHS::tidy_ranef() %>%
     LAHS::rename_quantile_colnames() %>%
     ggplot_mlm_estimates_by_year() +
+    ggplot2::scale_color_discrete(type = get_colour_scheme_region()) +
+    ggplot2::scale_fill_discrete(type = get_colour_scheme_region()) +
     ggplot2::facet_wrap(ggplot2::vars(.data$Region), ncol = 3) +
     ggplot2::expand_limits(y = c(-4, 4)) +
     ggplot2::guides(fill = "none", colour = "none") +

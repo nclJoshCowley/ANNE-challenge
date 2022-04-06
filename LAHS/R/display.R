@@ -73,6 +73,10 @@ display_percent <- function(x, ...) {
 #'     <https://lospec.com/palette-list/ibm-color-blind-safe>.
 #'   - `moor64green` and `moor64blue`. Derived from MOOR64, ordinal, 6 colours,
 #'     <https://lospec.com/palette-list/moor64>.
+#'   - `adobeseqforest` Adobe Sequential Forest, ordinal, 16 colours.
+#'     <https://spectrum.adobe.com/page/color-for-data-visualization>
+#'   - `adobe12` Adobe Categorical, 12 colours.
+#'     <https://spectrum.adobe.com/page/color-for-data-visualization>
 #'
 #' @export
 get_colour_scheme <- function(name) {
@@ -84,12 +88,30 @@ get_colour_scheme <- function(name) {
       c("#8dc168", "#65a84f", "#438e3e", "#2d782f", "#12561d", "#0d421c"),
 
     moor64blue =
-      c("#a8ebbf","#78d9c4","#42bdb5","#2e9298","#206f85","#004e78")
+      c("#a8ebbf","#78d9c4","#42bdb5","#2e9298","#206f85","#004e78"),
+
+    adobeseqforest =
+      c(
+        "#FFFFE0", "#E2F5BD", "#C5EA99", "#A6DF73",
+        "#8FD16C", "#79C365", "#62B55E", "#4CA658",
+        "#3B9752", "#31884F", "#28794C", "#1E6A48",
+        "#155B45", "#0E4D41", "#073F3E", "#00313A"
+      ),
+
+    adobe12 =
+      c(
+        "#00C0C7", "#5144D3", "#E8871A", "#DA3490",
+        "#9089FA", "#47E26F", "#2780EB", "#6F38B1",
+        "#DFBF03", "#CB6F10", "#268D6C", "#9BEC54"
+      )
   ))
 
   if (!name %in% names(col_env)) stop("Colour scheme missing - ", name)
   return(get(name, envir = col_env))
 }
 
-
-
+#' @describeIn get_colour_scheme Wrapper to be used for region colouring (n=9).
+#' @export
+get_colour_scheme_region <- function() {
+  c(get_colour_scheme("adobe12")[c(1:6, 9)], "black", "grey50")
+}
