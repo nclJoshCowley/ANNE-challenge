@@ -86,6 +86,9 @@ Analysis could be done at population level (model A, linear model) or at a
 group level (model B, multilevel model) depending on the questions one hopes
 to answer.
 
+With the EHS data, we could use the interview part of the dataset to further
+understand fuel poverty, which would have a greater impact.
+
 > **Can you give an example of analysis you have performed to investigate a
 > problem, prior to this challenge?**
 
