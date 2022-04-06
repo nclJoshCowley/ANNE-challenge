@@ -34,7 +34,7 @@ research and further use of the data for commercial use without first obtaining
 permission from the data service provider is prohibited.
 
 Furthermore, since these analyses can be interpreted as 'material derived from
-the data collections,' any user of this report must also be in agreement to 
+the data collections', any user of this report must also be in agreement to 
 these terms.
 
 
@@ -60,12 +60,13 @@ To achieve this, we explore features of the EHS dataset that are pertinent to
 the energy efficiency and CO2 emissions of the sampled dwellings. 
 Then, we employ regression to better understand the relationships between
 the ever-adapting EPC ratings and physical attributes of dwellings such as
-insulation and age of boiler installed.
+insulation and type of boiler installed.
 
 The final aim is realised using a multi-level modelling framework that allows
 practitioners to separate population-level effects with group-level effects where
 the population in this context is at a national level and the regions, such as
-the North East, are groupings.
+the North East, are groupings. It is these parameters and subsequent estimates
+that are intended to serve as environmental indicator(s).
 
 \section{Sampling Methodology}
 
@@ -77,7 +78,6 @@ collected.
 In summary, an initial sample of addresses is pulled from the Postcode Address
 File (PAF) using a two-stage random sample that is not covered in any detail
 here, for more information see [EHS Technical Reports][ehs-technical].
-
 Participants from this initial sample are invited to take part in an 
 \textit{interview} stage survey that is based on \textbf{households}. 
 A subset of these participants where permission is granted or the property is
@@ -112,18 +112,19 @@ LAHS::fig1_1_sample_sizes_by_region()
 
 \subsection{General}
 
-Here we are interested in the general properties of stock sampled in the EHS,
+Here we are interested in the general properties sampled in the EHS,
 the reader is also advises to view the annual headline report \citep{ehs2020}.
 For example, Figure 1.1 in the 2020-21 version shows an increase in private 
 renters and a decrease in social renters from the start of the millennium.
 
 Figure 1.2 shows us the proportion of properties that are owned by 
 \textit{housing assocations}. Both the North East and North West have
-a higher proportion when compared to other regions with no signs of change.
+a higher proportion when compared to other regions with no minor signs of 
+change.
 This could be due to a number of reasons such as fewer renters (when compared 
 to London) or fewer households being able to get on the property ladder.
 
-```{r fig1_2, fig.cap = "Housing Association market share highest in Northern regions"}
+```{r fig1_2, fig.cap = "Housing association market share highest in Northern regions"}
 LAHS::fig1_2_percentage_of_ownership()[["Housing association"]]
 ```
 
@@ -142,8 +143,8 @@ LAHS::EHS %>%
 
 Each dwelling is assigned into one of 10 categories based on the type of
 dwelling and when it was built. One clear discrepancy in the regions that is 
-highlighted by these data is the proportion of flats, defined as a purpose 
-built flat or converted flat, as shown in Table 1.1.
+highlighted by these data is the proportion of flats (defined as a purpose 
+built flat or converted flat) as shown in Table 1.1.
 
 ```{r tbl1_1}
 LAHS::tbl1_1_percentage_of_flats()
@@ -153,7 +154,7 @@ Also reported in the EHS is if there is any damp present, damp could be a
 symptom of bigger problems. Thankfully, the percentage at which this occurs is
 down from 5.18% in 2014-15 to 4.01% in 2019-20 although to understand if
 these changes are indicative of an actual decline or just variance in the 
-sampling methodology would require further investigation over a larger 
+data would require further investigation over a larger 
 timescale.
 
 ```{r reftbl_damp, include = FALSE}
@@ -173,7 +174,7 @@ Figure 1.3 shows us that there is a clear reliance on gas for systems related to
 heating up space with no clear trend emerging from the data. In 
 \citet{electricheatingoptions2019}, it is claimed that significant increases
 in heating bills and lifetime costs may pose a barrier that would explain this
-reliance on gas.
+hesitancy to switch to electrical systems.
 
 ```{r fig1_3, fig.asp = 0.4, fig.cap = "Little to no change in heating systems"}
 LAHS::fig1_3_fuelx_trend()
@@ -181,7 +182,7 @@ LAHS::fig1_3_fuelx_trend()
 
 \subsubsection{Wall Types}
 
-Wall type data in these data refers to the predominant external wall of a 
+Wall type data refers to the predominant external wall of a 
 dwelling. If a surveyor deems at least 50% of the external wall to be of 
 cavity or solid construction, that is recorded, otherwise it is recorded as 
 "other".
@@ -238,10 +239,10 @@ show_EPC_diff_1 <- LAHS::display_percent(EPC_diff_1, digits = 3)
 
 In fact, in our subset of the EHS sample we observe that the bands for each
 metric are equal `r show_EPC_diff_0` of the time and are at most 1 band 
-different in `r show_EPC_diff_0` of cases.
+different in `r show_EPC_diff_1` of cases.
 
-As such, Figure 1.5 shows only the efficiency ratings but due to high 
-correlation can be viewed as representative of both ratings. It is clear that
+As such, Figure 1.5 shows only the efficiency ratings, but due to high 
+correlation, can be viewed as representative of both ratings. It is clear that
 the majority of dwellings are in the middling bands of C and D, specifically
 `r LAHS::display_percent(mean(LAHS::EHS$EPceeb12e %in% c("C", "D")), digits = 3)`
 of our data. There are so few being in the top 2 bands of A and B that the
@@ -257,7 +258,7 @@ groupings. Figure 1.6 shows a histogram of all SAP ratings in our data and
 colours them according to their bands; note that the distribution is left-skew 
 meaning we expect to see more extremely inefficient houses over extremely
 efficient ones. There are also several outliers with a SAP rating reported as 1,
-further investigation into these outliers is require.
+further investigation into these outliers is required.
 
 ```{r fig1_6, fig.asp = 0.5, fig.cap = "Efficiency ratings average around 64 with a left-skew"}
 LAHS::fig1_6_sap_histogram()
@@ -307,7 +308,7 @@ has been found during the research phase of this project.
 To achieve the carbon neutral goals set out by the UK government and others in
 the Paris agreement, we must ask is the carbon investment and other pollution
 costs worth the offset that they will achieve.
-SImilar to various improvements are financially infeasible due to cost, we must
+Similar to how various improvements are financially infeasible due to cost, we must
 collect more data to rule out improvements that have too high an environmental 
 cost.
 
@@ -345,7 +346,7 @@ more indicative of CO2 emissions \citep{epccertificate2022}.
 > the less impact it has on the environment.
 
 Expectedly, these two ratings tend to be correlated; in our cohort of dwellings
-the pearson correlation coefficient is as high as
+the Pearson correlation coefficient is as high as
 `r LAHS::display_percent(cor(LAHS::EHS$EPceir12e, LAHS::EHS$sap12), digits = 3)`.
 
 As previously mentioned, the methodology that creates both ratings has been 
@@ -406,8 +407,8 @@ level and infer its impact on the rating, subject to keeping all other
 attributes fixed.
 
 For example, see that the reference level for boiler type is "Standard" and the 
-estimate for "Combination" boiler is 2.6 to 3.3 with a significant P value
-($p<0.05$). Thus, we expect that upgrading a house from a standard to a 
+estimate for "Combination" boiler is between 2.6 to 3.3 with a significant 
+P value ($p<0.05$). Thus, we expect that upgrading a house from a standard to a 
 combination boiler would increase their EER by approximately 3 points.
 
 ```{r tbl2_1}
@@ -421,7 +422,8 @@ insulation that is still reliant on oil systems and an electric water heater
 would expect to have a G band EPC rating.
 This hypothetical does not meet the current minimum energy efficiency standard
 (MEES) allowed for rented properties and such an anti-environment dwelling is 
-likely in need of other repairs, and will be potentially vacant.
+likely in need of more pressing repairs related to safety and could even be 
+vacant.
 
 The impact of different types of boilers is typical with the worst being a 
 back boiler, as expected. Interestingly, the impact on efficiency for condensing
@@ -441,7 +443,7 @@ A similar story is told by the water heating estimates, although it should be
 noted that a dedicated boiler could include both gas and electric boilers.
 
 Loft insulation appears to increase both EER and EIR as expected but as the 
-different between estimates decrease it may be a case of diminishing returns
+difference between estimates decrease it may be a case of diminishing returns
 and warrants further investigation.
 
 Wall insulation is less straightforward to compare since the data has encoded
@@ -482,7 +484,7 @@ Trivially the scope can be decreased, say to a local authority level, or even
 increased, say to a worldwide level, depending on the application and available
 data.
 
-In our model, we fit no intercept and instead only fit:
+In our model we fit intercepts only, namely:
 
 1. a population effect for each year that the data spans,
 
@@ -502,13 +504,13 @@ By inferring these parameters we can form an environmental indicator on a
 national level and a more granular indicator for each region that is derived
 from the energy efficiency ratings of the English Housing Survey sample.
 We focus on efficiency but the methodology can be re-executed for the impact
-rating to shift focus from energy use to CO2 emissions.
+rating to shift focus from efficiency to CO2 emissions.
 
 \subsection{Bayesian Inference}
 
-To fit this model we make use of R and the popular package `brms`
+To fit this model we make use of R and the popular brms package
 \citep{brms2021}. R version: `r paste(version$major, version$minor, sep = ".")`
-and `brms` version: `r utils::packageVersion("brms")`.
+and brms version: `r utils::packageVersion("brms")` is used.
 The aforementioned software will fit our model in Stan \citep{carpenter2017stan}
 that uses Bayesian methods such as Hamiltonian Monte Carlo and a No U-Turn 
 sampler, neither of which will be explained in any detail here.
@@ -549,7 +551,6 @@ Figure 3.1 shows us the population estimates by year with uncertainty quantified
 by the 95% credible intervals of the parameters. Using knowledge of the EPC 
 bands, we see that the estimate is representative of a D rating which is not
 overly surprising given that the majority of dwellings have a C-D rating.
-
 Positively, we see for the years we have selected the posterior estimate is
 increasing indicating an increase in efficiency ratings.
 
@@ -569,7 +570,8 @@ significance but only by a few points at best.
 In the author's opinion, small differences on a regional level are likely due 
 to the fact that substantial change in housing efficiency tend to come from
 \textit{green} government scheme(s) that are available nationwide. Such a claim
-warrants further investigation as these models show correlation, not causation.
+warrants further investigation and it is important to remember the models 
+highlight correlation not causation.
 
 ```{r fig3_2, fig.asp = 0.70, fig.cap = "Region-level estimates not significant"}
 LAHS::fig3_2_population_effects(fit_mlm)
@@ -587,10 +589,10 @@ arising from the Markov chain Monte Carlo samples.
 LAHS::tbl3_1_sigma(fit_mlm)
 ```
 
-The parameter Table 3.1 is trying to estimate is representative of the 
-measurement error in the SAP rating and would ideally be minimised. A further
-investigation could use this variable as supplementary information to determine
-if the accuracy of \textit{Standard Assessment Procedure}.
+The parameter summarised in Table 3.1 is trying to estimate is representative of 
+the measurement error in the SAP rating and would ideally be minimised. 
+A further investigation could use this variable as supplementary information to 
+determine if the accuracy of \textit{Standard Assessment Procedure}.
 
 \subsection{Model Extensibility}
 
@@ -619,9 +621,11 @@ energy efficiency rating, for a single year. Each observation or dwelling is
 indexed by $i = 1, \dots, n$, where $n$ is the sample size.
 
 In a multivariate linear regression (model A), we leverage dwelling information
-such as boiler type; we denote these predictors by a $p$ length vector
-$\bm{x}_i = (1, x_{i1}, \dots, x_{ip})$ where the 1 is added to all data to fit
-an intercept (population average). We can now model the response by
+such as insulation or boiler type. Denote these predictors by a $p$ length 
+vector
+$\bm{x}_i = \begin{pmatrix} 1 & x_{i1} & \dots & x_{ip} \end{pmatrix}$
+where the 1 is added to all data to fit an intercept (population average). 
+We can now model the response by
 \begin{equation*}
   y_i
     = \bm{x}_i^T \bm{\beta} + \epsilon_i
