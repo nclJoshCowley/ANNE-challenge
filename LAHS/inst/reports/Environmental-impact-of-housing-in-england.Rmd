@@ -573,13 +573,59 @@ a population level but at a regional level as well.
 
 \section{Multilevel Model Description} \label{append:mlm-descrip}
 
-TODO: Describe Model B in statistical rigour.
+Suppose we let $y_i$ be the variable we are interested in, such as 
+energy efficiency rating, for a single year. Each observation or dwelling is 
+indexed by $i = 1, \dots, n$, where $n$ is the sample size.
 
-Suppose we let $Y_i$ be the variable we are interested in, such as 
-energy efficiency rating, for $i = 1, \dots, n$, where $n$ is the sample size.
+In a multivariate linear regression (model A), we leverage dwelling information
+such as boiler type; we denote these predictors by a $p$ length vector
+$\bm{x}_i = (1, x_{i1}, \dots, x_{ip})$ where the 1 is added to all data to fit
+an intercept (population average). We can now model the response by
+\begin{equation*}
+  y_i
+    = \bm{x}_i^T \bm{\beta} + \epsilon_i
+  ,
+\end{equation*}
+where $\epsilon_i \sim \mathcal{N}(0, \sigma^2)$. Here, $\bm{\beta}$ and 
+$\sigma$ are parameters to be estimated, specifically regression and noise 
+parameters respectively.
 
-In a multivariate linear regression (model A), we 
+To extend this to a multilevel linear model we add a random effect for
+each group $g = 1, \dots, G$. Hence, for a set of \textit{potentially} different
+predictors $\bm{z}_i$:
 
+\begin{equation*}
+  y_i
+    = \bm{x}_i^T \bm{\beta} + \bm{z}_i^T \bm{\gamma}_g + \epsilon_i
+  .
+\end{equation*}
+
+where the new parameters, $\bm{\gamma}$ take the role of group specific 
+regression parameters and therefore are conditional on the group that $y_i$
+belongs to.
+
+\newpage <!-- Note: Move text relating to equation to same page --------------->
+Model B is a special case of these models where only intercepts are fitted,
+sometimes referred to as a random effects ANOVA. Here,
+
+\begin{equation*}
+  y_i
+    = \beta_0 + \gamma_{g} + \epsilon_i
+  .
+\end{equation*}
+
+Since we actually fit this over multiple years worth of data, suppose $y_{ij}$
+is the $i^{th}$ observation of the $j^{th}$ year, then
+
+\begin{equation*}
+  y_{ij}
+    = \beta_{0j} + \gamma_{gj} + \epsilon_{ij}
+  .
+\end{equation*}
+
+We refer to $\beta_{0j}$ as the population parameters as they represent the 
+global value for year $j$ and $\gamma{gj}$ are group-level parameters that 
+denote the deviation from the population value for group $g$ in year $j$.
 
 \newpage <!-------------------------------------------------------------------->
 
