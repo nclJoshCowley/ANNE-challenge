@@ -46,7 +46,7 @@ fit <-
       formula = brms_formula,
       data = EHS_subset,
       chains  = 2,
-      iter    = 2e3,
+      iter    = 4e3,
       warmup  = 1e3,
       thin    = 1,
       refresh = 20
