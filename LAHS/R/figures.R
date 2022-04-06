@@ -186,7 +186,7 @@ fig3_1_population_effects <- function(fit_mlm) {
     # EPC Bands: A/B (81+), C (69-80), D (55-68), E (39-54)
     ggplot2::geom_hline(
       yintercept = c(55, 68),
-      colour = "#F1EC37",
+      colour = get_colour_scheme("epcbands")["D"],
       size = 2,
       alpha = 0.6
     ) +

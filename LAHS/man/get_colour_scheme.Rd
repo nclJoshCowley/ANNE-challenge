@@ -24,14 +24,16 @@ character vector as opposed to do something clever like RColorBrewer.
 \section{Available Colour Scheme(s)}{
 
 \itemize{
-\item \code{ibm}: IBM Colour Blind safe scheme, nominal, 5 colours,
+\item \code{ibm}: IBM Colour Blind safe scheme, nominal, 5 colours.
 \url{https://lospec.com/palette-list/ibm-color-blind-safe}.
-\item \code{moor64green} and \code{moor64blue}. Derived from MOOR64, ordinal, 6 colours,
+\item \code{moor64green} and \code{moor64blue}. Derived from MOOR64, ordinal, 6 colours.
 \url{https://lospec.com/palette-list/moor64}.
 \item \code{adobeseqforest} Adobe Sequential Forest, ordinal, 16 colours.
 \url{https://spectrum.adobe.com/page/color-for-data-visualization}
 \item \code{adobe12} Adobe Categorical, 12 colours.
 \url{https://spectrum.adobe.com/page/color-for-data-visualization}
+\item \code{epcbands}. EPC Band colours (named), ordinal, 7 colours (A-G).
+\url{https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/5996/2116821.pdf}
 }
 }
 

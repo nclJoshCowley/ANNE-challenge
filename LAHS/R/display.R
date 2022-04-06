@@ -69,14 +69,16 @@ display_percent <- function(x, ...) {
 #' @param name choice. Must be a defined scheme.
 #'
 #' @section Available Colour Scheme(s):
-#'   - `ibm`: IBM Colour Blind safe scheme, nominal, 5 colours,
+#'   - `ibm`: IBM Colour Blind safe scheme, nominal, 5 colours.
 #'     <https://lospec.com/palette-list/ibm-color-blind-safe>.
-#'   - `moor64green` and `moor64blue`. Derived from MOOR64, ordinal, 6 colours,
+#'   - `moor64green` and `moor64blue`. Derived from MOOR64, ordinal, 6 colours.
 #'     <https://lospec.com/palette-list/moor64>.
 #'   - `adobeseqforest` Adobe Sequential Forest, ordinal, 16 colours.
 #'     <https://spectrum.adobe.com/page/color-for-data-visualization>
 #'   - `adobe12` Adobe Categorical, 12 colours.
 #'     <https://spectrum.adobe.com/page/color-for-data-visualization>
+#'   - `epcbands`. EPC Band colours (named), ordinal, 7 colours (A-G).
+#'     <https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/5996/2116821.pdf>
 #'
 #' @export
 get_colour_scheme <- function(name) {
@@ -103,6 +105,12 @@ get_colour_scheme <- function(name) {
         "#00C0C7", "#5144D3", "#E8871A", "#DA3490",
         "#9089FA", "#47E26F", "#2780EB", "#6F38B1",
         "#DFBF03", "#CB6F10", "#268D6C", "#9BEC54"
+      ),
+
+    epcbands =
+      c(
+        A = "#007F3D", B = "#2C9F29", C = "#9DCB3C", D = "#FFF200",
+        E = "#F7AF1D", `F` = "#ED6823", G = "#E31D23"
       )
   ))
 
