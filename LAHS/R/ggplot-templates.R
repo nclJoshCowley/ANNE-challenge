@@ -76,18 +76,23 @@ ggplot_trend_by_group <- function(data, yvalue, group, nudge_x = 0, expand_x) {
 #'
 #' @export
 ggplot_mlm_estimates_by_year <- function(tidy_tbl, alpha = 0.2, ...) {
+  has_region <- "Region" %in% colnames(tidy_tbl)
+
   tidy_tbl %>%
     ggplot2::ggplot(ggplot2::aes(
       x = .data$Year,
       y = .data$Estimate,
-      colour = if ("Region" %in% colnames(tidy_tbl)) .data$Region else NULL,
-      fill = if ("Region" %in% colnames(tidy_tbl)) .data$Region else NULL
+      fill = if (has_region) .data$Region else NULL
     )) +
     ggplot2::geom_ribbon(
       ggplot2::aes(ymin = .data$ci.low, ymax = .data$ci.high),
       alpha = alpha,
       ...
     ) +
-    ggplot2::geom_point() +
-    ggplot2::geom_line()
+    ggplot2::geom_point(ggplot2::aes(
+      colour = if (has_region) .data$Region else NULL
+    )) +
+    ggplot2::geom_line(ggplot2::aes(
+      colour = if (has_region) .data$Region else NULL
+    ))
 }
