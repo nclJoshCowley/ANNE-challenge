@@ -7,6 +7,7 @@
 \alias{fig1_3_fuelx_trend}
 \alias{fig1_4_boiler_trend}
 \alias{fig1_5_epc_samples}
+\alias{fig1_6_sap_histogram}
 \alias{tbl1_1_percentage_of_flats}
 \alias{tbl1_2_counts_of_wallinsx}
 \alias{tbl2_1_linear_models}
@@ -24,6 +25,8 @@ fig1_3_fuelx_trend()
 fig1_4_boiler_trend()
 
 fig1_5_epc_samples()
+
+fig1_6_sap_histogram()
 
 tbl1_1_percentage_of_flats()
 

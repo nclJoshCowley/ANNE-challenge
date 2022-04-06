@@ -109,6 +109,25 @@ fig1_5_epc_samples <- function() {
 
 #' @rdname figures
 #' @export
+fig1_6_sap_histogram <- function() {
+  LAHS::EHS %>%
+    ggplot2::ggplot(ggplot2::aes(
+      x = .data$sap12,
+      fill = .data$EPceeb12e
+    )) +
+    ggplot2::geom_histogram(bins = 200, colour = "grey90") +
+    ggplot2::expand_limits(x = c(0, 100)) +
+    ggplot2::scale_fill_discrete(
+      name = NULL,
+      type = rlang::set_names(get_colour_scheme("epcbands")[2:7], c("A/B", LETTERS[3:7]))
+    ) +
+    ggplot2::labs(y = NULL, x = "SAP Rating") +
+    ggplot2::theme(legend.position = "right")
+}
+
+
+#' @rdname figures
+#' @export
 tbl1_1_percentage_of_flats <- function() {
   LAHS::EHS %>%
     dplyr::mutate(alltypex = LAHS::condense_alltypex(.data$alltypex)) %>%
