@@ -109,7 +109,8 @@ get_colour_scheme <- function(name) {
 
     epcbands =
       c(
-        A = "#007F3D", B = "#2C9F29", C = "#9DCB3C", D = "#FFF200",
+        A = "#007F3D", B = "#2C9F29", C = "#9DCB3C",
+        D = "#F2E200", # Original was "#FFF200", vue changed from 100 to 95.
         E = "#F7AF1D", `F` = "#ED6823", G = "#E31D23"
       )
   ))
