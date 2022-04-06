@@ -184,14 +184,18 @@ fig3_1_population_effects <- function(fit_mlm) {
     LAHS::rename_quantile_colnames() %>%
     ggplot_mlm_estimates_by_year(fill = "grey", alpha = 0.45) +
     # EPC Bands: A/B (81+), C (69-80), D (55-68), E (39-54)
-    ggplot2::geom_hline(
-      yintercept = c(55, 68),
-      colour = get_colour_scheme("epcbands")["D"],
-      size = 2,
-      alpha = 0.6
-    ) +
+    # ggplot2::geom_hline(
+    #   yintercept = c(55, 68),
+    #   colour = get_colour_scheme("epcbands")["D"],
+    #   size = 2,
+    #   alpha = 0.6
+    # ) +
     ggplot2::scale_x_continuous(labels = display_YEAR) +
-    ggplot2::scale_y_continuous(name = NULL, breaks = c(55, 60, 65, 68))  +
+    ggplot2::scale_y_continuous(
+      name = NULL,
+      limits = c(55, 68),
+      breaks = c(55, 60, 65, 68)
+    )  +
     ggplot2::labs(
       title = "Population estimates imply increasing efficiency",
       subtitle = "Axis scaled to EPC D: (55 - 68)"
