@@ -85,6 +85,30 @@ fig1_4_boiler_trend <- function() {
 
 #' @rdname figures
 #' @export
+fig1_5_epc_samples <- function() {
+  LAHS::EHS %>%
+    dplyr::count(.data$gorEHS, .data$EPceeb12e) %>%
+    ggplot2::ggplot(ggplot2::aes(
+      x = .data$n,
+      y = rev(.data$gorEHS),
+      fill = .data$EPceeb12e
+    )) +
+    ggplot2::geom_bar(stat = "identity") +
+    ggplot2::scale_y_discrete(name = NULL, limits = rev) +
+    ggplot2::scale_x_continuous(
+      name = "Number of sampled dwellings",
+      labels = ~ format(.x, big.mark = ",")
+    ) +
+    ggplot2::scale_fill_discrete(
+      name = "Efficiency",
+      type = rlang::set_names(get_colour_scheme("epcbands")[2:7], c("A/B", LETTERS[3:7]))
+    ) +
+    ggplot2::theme(legend.position = "right")
+}
+
+
+#' @rdname figures
+#' @export
 tbl1_1_percentage_of_flats <- function() {
   LAHS::EHS %>%
     dplyr::mutate(alltypex = LAHS::condense_alltypex(.data$alltypex)) %>%
