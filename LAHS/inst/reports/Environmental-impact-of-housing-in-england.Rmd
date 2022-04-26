@@ -12,7 +12,7 @@ output:
 ---
 
 ```{r setup-yaml, echo = FALSE, results = "asis"}
-cat(readLines("config/options.yaml"), sep = "\n")
+cat(readLines("config/report-options.yaml"), sep = "\n")
 ```
 
 ```{r setup, include = FALSE}
