@@ -659,10 +659,10 @@ $endif$
 $if(beamer)$
 $else$
 \addtokomafont{section}{\color{heading-color}}
-$endif$
 % When using the classes report, scrreprt, book,
 % scrbook or memoir, uncomment the following line.
 \addtokomafont{chapter}{\color{heading-color}}
+$endif$
 
 %
 % variables for title, author and date
