@@ -17,7 +17,7 @@ titlepage-rule-color: FFFFFF
 titlepage-background: config/front-page-background
 
 page-background: config/all-page-background
-page-background-opacity: 0.8
+page-background-opacity: 1.0
 
 linkcolor: blue
 
