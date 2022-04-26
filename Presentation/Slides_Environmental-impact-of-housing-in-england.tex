@@ -1,0 +1,66 @@
+\documentclass[aspectratio=43]{beamer}
+
+% Document specific details
+\title{Environmental Impact of Housing in England}
+\author{Josh Cowley}
+\date{May 4th, 2022}
+
+\graphicspath{{images/}}
+
+% Document specific packages
+\usepackage{booktabs}
+\usepackage{bm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IDEALLY MOVE FOLLOWING TO .sty FILE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Define background images
+\newcommand{\bgall}{
+    \includegraphics
+        [width=\paperwidth,height=\paperheight]
+        {all-page-background}
+}
+
+\newcommand{\bgtitle}{
+    \includegraphics
+        [width=\paperwidth,height=\paperheight]
+        {front-page-background}
+}
+
+% Apply custom background images based on frame number 
+\makeatletter % Remove in .sty file?
+\setbeamertemplate{background canvas}{
+    \ifnum\c@framenumber=1%
+        % On title page
+        \bgtitle
+    \else%
+        % Other frames background
+        \bgall
+    \fi%
+}
+\makeatletter % Remove in .sty file?
+
+% Convert all title page font colour to be white
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{institute}{fg=white}
+\setbeamercolor{date}{fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGIN DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+\include{sections/motivation}
+
+\end{document}
