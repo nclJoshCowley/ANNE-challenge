@@ -1,4 +1,4 @@
-\documentclass[aspectratio=43]{beamer}
+\documentclass[aspectratio=43,12pt]{beamer}
 
 % Document specific details
 \title{Environmental Impact of Housing in England}
@@ -8,12 +8,18 @@
 \graphicspath{{images/}}
 
 % Document specific packages
-\usepackage{booktabs}
-\usepackage{bm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IDEALLY MOVE FOLLOWING TO .sty FILE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Persistent packages
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{bm}
+
+% Double-line spacing
+\setstretch{1.5}
 
 % Define background images
 \newcommand{\bgall}{
@@ -40,6 +46,10 @@
     \fi%
 }
 \makeatletter % Remove in .sty file?
+
+% Increase itemize and enumerate spacing
+\let\OLDitemize\itemize
+\renewcommand\itemize{\OLDitemize\setlength\itemsep{8.0pt plus 2.0pt minus 1.0pt}}
 
 % Convert all title page font colour to be white
 \setbeamercolor{title}{fg=white}
