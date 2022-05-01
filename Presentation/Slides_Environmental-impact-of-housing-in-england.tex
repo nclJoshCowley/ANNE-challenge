@@ -57,6 +57,13 @@
 \setbeamercolor{institute}{fg=white}
 \setbeamercolor{date}{fg=white}
 
+% Section introductions ??
+\AtBeginSection[]{
+  \begin{frame}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BEGIN DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -68,7 +75,7 @@
 \end{frame}
 
 \begin{frame}{Outline}
-    \tableofcontents[hideallsubsections]
+    \tableofcontents
 \end{frame}
 
 \include{sections/01-intro}
