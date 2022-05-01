@@ -248,7 +248,7 @@ fig3_1_population_effects <- function(fit_mlm) {
 
 #' @rdname figures
 #' @export
-fig3_2_population_effects <- function(fit_mlm) {
+fig3_2_regional_effects <- function(fit_mlm) {
   fit_mlm %>%
     LAHS::tidy_ranef() %>%
     LAHS::rename_quantile_colnames() %>%

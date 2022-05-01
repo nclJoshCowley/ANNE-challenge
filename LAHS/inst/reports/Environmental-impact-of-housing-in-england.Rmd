@@ -574,7 +574,7 @@ warrants further investigation and it is important to remember the models
 highlight correlation not causation.
 
 ```{r fig3_2, fig.asp = 0.70, fig.cap = "Region-level estimates not significant"}
-LAHS::fig3_2_population_effects(fit_mlm)
+LAHS::fig3_2_regional_effects(fit_mlm)
 ```
 
 \subsubsection{Noise Term}

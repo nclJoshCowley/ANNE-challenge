@@ -12,7 +12,7 @@
 \alias{tbl1_2_counts_of_wallinsx}
 \alias{tbl2_1_linear_models}
 \alias{fig3_1_population_effects}
-\alias{fig3_2_population_effects}
+\alias{fig3_2_regional_effects}
 \alias{tbl3_1_sigma}
 \title{Figures used in Environmental Impact of Housing in England}
 \usage{
@@ -36,7 +36,7 @@ tbl2_1_linear_models(fit_sap12, fit_EPceir12e)
 
 fig3_1_population_effects(fit_mlm)
 
-fig3_2_population_effects(fit_mlm)
+fig3_2_regional_effects(fit_mlm)
 
 tbl3_1_sigma(fit_mlm)
 }
