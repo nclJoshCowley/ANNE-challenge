@@ -3,7 +3,7 @@
 % Document specific details
 \title{Environmental Impact of Housing in England}
 \author{Josh Cowley}
-\date{May 4th, 2022}
+\date[May 4th, 2022]{}
 
 \graphicspath{{images/}}
 
@@ -14,9 +14,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Persistent packages
-\usepackage{setspace}
-\usepackage{booktabs}
+\usepackage{hyperref}
 \usepackage{bm}
+\usepackage{booktabs}
+\usepackage{setspace}
 
 % Double-line spacing
 \setstretch{1.5}
@@ -34,8 +35,11 @@
         {front-page-background}
 }
 
-% Apply custom background images based on frame number 
 \makeatletter % Remove in .sty file?
+
+
+
+% Apply custom background images based on frame number 
 \setbeamertemplate{background canvas}{
     \ifnum\c@framenumber=1%
         % On title page
@@ -45,6 +49,39 @@
         \bgall
     \fi%
 }
+
+% Custom headline
+\setbeamertemplate{headline}{%
+    \leavevmode
+    \begin{beamercolorbox}[ht=2.5ex,right]{title in head/foot}
+    \usebeamerfont{title in head/foot}
+        \ifnum\c@framenumber=1%
+            \usebeamercolor[fg]{date}%
+            \insertshortdate
+        \else%
+            \href{https://github.com/nclJoshCowley/ANNE-challenge}{github.com/nclJoshCowley/ANNE-challenge}
+        \fi%
+    \hspace*{1.0 em}
+    \end{beamercolorbox}%
+}
+
+% Custom footline
+\setbeamertemplate{footline}{%
+    \leavevmode
+    \ifnum\c@framenumber=1%
+        % No footline on title page
+    \else%
+    \begin{beamercolorbox}[ht=2.25ex,dp=1ex,right]{title in head/foot}
+        \usebeamerfont{title in head/foot}
+        \insertframenumber
+        \hspace*{1.0 em}
+    \end{beamercolorbox}%
+    \fi%
+}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
 \makeatletter % Remove in .sty file?
 
 % Increase itemize and enumerate spacing
@@ -57,11 +94,14 @@
 \setbeamercolor{institute}{fg=white}
 \setbeamercolor{date}{fg=white}
 
-% Section introductions ??
+% Section introduction slides (no numbering or footline)
 \AtBeginSection[]{
-  \begin{frame}
-    \tableofcontents[currentsection]
-  \end{frame}
+    \begingroup
+        \setbeamertemplate{footline}{}
+        \begin{frame}[noframenumbering]
+            \tableofcontents[currentsection]
+        \end{frame}
+    \endgroup
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
