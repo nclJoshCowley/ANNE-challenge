@@ -1,0 +1,65 @@
+---
+title: "Figures to be used in Presentation"
+date: "Generated **`r format(Sys.time(), '%B %d, %Y')`**."
+output: 
+  pdf_document:
+    keep_md: true
+params:
+  fig.asp: 0.7
+---
+
+The following is a script to save figures used in report as standalone files.
+
+```{r setup, include = FALSE}
+LAHS::common_report_setup(
+  echo = FALSE,
+  fig.path = "./",
+  fig.asp = params$fig.asp,
+  dev = "cairo_pdf",
+  root.dir = "."
+)
+```
+
+```{r load-fit-mlm}
+fit_mlm <- readRDS("mlm_regional_epc_run2.rds")
+```
+
+
+It was created using the latest version of the `LAHS` package (pending rename)
+at version:
+
+```{r git_version, results = "asis"}
+cat(
+  "```",
+  capture.output(git2r::revparse_single(".", "HEAD")),
+  "```",
+  sep = "\n"
+)
+```
+
+## Figure 1.6
+
+```{r fig1_6}
+LAHS::fig1_6_sap_histogram() +
+  ggplot2::labs(
+    title = expression("SAP ratings from 2014 to 2019 (n" %~~% "37,000)"),
+    subtitle = "Mean rating of 64.0 (EPC D)",
+  )
+```
+
+## Figure 3.1
+
+```{r fig3_1}
+LAHS::fig3_1_population_effects(fit_mlm)
+```
+
+## Figure 3.2
+
+```{r fig3_2}
+LAHS::fig3_2_regional_effects(fit_mlm) +
+  ggplot2::labs(
+    title = "Regional-effect estimate(s) close to zero"
+  )
+```
+
+
