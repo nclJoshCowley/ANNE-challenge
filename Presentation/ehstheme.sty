@@ -1,0 +1,101 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EHS Theme (Created May 2022)
+% Josh Cowley (j.cowley1@ncl.ac.uk)
+%
+% The following is a start to some theme elements for use in beamer and
+% will hopefully act as a precursor for a custom beamer presentation theme 
+% (see Section 15.1 of beamer user guide).
+%
+% Until then. using these options is done by adding `\usepackage{ehstheme}`.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Persistent packages
+\usepackage{hyperref}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{setspace}
+
+% Double-line spacing
+\setstretch{1.5}
+
+% Define background images
+\newcommand{\bgall}{
+    \includegraphics
+        [width=\paperwidth,height=\paperheight]
+        {all-page-background}
+}
+
+\newcommand{\bgtitle}{
+    \includegraphics
+        [width=\paperwidth,height=\paperheight]
+        {front-page-background}
+}
+
+% \makeatletter % Remove in .sty file?
+
+
+
+% Apply custom background images based on frame number 
+\setbeamertemplate{background canvas}{
+    \ifnum\c@framenumber=1%
+        % On title page
+        \bgtitle
+    \else%
+        % Other frames background
+        \bgall
+    \fi%
+}
+
+% Custom headline
+\setbeamertemplate{headline}{%
+    \leavevmode
+    \begin{beamercolorbox}[ht=2.5ex,right]{title in head/foot}
+    \usebeamerfont{title in head/foot}
+        \ifnum\c@framenumber=1%
+            \usebeamercolor[fg]{date}%
+            \insertshortdate
+        \else%
+            \href{https://github.com/nclJoshCowley/ANNE-challenge}{github.com/nclJoshCowley/ANNE-challenge}
+        \fi%
+    \hspace*{1.0 em}
+    \end{beamercolorbox}%
+}
+
+% Custom footline
+\setbeamertemplate{footline}{%
+    \leavevmode
+    \ifnum\c@framenumber=1%
+        % No footline on title page
+    \else%
+    \begin{beamercolorbox}[ht=2.25ex,dp=1ex,right]{title in head/foot}
+        \usebeamerfont{title in head/foot}
+        \insertframenumber
+        \hspace*{1.0 em}
+    \end{beamercolorbox}%
+    \fi%
+}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% \makeatletter % Remove in .sty file?
+
+% Increase itemize and enumerate spacing
+\let\OLDitemize\itemize
+\renewcommand\itemize{\OLDitemize\setlength\itemsep{8.0pt plus 2.0pt minus 1.0pt}}
+
+% Convert all title page font colour to be white
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{institute}{fg=white}
+\setbeamercolor{date}{fg=white}
+
+% Section introduction slides (no numbering or footline)
+\AtBeginSection[]{
+    \begingroup
+        \setbeamertemplate{footline}{}
+        \begin{frame}[noframenumbering]
+            \tableofcontents[currentsection]
+        \end{frame}
+    \endgroup
+}
