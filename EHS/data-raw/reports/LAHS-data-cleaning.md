@@ -1,7 +1,7 @@
 ---
 title: "Local Authority Housing Statistics - Data Cleaning Script"
 author: "Josh Cowley"
-date: "March 29, 2022"
+date: "May 02, 2022"
 output:
   html_document:
     number_sections: true
@@ -528,5 +528,5 @@ One can access this data by installing this package and importing the dataset.
 
 
 ```r
-data("LAHS", package = "LAHS")
+data("LAHS", package = "EHS")
 ```

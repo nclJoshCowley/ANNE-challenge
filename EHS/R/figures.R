@@ -12,14 +12,14 @@ NULL
 #' @rdname figures
 #' @export
 fig1_1_sample_sizes_by_region <- function() {
-  LAHS::EHS %>%
+  EHS::EHS %>%
     dplyr::mutate(
-      gorEHS = LAHS::display_gorEHS(.data$gorEHS),
-      YEAR = LAHS::display_YEAR(.data$YEAR)
+      gorEHS = EHS::display_gorEHS(.data$gorEHS),
+      YEAR = EHS::display_YEAR(.data$YEAR)
     ) %>%
-    LAHS::ggplot_counts_by_group(counts = .data$YEAR, group = .data$gorEHS) +
+    EHS::ggplot_counts_by_group(counts = .data$YEAR, group = .data$gorEHS) +
     ggplot2::scale_fill_discrete(
-      type = LAHS::get_colour_scheme("adobeseqforest")[4:10]
+      type = EHS::get_colour_scheme("adobeseqforest")[4:10]
     ) +
     ggplot2::labs(y = NULL, x = NULL, fill = NULL)
 }
@@ -30,11 +30,11 @@ fig1_1_sample_sizes_by_region <- function() {
 fig1_2_percentage_of_ownership <- function() {
   # Gets data for all plots, define fn to work on filtered data, split by level
   tenure4x_summary <-
-    LAHS::count_by_group(LAHS::EHS, .data$tenure4x, .data$gorEHS, .data$YEAR)
+    EHS::count_by_group(EHS::EHS, .data$tenure4x, .data$gorEHS, .data$YEAR)
 
   create_plot <- function(d) {
     d %>%
-      dplyr::mutate(gorEHS = LAHS::display_gorEHS(.data$gorEHS)) %>%
+      dplyr::mutate(gorEHS = EHS::display_gorEHS(.data$gorEHS)) %>%
       ggplot_trend_by_group(.data$prop, .data$gorEHS, nudge_x = 0.3) +
       ggplot2::guides(colour = "none") +
       ggplot2::scale_x_continuous(labels = display_YEAR, expand = c(0, 0, 0.15, 0)) +
@@ -54,7 +54,7 @@ fig1_2_percentage_of_ownership <- function() {
 #' @rdname figures
 #' @export
 fig1_3_fuelx_trend <- function() {
-  LAHS::EHS %>%
+  EHS::EHS %>%
     dplyr::count(.data$YEAR, .data$fuelx) %>%
     dplyr::filter(!is.na(.data$fuelx)) %>%
     ggplot_trend_by_group(.data$n, .data$fuelx, nudge_x = 0.2) +
@@ -68,7 +68,7 @@ fig1_3_fuelx_trend <- function() {
 #' @rdname figures
 #' @export
 fig1_4_boiler_trend <- function() {
-  LAHS::EHS %>%
+  EHS::EHS %>%
     dplyr::count(.data$YEAR, .data$boiler) %>%
     dplyr::mutate(
       boiler = .data$boiler %>%
@@ -86,7 +86,7 @@ fig1_4_boiler_trend <- function() {
 #' @rdname figures
 #' @export
 fig1_5_epc_samples <- function() {
-  LAHS::EHS %>%
+  EHS::EHS %>%
     dplyr::count(.data$gorEHS, .data$EPceeb12e) %>%
     ggplot2::ggplot(ggplot2::aes(
       x = .data$n,
@@ -110,7 +110,7 @@ fig1_5_epc_samples <- function() {
 #' @rdname figures
 #' @export
 fig1_6_sap_histogram <- function() {
-  LAHS::EHS %>%
+  EHS::EHS %>%
     ggplot2::ggplot(ggplot2::aes(
       x = .data$sap12,
       fill = .data$EPceeb12e
@@ -129,10 +129,10 @@ fig1_6_sap_histogram <- function() {
 #' @rdname figures
 #' @export
 tbl1_1_percentage_of_flats <- function() {
-  LAHS::EHS %>%
-    dplyr::mutate(alltypex = LAHS::condense_alltypex(.data$alltypex)) %>%
-    LAHS::count_by_group(prop = .data$alltypex, .data$gorEHS) %>%
-    dplyr::mutate(prop = LAHS::display_percent(.data$prop, digits = 2)) %>%
+  EHS::EHS %>%
+    dplyr::mutate(alltypex = EHS::condense_alltypex(.data$alltypex)) %>%
+    EHS::count_by_group(prop = .data$alltypex, .data$gorEHS) %>%
+    dplyr::mutate(prop = EHS::display_percent(.data$prop, digits = 2)) %>%
     dplyr::filter(.data$alltypex == "Flat") %>%
     dplyr::select(-.data$alltypex) %>%
     dplyr::arrange(dplyr::desc(.data$prop)) %>%
@@ -149,7 +149,7 @@ tbl1_1_percentage_of_flats <- function() {
 #' @rdname figures
 #' @export
 tbl1_2_counts_of_wallinsx <- function() {
-  LAHS::EHS %>%
+  EHS::EHS %>%
     dplyr::count(.data$wallinsz) %>%
     tidyr::separate(
       .data$wallinsz,
@@ -181,8 +181,8 @@ tbl2_1_linear_models <- function(fit_sap12, fit_EPceir12e) {
 
   joined_tidy_tbls <-
     dplyr::full_join(
-      LAHS::custom_tidy_tbl(fit_sap12, digits = 1),
-      LAHS::custom_tidy_tbl(fit_EPceir12e, digits = 1),
+      EHS::custom_tidy_tbl(fit_sap12, digits = 1),
+      EHS::custom_tidy_tbl(fit_EPceir12e, digits = 1),
       by = c("term_name", "term_level")
     )
 
@@ -202,7 +202,7 @@ tbl2_1_linear_models <- function(fit_sap12, fit_EPceir12e) {
   # Want one row heading for each factor fitted
   groupings <-
     unique(stats::na.omit(joined_tidy_tbls$term_name)) %>%
-    rlang::set_names(nm = LAHS::display_ehs_cnames(.)) %>%
+    rlang::set_names(nm = EHS::display_ehs_cnames(.)) %>%
     purrr::map(~ range(which(joined_tidy_tbls$term_name == .x)))
 
   for (gi in seq_along(groupings)) {
@@ -223,8 +223,8 @@ tbl2_1_linear_models <- function(fit_sap12, fit_EPceir12e) {
 #' @export
 fig3_1_population_effects <- function(fit_mlm) {
   fit_mlm %>%
-    LAHS::tidy_fixef() %>%
-    LAHS::rename_quantile_colnames() %>%
+    EHS::tidy_fixef() %>%
+    EHS::rename_quantile_colnames() %>%
     ggplot_mlm_estimates_by_year(fill = "grey", alpha = 0.45) +
     # EPC Bands: A/B (81+), C (69-80), D (55-68), E (39-54)
     # ggplot2::geom_hline(
@@ -250,8 +250,8 @@ fig3_1_population_effects <- function(fit_mlm) {
 #' @export
 fig3_2_regional_effects <- function(fit_mlm) {
   fit_mlm %>%
-    LAHS::tidy_ranef() %>%
-    LAHS::rename_quantile_colnames() %>%
+    EHS::tidy_ranef() %>%
+    EHS::rename_quantile_colnames() %>%
     ggplot_mlm_estimates_by_year() +
     ggplot2::scale_color_discrete(type = get_colour_scheme_region()) +
     ggplot2::scale_fill_discrete(type = get_colour_scheme_region()) +

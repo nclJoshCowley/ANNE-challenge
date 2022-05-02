@@ -1,7 +1,7 @@
 ---
 title: "English Housing Survey - Data Cleaning Script"
 author: "Josh Cowley"
-date: "April 04, 2022"
+date: "May 02, 2022"
 output:
   html_document:
     number_sections: true
@@ -450,9 +450,9 @@ physical_data <-
 
 
 One can access this data by downloading the data from UKDA, compiling this 
-report and building the LAHS package, then, import the dataset.
+report and building the EHS package, then, import the dataset.
 
 
 ```r
-data("EHS", package = "LAHS")
+data("EHS", package = "EHS")
 ```

@@ -9,7 +9,7 @@
 #' object in a cache for later analysis.
 
 #+ setup, include = FALSE
-library(LAHS)
+library(EHS)
 library(magrittr)
 library(rprojroot)
 library(xfun)
@@ -28,11 +28,11 @@ cat(sprintf("```\n%s\n```", cache_dir))
 #' ensure the temporal aspect is coded as a factor.
 EHS_subset <-
   dplyr::transmute(
-    LAHS::EHS,
+    EHS::EHS,
     SAP = .data$sap12,
     Year = factor(.data$YEAR),
     Region = .data$gorEHS,
-    Type = LAHS::condense_alltypex(.data$alltypex)
+    Type = EHS::condense_alltypex(.data$alltypex)
   )
 
 #' The formula is given as follows, removing the population and group intercept.

@@ -16,11 +16,11 @@ ensure the temporal aspect is coded as a factor.
 ``` r
 EHS_subset <-
   dplyr::transmute(
-    LAHS::EHS,
+    EHS::EHS,
     SAP = .data$sap12,
     Year = factor(.data$YEAR),
     Region = .data$gorEHS,
-    Type = LAHS::condense_alltypex(.data$alltypex)
+    Type = EHS::condense_alltypex(.data$alltypex)
   )
 ```
 

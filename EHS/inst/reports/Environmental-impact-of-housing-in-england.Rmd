@@ -17,7 +17,7 @@ cat(readLines("config/report-options.yaml"), sep = "\n")
 
 ```{r setup, include = FALSE}
 library(magrittr) # %>%
-LAHS::common_report_setup(fig.asp = 0.55, root.dir = ".")
+EHS::common_report_setup(fig.asp = 0.55, root.dir = ".")
 ```
 
 
@@ -105,7 +105,7 @@ expected as the number of houses in each region are not necessarily equal.
 
 \vspace{1.0 em} <!-- NOTE: Make use of space surrounding Figure 1.1 -->
 ```{r fig1_1, fig.cap = "Unequal sample size across regions"}
-LAHS::fig1_1_sample_sizes_by_region()
+EHS::fig1_1_sample_sizes_by_region()
 ```
 
 \section{Dwelling Stock}
@@ -125,7 +125,7 @@ This could be due to a number of reasons such as fewer renters (when compared
 to London) or fewer households being able to get on the property ladder.
 
 ```{r fig1_2, fig.cap = "Housing association market share highest in Northern regions"}
-LAHS::fig1_2_percentage_of_ownership()[["Housing association"]]
+EHS::fig1_2_percentage_of_ownership()[["Housing association"]]
 ```
 
 Properties that are vacant are few and far between in the data; all regions
@@ -134,7 +134,7 @@ between April 2014 and March 2020.
 
 ```{r reftbl_vacant, include = FALSE}
 # NOT DISPLAYED. For proof of above statement only.
-LAHS::EHS %>%
+EHS::EHS %>%
   dplyr::group_by(.data$gorEHS) %>%
   dplyr::summarise(
     pct_occupied = sprintf("%.1f%%", 100 * mean(.data$vacantx == "Occupied"))
@@ -147,7 +147,7 @@ highlighted by these data is the proportion of flats (defined as a purpose
 built flat or converted flat) as shown in Table 1.1.
 
 ```{r tbl1_1}
-LAHS::tbl1_1_percentage_of_flats()
+EHS::tbl1_1_percentage_of_flats()
 ```
 
 Also reported in the EHS is if there is any damp present, damp could be a 
@@ -159,7 +159,7 @@ timescale.
 
 ```{r reftbl_damp, include = FALSE}
 # NOT DISPLAYED. For proof of above statement only.
-LAHS::EHS %>%
+EHS::EHS %>%
   dplyr::group_by(.data$YEAR) %>%
   dplyr::summarise(pcT_damp = mean(.data$dampalf == "Damp present"))
 ```
@@ -177,7 +177,7 @@ in heating bills and lifetime costs may pose a barrier that would explain this
 hesitancy to switch to electrical systems.
 
 ```{r fig1_3, fig.asp = 0.4, fig.cap = "Little to no change in heating systems"}
-LAHS::fig1_3_fuelx_trend()
+EHS::fig1_3_fuelx_trend()
 ```
 
 \subsubsection{Wall Types}
@@ -196,7 +196,7 @@ solid walls. As expected due to the difficulties involved with insulating a
 solid wall relative to a cavity type wall.
 
 ```{r tbl1_2}
-LAHS::tbl1_2_counts_of_wallinsx()
+EHS::tbl1_2_counts_of_wallinsx()
 ```
 
 \subsubsection{Boiler Type}
@@ -216,7 +216,7 @@ increase in efficiency may not justify a full boiler replacement and the oldest
 or least efficient appliances should be replaced as a priority.
 
 ```{r fig1_4, fig.asp = 0.45, fig.cap = "Newer boiler types being adopted, nationwide"}
-LAHS::fig1_4_boiler_trend()
+EHS::fig1_4_boiler_trend()
 ```
 
 \subsection{Energy Ratings}
@@ -226,15 +226,15 @@ the energy efficiency rating measures energy efficiency and the energy impact
 rating measures CO2 emissions, one would expect these to be very similar.
 
 ```{r calc-epc-diff}
-EPC_diff <- as.numeric(LAHS::EHS$EPceeb12e) - as.numeric(LAHS::EHS$EPceib12e)
+EPC_diff <- as.numeric(EHS::EHS$EPceeb12e) - as.numeric(EHS::EHS$EPceib12e)
 
 # How many are equal
 EPC_diff_0 <- mean(EPC_diff == 0)
-show_EPC_diff_0 <- LAHS::display_percent(EPC_diff_0, digits = 3)
+show_EPC_diff_0 <- EHS::display_percent(EPC_diff_0, digits = 3)
 
 # How many are +/- 1
 EPC_diff_1 <- mean(EPC_diff >= -1 & EPC_diff <= 1)
-show_EPC_diff_1 <- LAHS::display_percent(EPC_diff_1, digits = 3)
+show_EPC_diff_1 <- EHS::display_percent(EPC_diff_1, digits = 3)
 ```
 
 In fact, in our subset of the EHS sample we observe that the bands for each
@@ -244,12 +244,12 @@ different in `r show_EPC_diff_1` of cases.
 As such, Figure 1.5 shows only the efficiency ratings, but due to high 
 correlation, can be viewed as representative of both ratings. It is clear that
 the majority of dwellings are in the middling bands of C and D, specifically
-`r LAHS::display_percent(mean(LAHS::EHS$EPceeb12e %in% c("C", "D")), digits = 3)`
+`r EHS::display_percent(mean(EHS::EHS$EPceeb12e %in% c("C", "D")), digits = 3)`
 of our data. There are so few being in the top 2 bands of A and B that the
 surveyors grouped them together in the data.
 
 ```{r fig1_5, fig.asp = 0.45, fig.cap = "Most dwellings categorised as C or D bands (EPC)"}
-LAHS::fig1_5_epc_samples()
+EHS::fig1_5_epc_samples()
 ```
 
 While these bands are a good simplification for consumers, we aim to model the 
@@ -261,7 +261,7 @@ efficient ones. There are also several outliers with a SAP rating reported as 1,
 further investigation into these outliers is required.
 
 ```{r fig1_6, fig.asp = 0.5, fig.cap = "Efficiency ratings average around 64 with a left-skew"}
-LAHS::fig1_6_sap_histogram()
+EHS::fig1_6_sap_histogram()
 ```
 
 \section{Data Availability}
@@ -347,7 +347,7 @@ more indicative of CO2 emissions \citep{epccertificate2022}.
 
 Expectedly, these two ratings tend to be correlated; in our cohort of dwellings
 the Pearson correlation coefficient is as high as
-`r LAHS::display_percent(cor(LAHS::EHS$EPceir12e, LAHS::EHS$sap12), digits = 3)`.
+`r EHS::display_percent(cor(EHS::EHS$EPceir12e, EHS::EHS$sap12), digits = 3)`.
 
 As previously mentioned, the methodology that creates both ratings has been 
 under some criticism \citep{epcaction2018} and hence any measure derived from
@@ -388,13 +388,13 @@ the current rating system.
 fit_sap12 <- 
   stats::lm(
     sap12 ~ boiler + dblglaz4 + fuelx + loftins6 + wallinsz + watersys,
-    data = LAHS::EHS
+    data = EHS::EHS
   )
 
 fit_EPceir12e <- 
   stats::lm(
     EPceir12e ~ boiler + dblglaz4 + fuelx + loftins6 + wallinsz + watersys,
-    data = LAHS::EHS
+    data = EHS::EHS
   )
 ```
 
@@ -412,7 +412,7 @@ P value ($p<0.05$). Thus, we expect that upgrading a house from a standard to a
 combination boiler would increase their EER by approximately 3 points.
 
 ```{r tbl2_1}
-LAHS::tbl2_1_linear_models(fit_sap12, fit_EPceir12e)
+EHS::tbl2_1_linear_models(fit_sap12, fit_EPceir12e)
 ```
 
 \subsection{Discussion}
@@ -528,7 +528,7 @@ and efficiency of our model, for example see \citet{gosling2018shelf}.
 \subsection{Results}
 
 ```{r load-fit-mlm, include = FALSE}
-# Fit and cached in own script to be used here (see `LAHS/R/scripts`).
+# Fit and cached in own script to be used here (see `EHS/R/scripts`).
 fit_mlm <- 
   readRDS(
     file.path(
@@ -556,7 +556,7 @@ increasing indicating an increase in efficiency ratings.
 
 \clearpage <!-- Note: Clear page to force following text below Fig 3.1 -->
 ```{r fig3_1, fig.asp = 0.5, fig.cap = "Population estimates imply increasing efficiency"}
-LAHS::fig3_1_population_effects(fit_mlm)
+EHS::fig3_1_population_effects(fit_mlm)
 ```
 
 For a region-specific indicator one could combine the estimates from Figure 3.1
@@ -574,7 +574,7 @@ warrants further investigation and it is important to remember the models
 highlight correlation not causation.
 
 ```{r fig3_2, fig.asp = 0.70, fig.cap = "Region-level estimates not significant"}
-LAHS::fig3_2_regional_effects(fit_mlm)
+EHS::fig3_2_regional_effects(fit_mlm)
 ```
 
 \subsubsection{Noise Term}
@@ -586,7 +586,7 @@ parameters, by looking at the mean and credible region of the samples
 arising from the Markov chain Monte Carlo samples.
 
 ```{r warning = FALSE, message = FALSE}
-LAHS::tbl3_1_sigma(fit_mlm)
+EHS::tbl3_1_sigma(fit_mlm)
 ```
 
 The parameter summarised in Table 3.1 is trying to estimate is representative of 

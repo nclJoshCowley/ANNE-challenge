@@ -20,12 +20,12 @@ library(usethis)
 library(kableExtra)
 
 # Github
-library(LAHS)
-LAHS::common_report_setup()
+library(EHS)
+EHS::common_report_setup()
 
 # Data
-data("LAHS", package = "LAHS")
-data("LACO2", package = "LAHS")
+data("LAHS", package = "EHS")
+data("LACO2", package = "EHS")
 
 LACO2_domestic <- dplyr::filter(LACO2, .data$CO2_SECTOR == "Domestic")
 rm(LACO2)

@@ -21,8 +21,8 @@ library(usethis)
 library(kableExtra)
 
 # Github
-library(LAHS)
-LAHS::common_report_setup(echo = TRUE)
+library(EHS)
+EHS::common_report_setup(echo = TRUE)
 ```
 
 ```{r setup-helper}
@@ -354,8 +354,8 @@ usethis::use_data(EHS, overwrite = TRUE)
 ```
 
 One can access this data by downloading the data from UKDA, compiling this 
-report and building the LAHS package, then, import the dataset.
+report and building the EHS package, then, import the dataset.
 
 ```{r eg-import, echo = TRUE, eval = FALSE}
-data("EHS", package = "LAHS")
+data("EHS", package = "EHS")
 ```

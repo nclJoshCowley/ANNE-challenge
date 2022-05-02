@@ -1,7 +1,7 @@
 ---
 title: "Local Authority CO2 Emissions - Data Cleaning Script"
 author: "Josh Cowley"
-date: "April 04, 2022"
+date: "May 02, 2022"
 output:
   html_document:
     number_sections: true
@@ -100,5 +100,5 @@ One can access this data by installing this package and importing the dataset.
 
 
 ```r
-data("LAHS", package = "LAHS")
+data("LACO2", package = "EHS")
 ```

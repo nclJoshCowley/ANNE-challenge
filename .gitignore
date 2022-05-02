@@ -53,6 +53,6 @@ rsconnect/
 .vscode/spellright.dict
 
 # EHS dataset not to be made public on Github
-LAHS/data-raw/source/EHS/
-!LAHS/data-raw/source/EHS/README_*
-LAHS/data/EHS.rda
+EHS/data-raw/source/EHS/
+!EHS/data-raw/source/EHS/README_*
+EHS/data/EHS.rda
