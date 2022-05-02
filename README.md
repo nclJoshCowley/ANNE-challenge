@@ -1,8 +1,29 @@
 # ANNE-challenge
 
-ANNE (Analyst Network North East) produced the following challenge for students
-in the North East of England in collaboration with NEECCo (North East England
-Climate Coalition) and NICD (National Innovation Centre for Data).
+ANNE (Analyst Network North East) in collaboration with NEECCo (North East
+England Climate Coalition) and NICD (National Innovation Centre for Data)
+challenged students in the North East of England to create an environmental
+indicator, more information below.
+
+Folders in this repository are as follows:
+
+- **EHS** - R package used for analysis of English Housing Statistics dataset;
+
+- **Presentation** - Slides used for the ANNE spring conference 2022;
+
+- **Submission** - Documents submitted to ANNE on 6th April 2022.
+
+And key documents are kept at the top-level:
+
+- **Environmental-impact-of-housing-in-england** - Latest version of report.
+
+- **Ideas** - Brainstorming stage, considering various issues;
+
+- **Plan** - Plan used during the challenge;
+
+<details>
+
+  <summary>Show full challenge brief</summary>
 
 > The Challenge is to produce an indicator or a small set of indicators related
 > to climate change or environmental sustainability, specifically for the
@@ -35,3 +56,5 @@ Climate Coalition) and NICD (National Innovation Centre for Data).
 >    a graph or map) on a static page (such as a PDF or R markdown report) or
 >    on an interactive dashboard (such as a Power BI or R Shiny app). We
 >    welcome you to get creative or possibly even artistic here!
+
+</details>
