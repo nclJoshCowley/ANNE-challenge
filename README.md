@@ -7,19 +7,15 @@ indicator, more information below.
 
 Folders in this repository are as follows:
 
+- **Environmental-impact-of-housing-in-england** - Latest version of report;
+
 - **EHS** - R package used for analysis of English Housing Statistics dataset;
 
 - **Presentation** - Slides used for the ANNE spring conference 2022;
 
-- **Submission** - Documents submitted to ANNE on 6th April 2022.
+- **Submission** - Documents submitted to ANNE on 6th April 2022;
 
-And key documents are kept at the top-level:
-
-- **Environmental-impact-of-housing-in-england** - Latest version of report.
-
-- **Ideas** - Brainstorming stage, considering various issues;
-
-- **Plan** - Plan used during the challenge;
+- **Plan** - Documents used in the planning stage.
 
 <details>
 
